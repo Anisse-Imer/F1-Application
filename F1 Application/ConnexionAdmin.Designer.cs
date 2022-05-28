@@ -1,6 +1,6 @@
 ﻿namespace F1_Application
 {
-    partial class ConnexionAdmin
+    partial class frmConnexionAdmin
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConnexionAdmin));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmConnexionAdmin));
             this.lblTitreAdministrateur = new System.Windows.Forms.Label();
             this.lblIdentifiant = new System.Windows.Forms.Label();
             this.lblMotDePasse = new System.Windows.Forms.Label();
@@ -74,6 +74,7 @@
             this.cmdValiderAdministrateur.TabIndex = 3;
             this.cmdValiderAdministrateur.Text = "Valider";
             this.cmdValiderAdministrateur.UseVisualStyleBackColor = false;
+            this.cmdValiderAdministrateur.Click += new System.EventHandler(this.cmdValiderAdministrateur_Click);
             // 
             // txtIdentifiant
             // 
@@ -89,7 +90,7 @@
             this.txtMotDePasse.Size = new System.Drawing.Size(137, 23);
             this.txtMotDePasse.TabIndex = 5;
             // 
-            // ConnexionAdmin
+            // frmConnexionAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -102,8 +103,8 @@
             this.Controls.Add(this.lblIdentifiant);
             this.Controls.Add(this.lblTitreAdministrateur);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "ConnexionAdmin";
+            //this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "frmConnexionAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ConnexionAdmin";
             this.ResumeLayout(false);
