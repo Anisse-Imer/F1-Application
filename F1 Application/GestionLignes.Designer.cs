@@ -33,7 +33,7 @@
             this.cmdModifierLigne = new System.Windows.Forms.Button();
             this.cmdAnnulerGestionLigne = new System.Windows.Forms.Button();
             this.lblTitreGestionLigne = new System.Windows.Forms.Label();
-            this.clstSelectionLigne = new System.Windows.Forms.CheckedListBox();
+            this.cboSelectionLigne = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // cmdSupprimerLigne
@@ -57,6 +57,7 @@
             this.cmdAjouterLigne.TabIndex = 1;
             this.cmdAjouterLigne.Text = "Ajouter une nouvelle ligne";
             this.cmdAjouterLigne.UseVisualStyleBackColor = false;
+            this.cmdAjouterLigne.Click += new System.EventHandler(this.cmdAjouterLigne_Click);
             // 
             // cmdModifierLigne
             // 
@@ -79,6 +80,7 @@
             this.cmdAnnulerGestionLigne.TabIndex = 3;
             this.cmdAnnulerGestionLigne.Text = "Annuler";
             this.cmdAnnulerGestionLigne.UseVisualStyleBackColor = false;
+            this.cmdAnnulerGestionLigne.Click += new System.EventHandler(this.cmdAnnulerGestionLigne_Click);
             // 
             // lblTitreGestionLigne
             // 
@@ -90,14 +92,13 @@
             this.lblTitreGestionLigne.TabIndex = 5;
             this.lblTitreGestionLigne.Text = "Séletionner une ligne : ";
             // 
-            // clstSelectionLigne
+            // cboSelectionLigne
             // 
-            this.clstSelectionLigne.BackColor = System.Drawing.Color.Lavender;
-            this.clstSelectionLigne.FormattingEnabled = true;
-            this.clstSelectionLigne.Location = new System.Drawing.Point(63, 41);
-            this.clstSelectionLigne.Name = "clstSelectionLigne";
-            this.clstSelectionLigne.Size = new System.Drawing.Size(309, 109);
-            this.clstSelectionLigne.TabIndex = 6;
+            this.cboSelectionLigne.FormattingEnabled = true;
+            this.cboSelectionLigne.Location = new System.Drawing.Point(62, 52);
+            this.cboSelectionLigne.Name = "cboSelectionLigne";
+            this.cboSelectionLigne.Size = new System.Drawing.Size(308, 21);
+            this.cboSelectionLigne.TabIndex = 6;
             // 
             // frmGestionLignes
             // 
@@ -105,7 +106,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(432, 261);
-            this.Controls.Add(this.clstSelectionLigne);
+            this.Controls.Add(this.cboSelectionLigne);
             this.Controls.Add(this.lblTitreGestionLigne);
             this.Controls.Add(this.cmdAnnulerGestionLigne);
             this.Controls.Add(this.cmdModifierLigne);
@@ -114,6 +115,7 @@
             this.Name = "frmGestionLignes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GestionLignes";
+            this.Load += new System.EventHandler(this.frmGestionLignes_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,6 +128,6 @@
         private System.Windows.Forms.Button cmdModifierLigne;
         private System.Windows.Forms.Button cmdAnnulerGestionLigne;
         private System.Windows.Forms.Label lblTitreGestionLigne;
-        private System.Windows.Forms.CheckedListBox clstSelectionLigne;
+        private System.Windows.Forms.ComboBox cboSelectionLigne;
     }
 }

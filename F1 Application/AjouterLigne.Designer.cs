@@ -31,24 +31,25 @@
             this.lblRangArretsAjouterLigne = new System.Windows.Forms.Label();
             this.lblArretsAjouterLigne = new System.Windows.Forms.Label();
             this.clstListeArrets = new System.Windows.Forms.CheckedListBox();
-            this.pnlRangArrets = new System.Windows.Forms.Panel();
             this.pnlNomNombreArrets = new System.Windows.Forms.Panel();
-            this.nudNombreArrets = new System.Windows.Forms.NumericUpDown();
+            this.lblNbrArretSelectionne = new System.Windows.Forms.Label();
             this.lblNombreArrets = new System.Windows.Forms.Label();
             this.txtNomLigne = new System.Windows.Forms.TextBox();
             this.lblNomLigne = new System.Windows.Forms.Label();
             this.lblAjouterLigne = new System.Windows.Forms.Label();
             this.cmdAnnulerAjouterLigne = new System.Windows.Forms.Button();
             this.cmdConfirmerAjouterLigne = new System.Windows.Forms.Button();
+            this.flpRangArret = new System.Windows.Forms.FlowLayoutPanel();
+            this.cboCouleur = new System.Windows.Forms.ComboBox();
+            this.lblCouleur = new System.Windows.Forms.Label();
             this.pnlNomNombreArrets.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudNombreArrets)).BeginInit();
             this.SuspendLayout();
             // 
             // lblRangArretsAjouterLigne
             // 
             this.lblRangArretsAjouterLigne.AutoSize = true;
             this.lblRangArretsAjouterLigne.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRangArretsAjouterLigne.Location = new System.Drawing.Point(262, 132);
+            this.lblRangArretsAjouterLigne.Location = new System.Drawing.Point(264, 132);
             this.lblRangArretsAjouterLigne.Name = "lblRangArretsAjouterLigne";
             this.lblRangArretsAjouterLigne.Size = new System.Drawing.Size(85, 14);
             this.lblRangArretsAjouterLigne.TabIndex = 13;
@@ -71,21 +72,13 @@
             this.clstListeArrets.Name = "clstListeArrets";
             this.clstListeArrets.Size = new System.Drawing.Size(161, 199);
             this.clstListeArrets.TabIndex = 11;
-            // 
-            // pnlRangArrets
-            // 
-            this.pnlRangArrets.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.pnlRangArrets.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlRangArrets.Location = new System.Drawing.Point(261, 150);
-            this.pnlRangArrets.Name = "pnlRangArrets";
-            this.pnlRangArrets.Size = new System.Drawing.Size(197, 199);
-            this.pnlRangArrets.TabIndex = 10;
+            this.clstListeArrets.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clstListeArrets_ItemCheck);
             // 
             // pnlNomNombreArrets
             // 
             this.pnlNomNombreArrets.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.pnlNomNombreArrets.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlNomNombreArrets.Controls.Add(this.nudNombreArrets);
+            this.pnlNomNombreArrets.Controls.Add(this.lblNbrArretSelectionne);
             this.pnlNomNombreArrets.Controls.Add(this.lblNombreArrets);
             this.pnlNomNombreArrets.Controls.Add(this.txtNomLigne);
             this.pnlNomNombreArrets.Controls.Add(this.lblNomLigne);
@@ -94,12 +87,15 @@
             this.pnlNomNombreArrets.Size = new System.Drawing.Size(361, 55);
             this.pnlNomNombreArrets.TabIndex = 9;
             // 
-            // nudNombreArrets
+            // lblNbrArretSelectionne
             // 
-            this.nudNombreArrets.Location = new System.Drawing.Point(206, 28);
-            this.nudNombreArrets.Name = "nudNombreArrets";
-            this.nudNombreArrets.Size = new System.Drawing.Size(140, 20);
-            this.nudNombreArrets.TabIndex = 4;
+            this.lblNbrArretSelectionne.AutoSize = true;
+            this.lblNbrArretSelectionne.Font = new System.Drawing.Font("Times New Roman", 10F);
+            this.lblNbrArretSelectionne.Location = new System.Drawing.Point(252, 32);
+            this.lblNbrArretSelectionne.Name = "lblNbrArretSelectionne";
+            this.lblNbrArretSelectionne.Size = new System.Drawing.Size(15, 16);
+            this.lblNbrArretSelectionne.TabIndex = 7;
+            this.lblNbrArretSelectionne.Text = "0";
             // 
             // lblNombreArrets
             // 
@@ -147,6 +143,7 @@
             this.cmdAnnulerAjouterLigne.TabIndex = 15;
             this.cmdAnnulerAjouterLigne.Text = "Annuler";
             this.cmdAnnulerAjouterLigne.UseVisualStyleBackColor = false;
+            this.cmdAnnulerAjouterLigne.Click += new System.EventHandler(this.cmdAnnulerAjouterLigne_Click);
             // 
             // cmdConfirmerAjouterLigne
             // 
@@ -157,18 +154,47 @@
             this.cmdConfirmerAjouterLigne.TabIndex = 14;
             this.cmdConfirmerAjouterLigne.Text = "Confirmer";
             this.cmdConfirmerAjouterLigne.UseVisualStyleBackColor = false;
+            this.cmdConfirmerAjouterLigne.Click += new System.EventHandler(this.cmdConfirmerAjouterLigne_Click);
+            // 
+            // flpRangArret
+            // 
+            this.flpRangArret.AutoScroll = true;
+            this.flpRangArret.BackColor = System.Drawing.Color.Green;
+            this.flpRangArret.Location = new System.Drawing.Point(267, 149);
+            this.flpRangArret.Name = "flpRangArret";
+            this.flpRangArret.Size = new System.Drawing.Size(248, 199);
+            this.flpRangArret.TabIndex = 16;
+            // 
+            // cboCouleur
+            // 
+            this.cboCouleur.FormattingEnabled = true;
+            this.cboCouleur.Location = new System.Drawing.Point(4, 153);
+            this.cboCouleur.Name = "cboCouleur";
+            this.cboCouleur.Size = new System.Drawing.Size(82, 22);
+            this.cboCouleur.TabIndex = 17;
+            // 
+            // lblCouleur
+            // 
+            this.lblCouleur.AutoSize = true;
+            this.lblCouleur.Location = new System.Drawing.Point(0, 132);
+            this.lblCouleur.Name = "lblCouleur";
+            this.lblCouleur.Size = new System.Drawing.Size(91, 14);
+            this.lblCouleur.TabIndex = 18;
+            this.lblCouleur.Text = "Couleur de la ligne";
             // 
             // frmAjouterLigne
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(552, 431);
+            this.Controls.Add(this.lblCouleur);
+            this.Controls.Add(this.cboCouleur);
+            this.Controls.Add(this.flpRangArret);
             this.Controls.Add(this.cmdAnnulerAjouterLigne);
             this.Controls.Add(this.cmdConfirmerAjouterLigne);
             this.Controls.Add(this.lblRangArretsAjouterLigne);
             this.Controls.Add(this.lblArretsAjouterLigne);
             this.Controls.Add(this.clstListeArrets);
-            this.Controls.Add(this.pnlRangArrets);
             this.Controls.Add(this.pnlNomNombreArrets);
             this.Controls.Add(this.lblAjouterLigne);
             this.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -176,9 +202,9 @@
             this.Name = "frmAjouterLigne";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AjouterLigne";
+            this.Load += new System.EventHandler(this.frmAjouterLigne_Load);
             this.pnlNomNombreArrets.ResumeLayout(false);
             this.pnlNomNombreArrets.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudNombreArrets)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -189,14 +215,16 @@
         private System.Windows.Forms.Label lblRangArretsAjouterLigne;
         private System.Windows.Forms.Label lblArretsAjouterLigne;
         private System.Windows.Forms.CheckedListBox clstListeArrets;
-        private System.Windows.Forms.Panel pnlRangArrets;
         private System.Windows.Forms.Panel pnlNomNombreArrets;
-        private System.Windows.Forms.NumericUpDown nudNombreArrets;
         private System.Windows.Forms.Label lblNombreArrets;
         private System.Windows.Forms.TextBox txtNomLigne;
         private System.Windows.Forms.Label lblNomLigne;
         private System.Windows.Forms.Label lblAjouterLigne;
         private System.Windows.Forms.Button cmdAnnulerAjouterLigne;
         private System.Windows.Forms.Button cmdConfirmerAjouterLigne;
+        private System.Windows.Forms.Label lblNbrArretSelectionne;
+        private System.Windows.Forms.FlowLayoutPanel flpRangArret;
+        private System.Windows.Forms.ComboBox cboCouleur;
+        private System.Windows.Forms.Label lblCouleur;
     }
 }

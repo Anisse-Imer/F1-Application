@@ -51,22 +51,8 @@ namespace F1_Application
             int newNbrLigne = BDD.GetTableCount("Ligne");
             information.SetNbrLigne(newNbrLigne);
 
-            
-            string[] arret;
-            arret = BDD.GetAllArret();
-            for (int i = 0; i < arret.Length; i++) {
-                //Debug.Print($"Arret {i+1} : {Arret[i]}");
-                cboDepart.Items.Add(arret[i]);
-                cboArrivee.Items.Add(arret[i]);
-            }
 
-            string[] ligne;
-            ligne = BDD.GetAllLigne();
-            cboVisualiserLigne.Items.Add("Toutes les lignes");
-            for (int i = 0; i < ligne.Length; i++)
-            {
-                cboVisualiserLigne.Items.Add(ligne[i]);
-            }
+            Reload();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -151,6 +137,8 @@ namespace F1_Application
                             i++;
                         }
                         // Debug.Print($"Rang {i + 1} : {BDD.GetNomArret(arretEtRangDeLarret[i])}");
+                        if (i % 3 == 0)
+                            lblVisualiserLigne.Text += "\n";
                         lblVisualiserLigne.Text += $"{BDD.GetNomArret(arretEtRangDeLarret[i])}";
                         lblVisualiserLigne.Text += "\n\n";
                     }
@@ -191,6 +179,8 @@ namespace F1_Application
                         i++;
                     }
                     // Debug.Print($"Rang {i + 1} : {BDD.GetNomArret(arretEtRangDeLarret[i])}");
+                    if (i % 3 == 0)
+                        lblVisualiserLigne.Text += "\n";
                     lblVisualiserLigne.Text += $"{BDD.GetNomArret(arretEtRangDeLarret[i])}";
                 }
             }
@@ -204,6 +194,45 @@ namespace F1_Application
 
             lblVisualiserLigne.Text = "Aucune ligne selectionné";
 
+            Reload();
+            this.Show();
+        }
+
+
+
+        private void Reload()
+        {
+            cboDepart.Items.Clear();
+            cboArrivee.Items.Clear();
+            cboVisualiserLigne.Items.Clear();
+
+
+            string[] arret;
+            arret = BDD.GetAllArret();
+            for (int i = 0; i < arret.Length; i++)
+            {
+                cboDepart.Items.Add(arret[i]);
+                cboArrivee.Items.Add(arret[i]);
+            }
+
+            string[] ligne;
+            ligne = BDD.GetAllLigne();
+            cboVisualiserLigne.Items.Add("Toutes les lignes");
+            for (int i = 0; i < ligne.Length; i++)
+            {
+                cboVisualiserLigne.Items.Add(ligne[i]);
+            }
+        }
+
+        private void cmdGererLignes_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmGestionLignes gestionLigne = new frmGestionLignes();
+            gestionLigne.ShowDialog();
+
+            lblVisualiserLigne.Text = "Aucune ligne selectionné";
+
+            Reload();
             this.Show();
         }
     }

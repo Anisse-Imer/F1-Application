@@ -17,7 +17,7 @@ namespace F1_Application
             //Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmModifierLigne());
+            Application.Run(new frmAccueil());
         }
     }
 }

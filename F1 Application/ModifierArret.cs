@@ -39,7 +39,6 @@ namespace F1_Application
             {
                 if(txtNomArret != null && txtNomArret.TextLength >= 3)
                 {
-                    Debug.Print(BDD.GetNumArret(lstArretsReseau.SelectedItem.ToString()).ToString());
                     int numArret = BDD.GetNumArret(lstArretsReseau.SelectedItem.ToString());
 
                     bool resultat = BDD.ModifierNomArret(numArret, txtNomArret.Text.ToString());

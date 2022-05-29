@@ -80,6 +80,7 @@
             this.cmdAjouterArret.TabIndex = 8;
             this.cmdAjouterArret.Text = "Ajouter un nouvel arret";
             this.cmdAjouterArret.UseVisualStyleBackColor = false;
+            this.cmdAjouterArret.Click += new System.EventHandler(this.cmdAjouterArret_Click);
             // 
             // cmdSupprimerArret
             // 
@@ -91,6 +92,7 @@
             this.cmdSupprimerArret.TabIndex = 7;
             this.cmdSupprimerArret.Text = "Supprimer l\'arret";
             this.cmdSupprimerArret.UseVisualStyleBackColor = false;
+            this.cmdSupprimerArret.Click += new System.EventHandler(this.cmdSupprimerArret_Click);
             // 
             // cboArret
             // 
@@ -113,6 +115,7 @@
             this.Controls.Add(this.cmdAjouterArret);
             this.Controls.Add(this.cmdSupprimerArret);
             this.Name = "frmGestionArret";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GestionArret";
             this.Load += new System.EventHandler(this.frmGestionArret_Load);
             this.ResumeLayout(false);

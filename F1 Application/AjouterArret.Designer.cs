@@ -46,6 +46,7 @@
             this.cmdAnnulerAjouterArret.TabIndex = 23;
             this.cmdAnnulerAjouterArret.Text = "Annuler";
             this.cmdAnnulerAjouterArret.UseVisualStyleBackColor = false;
+            this.cmdAnnulerAjouterArret.Click += new System.EventHandler(this.cmdAnnulerAjouterArret_Click);
             // 
             // cmdConfirmerAjouterArret
             // 
@@ -56,6 +57,7 @@
             this.cmdConfirmerAjouterArret.TabIndex = 22;
             this.cmdConfirmerAjouterArret.Text = "Confirmer";
             this.cmdConfirmerAjouterArret.UseVisualStyleBackColor = false;
+            this.cmdConfirmerAjouterArret.Click += new System.EventHandler(this.cmdConfirmerAjouterArret_Click);
             // 
             // lblArretsReseau
             // 
@@ -118,6 +120,7 @@
             this.Controls.Add(this.lblAjouterArret);
             this.Name = "frmAjouterArret";
             this.Text = "AjouterArret";
+            this.Load += new System.EventHandler(this.frmAjouterArret_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

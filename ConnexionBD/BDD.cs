@@ -246,18 +246,10 @@ namespace ConnexionBD
 
                 while (rdr.Read())
                 {
-                    /*
-                    for (int i = 0; i < rdr.FieldCount; i++)
-                    {
-                        Debug.Print(rdr.GetValue(i).ToString());
-                    }
-                    Debug.Print("--------------");
-                    */
+
                     arretEtRangDeLarret[compteur] = rdr.GetInt32(1);
                     compteur++;
 
-
-                    // Debug.Print($"{rdr.GetValue(1).ToString()} | {rdr.GetValue(2).ToString()}");
                 }
 
                 rdr.Close();
@@ -276,6 +268,165 @@ namespace ConnexionBD
             bool retour = true;
 
             string sql = $"UPDATE Arret SET Nom_Arret='{nouveauNomArret}' WHERE N_Arret={numArret}";
+
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                retour = false;
+            }
+
+            return retour;
+        }
+
+        public static int AjoutArret(string nomArret)
+        {
+            int retour = -1;
+
+
+            string sql = $"INSERT INTO Arret (Nom_Arret) VALUES ('{nomArret}')";
+
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                retour = (int)cmd.LastInsertedId;
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+            }
+
+            return retour;
+        }
+
+        public static bool SupprimerUnArretDesLignes(int num_Arret)
+        {
+            bool retour = true;
+
+            string sql = $"DELETE FROM Positionnement WHERE N_Arret = {num_Arret}";
+
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                retour = false;
+            }
+
+            return retour;
+        }
+
+
+        public static int AjoutLigne(string nomLigne, string couleurLigne)
+        {
+            int retour = -1;
+
+
+            string sql = $"INSERT INTO Ligne (Nom_ligne,Etat_ligne,Couleur_ligne) VALUES ('{nomLigne}',1,'{couleurLigne}')";
+
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                retour = (int)cmd.LastInsertedId;
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+            }
+
+            return retour;
+        }
+
+
+        public static bool AjoutPositionnement(int n_Ligne, int n_Arret, int rang_Arret)
+        {
+            bool retour = true;
+
+
+            string sql = $"INSERT INTO Positionnement (N_ligne,N_Arret,Rang_Arret) VALUES ({n_Ligne},{n_Arret},{rang_Arret})";
+
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                retour = false;
+            }
+
+            return retour;
+        }
+
+        public static int GetPosition(int Num_ligne, int Num_Arret)
+        {
+
+            string sql = $"SELECT * FROM Positionnement WHERE N_ligne = {Num_ligne} AND N_Arret = {Num_Arret}";
+            int rang = -1;
+
+            try
+            {
+
+                MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    rang = rdr.GetInt32(2);
+                }
+
+                rdr.Close();
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return rang;
+        }
+
+        public static bool SetPosition(int Num_ligne, int Num_Arret, int Rang_Arret)
+        {
+            bool retour = true;
+
+            string sql = $"UPDATE Positionnement SET Rang_Arret={Rang_Arret} WHERE N_ligne={Num_ligne} AND N_Arret={Num_Arret}";
+
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                retour = false;
+            }
+
+            return retour;
+        }
+
+        public static bool SupprimerArret(int num_Arret)
+        {
+            bool retour = true;
+
+            string sql = $"DELETE FROM Arret WHERE N_Arret = {num_Arret}";
 
             MySqlCommand cmd = new MySqlCommand(sql, maCnx);
 

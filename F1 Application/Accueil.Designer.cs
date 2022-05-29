@@ -49,17 +49,17 @@ namespace F1_Application
             this.cmdGererArrêts = new System.Windows.Forms.Button();
             this.cmdDeconnexionAdmin = new System.Windows.Forms.Button();
             this.pnlRecherche = new System.Windows.Forms.Panel();
+            this.lblArriveeOuDepart = new System.Windows.Forms.Label();
+            this.optDépart = new System.Windows.Forms.RadioButton();
+            this.optArrivée = new System.Windows.Forms.RadioButton();
+            this.lblH = new System.Windows.Forms.Label();
             this.pnlVisualisation = new System.Windows.Forms.Panel();
+            this.lblVisualisationDemande = new System.Windows.Forms.Label();
             this.pnlAdministrateur = new System.Windows.Forms.Panel();
             this.lblResultatRecherche = new System.Windows.Forms.Label();
             this.pnlResultatRecherche = new System.Windows.Forms.Panel();
-            this.lblH = new System.Windows.Forms.Label();
             this.pnlAffichage = new System.Windows.Forms.Panel();
             this.lblVisualiserLigne = new System.Windows.Forms.Label();
-            this.optArrivée = new System.Windows.Forms.RadioButton();
-            this.optDépart = new System.Windows.Forms.RadioButton();
-            this.lblArriveeOuDepart = new System.Windows.Forms.Label();
-            this.lblVisualisationDemande = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeure)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDate)).BeginInit();
@@ -253,6 +253,7 @@ namespace F1_Application
             this.cmdGererLignes.Text = "Gérer lignes ";
             this.cmdGererLignes.UseVisualStyleBackColor = false;
             this.cmdGererLignes.Visible = false;
+            this.cmdGererLignes.Click += new System.EventHandler(this.cmdGererLignes_Click);
             // 
             // cmdGererArrêts
             // 
@@ -301,6 +302,50 @@ namespace F1_Application
             this.pnlRecherche.Size = new System.Drawing.Size(307, 356);
             this.pnlRecherche.TabIndex = 27;
             // 
+            // lblArriveeOuDepart
+            // 
+            this.lblArriveeOuDepart.AutoSize = true;
+            this.lblArriveeOuDepart.Font = new System.Drawing.Font("Perpetua", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblArriveeOuDepart.Location = new System.Drawing.Point(33, 244);
+            this.lblArriveeOuDepart.Name = "lblArriveeOuDepart";
+            this.lblArriveeOuDepart.Size = new System.Drawing.Size(239, 15);
+            this.lblArriveeOuDepart.TabIndex = 22;
+            this.lblArriveeOuDepart.Text = "Recherche pour un départ ou une arrivée ?";
+            // 
+            // optDépart
+            // 
+            this.optDépart.AutoSize = true;
+            this.optDépart.Font = new System.Drawing.Font("Perpetua", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.optDépart.Location = new System.Drawing.Point(48, 271);
+            this.optDépart.Name = "optDépart";
+            this.optDépart.Size = new System.Drawing.Size(101, 19);
+            this.optDépart.TabIndex = 21;
+            this.optDépart.TabStop = true;
+            this.optDépart.Text = "Heure de départ";
+            this.optDépart.UseVisualStyleBackColor = true;
+            // 
+            // optArrivée
+            // 
+            this.optArrivée.AutoSize = true;
+            this.optArrivée.Font = new System.Drawing.Font("Perpetua", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.optArrivée.Location = new System.Drawing.Point(156, 271);
+            this.optArrivée.Name = "optArrivée";
+            this.optArrivée.Size = new System.Drawing.Size(96, 19);
+            this.optArrivée.TabIndex = 20;
+            this.optArrivée.TabStop = true;
+            this.optArrivée.Text = "Heure d\'arrivée";
+            this.optArrivée.UseVisualStyleBackColor = true;
+            // 
+            // lblH
+            // 
+            this.lblH.AutoSize = true;
+            this.lblH.Font = new System.Drawing.Font("Impact", 12F);
+            this.lblH.Location = new System.Drawing.Point(157, 203);
+            this.lblH.Name = "lblH";
+            this.lblH.Size = new System.Drawing.Size(17, 20);
+            this.lblH.TabIndex = 13;
+            this.lblH.Text = "h";
+            // 
             // pnlVisualisation
             // 
             this.pnlVisualisation.BackColor = System.Drawing.Color.AliceBlue;
@@ -313,6 +358,15 @@ namespace F1_Application
             this.pnlVisualisation.Name = "pnlVisualisation";
             this.pnlVisualisation.Size = new System.Drawing.Size(307, 185);
             this.pnlVisualisation.TabIndex = 28;
+            // 
+            // lblVisualisationDemande
+            // 
+            this.lblVisualisationDemande.AutoSize = true;
+            this.lblVisualisationDemande.Location = new System.Drawing.Point(57, 67);
+            this.lblVisualisationDemande.Name = "lblVisualisationDemande";
+            this.lblVisualisationDemande.Size = new System.Drawing.Size(160, 13);
+            this.lblVisualisationDemande.TabIndex = 22;
+            this.lblVisualisationDemande.Text = "Sélectionner la ligne à visualiser.";
             // 
             // pnlAdministrateur
             // 
@@ -349,16 +403,6 @@ namespace F1_Application
             this.pnlResultatRecherche.Size = new System.Drawing.Size(327, 746);
             this.pnlResultatRecherche.TabIndex = 30;
             // 
-            // lblH
-            // 
-            this.lblH.AutoSize = true;
-            this.lblH.Font = new System.Drawing.Font("Impact", 12F);
-            this.lblH.Location = new System.Drawing.Point(157, 203);
-            this.lblH.Name = "lblH";
-            this.lblH.Size = new System.Drawing.Size(17, 20);
-            this.lblH.TabIndex = 13;
-            this.lblH.Text = "h";
-            // 
             // pnlAffichage
             // 
             this.pnlAffichage.BackColor = System.Drawing.Color.Azure;
@@ -379,49 +423,6 @@ namespace F1_Application
             this.lblVisualiserLigne.TabIndex = 0;
             this.lblVisualiserLigne.Text = "Aucune ligne selectionné";
             // 
-            // optArrivée
-            // 
-            this.optArrivée.AutoSize = true;
-            this.optArrivée.Font = new System.Drawing.Font("Perpetua", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.optArrivée.Location = new System.Drawing.Point(156, 271);
-            this.optArrivée.Name = "optArrivée";
-            this.optArrivée.Size = new System.Drawing.Size(96, 19);
-            this.optArrivée.TabIndex = 20;
-            this.optArrivée.TabStop = true;
-            this.optArrivée.Text = "Heure d\'arrivée";
-            this.optArrivée.UseVisualStyleBackColor = true;
-            // 
-            // optDépart
-            // 
-            this.optDépart.AutoSize = true;
-            this.optDépart.Font = new System.Drawing.Font("Perpetua", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.optDépart.Location = new System.Drawing.Point(48, 271);
-            this.optDépart.Name = "optDépart";
-            this.optDépart.Size = new System.Drawing.Size(101, 19);
-            this.optDépart.TabIndex = 21;
-            this.optDépart.TabStop = true;
-            this.optDépart.Text = "Heure de départ";
-            this.optDépart.UseVisualStyleBackColor = true;
-            // 
-            // lblArriveeOuDepart
-            // 
-            this.lblArriveeOuDepart.AutoSize = true;
-            this.lblArriveeOuDepart.Font = new System.Drawing.Font("Perpetua", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblArriveeOuDepart.Location = new System.Drawing.Point(33, 244);
-            this.lblArriveeOuDepart.Name = "lblArriveeOuDepart";
-            this.lblArriveeOuDepart.Size = new System.Drawing.Size(239, 15);
-            this.lblArriveeOuDepart.TabIndex = 22;
-            this.lblArriveeOuDepart.Text = "Recherche pour un départ ou une arrivée ?";
-            // 
-            // lblVisualisationDemande
-            // 
-            this.lblVisualisationDemande.AutoSize = true;
-            this.lblVisualisationDemande.Location = new System.Drawing.Point(57, 67);
-            this.lblVisualisationDemande.Name = "lblVisualisationDemande";
-            this.lblVisualisationDemande.Size = new System.Drawing.Size(160, 13);
-            this.lblVisualisationDemande.TabIndex = 22;
-            this.lblVisualisationDemande.Text = "Sélectionner la ligne à visualiser.";
-            // 
             // frmAccueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -439,7 +440,6 @@ namespace F1_Application
             this.Name = "frmAccueil";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Le guide du petit arpenteur";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Accueil_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Accueil_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
