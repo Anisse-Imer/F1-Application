@@ -1,6 +1,6 @@
 ﻿namespace F1_Application
 {
-    partial class AjouterLigne
+    partial class frmAjouterLigne
     {
         /// <summary>
         /// Required designer variable.
@@ -47,36 +47,38 @@
             // lblRangArretsAjouterLigne
             // 
             this.lblRangArretsAjouterLigne.AutoSize = true;
-            this.lblRangArretsAjouterLigne.Location = new System.Drawing.Point(306, 142);
+            this.lblRangArretsAjouterLigne.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRangArretsAjouterLigne.Location = new System.Drawing.Point(262, 132);
             this.lblRangArretsAjouterLigne.Name = "lblRangArretsAjouterLigne";
-            this.lblRangArretsAjouterLigne.Size = new System.Drawing.Size(96, 15);
+            this.lblRangArretsAjouterLigne.Size = new System.Drawing.Size(85, 14);
             this.lblRangArretsAjouterLigne.TabIndex = 13;
             this.lblRangArretsAjouterLigne.Text = "Rang des arrêts : ";
             // 
             // lblArretsAjouterLigne
             // 
             this.lblArretsAjouterLigne.AutoSize = true;
-            this.lblArretsAjouterLigne.Location = new System.Drawing.Point(113, 142);
+            this.lblArretsAjouterLigne.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblArretsAjouterLigne.Location = new System.Drawing.Point(97, 132);
             this.lblArretsAjouterLigne.Name = "lblArretsAjouterLigne";
-            this.lblArretsAjouterLigne.Size = new System.Drawing.Size(104, 15);
+            this.lblArretsAjouterLigne.Size = new System.Drawing.Size(94, 14);
             this.lblArretsAjouterLigne.TabIndex = 12;
             this.lblArretsAjouterLigne.Text = "Arrêts sur la ligne :";
             // 
             // clstListeArrets
             // 
             this.clstListeArrets.FormattingEnabled = true;
-            this.clstListeArrets.Location = new System.Drawing.Point(111, 160);
+            this.clstListeArrets.Location = new System.Drawing.Point(95, 150);
             this.clstListeArrets.Name = "clstListeArrets";
-            this.clstListeArrets.Size = new System.Drawing.Size(187, 220);
+            this.clstListeArrets.Size = new System.Drawing.Size(161, 199);
             this.clstListeArrets.TabIndex = 11;
             // 
             // pnlRangArrets
             // 
             this.pnlRangArrets.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.pnlRangArrets.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlRangArrets.Location = new System.Drawing.Point(304, 160);
+            this.pnlRangArrets.Location = new System.Drawing.Point(261, 150);
             this.pnlRangArrets.Name = "pnlRangArrets";
-            this.pnlRangArrets.Size = new System.Drawing.Size(230, 220);
+            this.pnlRangArrets.Size = new System.Drawing.Size(197, 199);
             this.pnlRangArrets.TabIndex = 10;
             // 
             // pnlNomNombreArrets
@@ -87,59 +89,61 @@
             this.pnlNomNombreArrets.Controls.Add(this.lblNombreArrets);
             this.pnlNomNombreArrets.Controls.Add(this.txtNomLigne);
             this.pnlNomNombreArrets.Controls.Add(this.lblNomLigne);
-            this.pnlNomNombreArrets.Location = new System.Drawing.Point(113, 67);
+            this.pnlNomNombreArrets.Location = new System.Drawing.Point(97, 62);
             this.pnlNomNombreArrets.Name = "pnlNomNombreArrets";
-            this.pnlNomNombreArrets.Size = new System.Drawing.Size(421, 59);
+            this.pnlNomNombreArrets.Size = new System.Drawing.Size(361, 55);
             this.pnlNomNombreArrets.TabIndex = 9;
             // 
             // nudNombreArrets
             // 
-            this.nudNombreArrets.Location = new System.Drawing.Point(240, 30);
+            this.nudNombreArrets.Location = new System.Drawing.Point(206, 28);
             this.nudNombreArrets.Name = "nudNombreArrets";
-            this.nudNombreArrets.Size = new System.Drawing.Size(163, 23);
+            this.nudNombreArrets.Size = new System.Drawing.Size(140, 20);
             this.nudNombreArrets.TabIndex = 4;
             // 
             // lblNombreArrets
             // 
             this.lblNombreArrets.AutoSize = true;
-            this.lblNombreArrets.Location = new System.Drawing.Point(253, 12);
+            this.lblNombreArrets.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombreArrets.Location = new System.Drawing.Point(217, 11);
             this.lblNombreArrets.Name = "lblNombreArrets";
-            this.lblNombreArrets.Size = new System.Drawing.Size(99, 15);
+            this.lblNombreArrets.Size = new System.Drawing.Size(86, 14);
             this.lblNombreArrets.TabIndex = 6;
             this.lblNombreArrets.Text = "Nombre d\'arrêts :";
             // 
             // txtNomLigne
             // 
-            this.txtNomLigne.Location = new System.Drawing.Point(21, 30);
+            this.txtNomLigne.Location = new System.Drawing.Point(18, 28);
             this.txtNomLigne.Name = "txtNomLigne";
-            this.txtNomLigne.Size = new System.Drawing.Size(163, 23);
+            this.txtNomLigne.Size = new System.Drawing.Size(140, 20);
             this.txtNomLigne.TabIndex = 5;
             // 
             // lblNomLigne
             // 
             this.lblNomLigne.AutoSize = true;
-            this.lblNomLigne.Location = new System.Drawing.Point(35, 12);
+            this.lblNomLigne.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNomLigne.Location = new System.Drawing.Point(30, 11);
             this.lblNomLigne.Name = "lblNomLigne";
-            this.lblNomLigne.Size = new System.Drawing.Size(97, 15);
+            this.lblNomLigne.Size = new System.Drawing.Size(85, 14);
             this.lblNomLigne.TabIndex = 4;
             this.lblNomLigne.Text = "Nom de la ligne :";
             // 
             // lblAjouterLigne
             // 
             this.lblAjouterLigne.AutoSize = true;
-            this.lblAjouterLigne.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblAjouterLigne.Location = new System.Drawing.Point(214, 20);
+            this.lblAjouterLigne.Font = new System.Drawing.Font("Times New Roman", 20F);
+            this.lblAjouterLigne.Location = new System.Drawing.Point(183, 18);
             this.lblAjouterLigne.Name = "lblAjouterLigne";
-            this.lblAjouterLigne.Size = new System.Drawing.Size(209, 31);
+            this.lblAjouterLigne.Size = new System.Drawing.Size(217, 31);
             this.lblAjouterLigne.TabIndex = 8;
-            this.lblAjouterLigne.Text = "Ajouter une igne :";
+            this.lblAjouterLigne.Text = "Ajouter une ligne :";
             // 
             // cmdAnnulerAjouterLigne
             // 
             this.cmdAnnulerAjouterLigne.BackColor = System.Drawing.Color.Silver;
-            this.cmdAnnulerAjouterLigne.Location = new System.Drawing.Point(12, 415);
+            this.cmdAnnulerAjouterLigne.Location = new System.Drawing.Point(10, 388);
             this.cmdAnnulerAjouterLigne.Name = "cmdAnnulerAjouterLigne";
-            this.cmdAnnulerAjouterLigne.Size = new System.Drawing.Size(122, 34);
+            this.cmdAnnulerAjouterLigne.Size = new System.Drawing.Size(105, 31);
             this.cmdAnnulerAjouterLigne.TabIndex = 15;
             this.cmdAnnulerAjouterLigne.Text = "Annuler";
             this.cmdAnnulerAjouterLigne.UseVisualStyleBackColor = false;
@@ -147,18 +151,18 @@
             // cmdConfirmerAjouterLigne
             // 
             this.cmdConfirmerAjouterLigne.BackColor = System.Drawing.Color.Silver;
-            this.cmdConfirmerAjouterLigne.Location = new System.Drawing.Point(514, 415);
+            this.cmdConfirmerAjouterLigne.Location = new System.Drawing.Point(441, 388);
             this.cmdConfirmerAjouterLigne.Name = "cmdConfirmerAjouterLigne";
-            this.cmdConfirmerAjouterLigne.Size = new System.Drawing.Size(122, 34);
+            this.cmdConfirmerAjouterLigne.Size = new System.Drawing.Size(105, 31);
             this.cmdConfirmerAjouterLigne.TabIndex = 14;
             this.cmdConfirmerAjouterLigne.Text = "Confirmer";
             this.cmdConfirmerAjouterLigne.UseVisualStyleBackColor = false;
             // 
-            // AjouterLigne
+            // frmAjouterLigne
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(644, 461);
+            this.ClientSize = new System.Drawing.Size(552, 431);
             this.Controls.Add(this.cmdAnnulerAjouterLigne);
             this.Controls.Add(this.cmdConfirmerAjouterLigne);
             this.Controls.Add(this.lblRangArretsAjouterLigne);
@@ -167,7 +171,9 @@
             this.Controls.Add(this.pnlRangArrets);
             this.Controls.Add(this.pnlNomNombreArrets);
             this.Controls.Add(this.lblAjouterLigne);
-            this.Name = "AjouterLigne";
+            this.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HelpButton = true;
+            this.Name = "frmAjouterLigne";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AjouterLigne";
             this.pnlNomNombreArrets.ResumeLayout(false);

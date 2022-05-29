@@ -40,9 +40,10 @@
             // lblNomArret
             // 
             this.lblNomArret.AutoSize = true;
+            this.lblNomArret.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNomArret.Location = new System.Drawing.Point(9, 43);
             this.lblNomArret.Name = "lblNomArret";
-            this.lblNomArret.Size = new System.Drawing.Size(123, 13);
+            this.lblNomArret.Size = new System.Drawing.Size(120, 14);
             this.lblNomArret.TabIndex = 25;
             this.lblNomArret.Text = "Nouveau nom de l\'arret :";
             // 
@@ -86,9 +87,10 @@
             // lblArretsReseau
             // 
             this.lblArretsReseau.AutoSize = true;
+            this.lblArretsReseau.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblArretsReseau.Location = new System.Drawing.Point(9, 92);
             this.lblArretsReseau.Name = "lblArretsReseau";
-            this.lblArretsReseau.Size = new System.Drawing.Size(103, 13);
+            this.lblArretsReseau.Size = new System.Drawing.Size(100, 14);
             this.lblArretsReseau.TabIndex = 28;
             this.lblArretsReseau.Text = "Arrêts sur le réseau :";
             // 

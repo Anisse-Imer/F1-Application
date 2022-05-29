@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace F1_Application
 {
-    public partial class AjouterLigne : Form
+    public partial class frmAjouterLigne : Form
     {
-        public AjouterLigne()
+        public frmAjouterLigne()
         {
             InitializeComponent();
         }

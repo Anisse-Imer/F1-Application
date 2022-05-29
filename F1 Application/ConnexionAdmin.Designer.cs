@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmConnexionAdmin));
             this.lblTitreAdministrateur = new System.Windows.Forms.Label();
             this.lblIdentifiant = new System.Windows.Forms.Label();
             this.lblMotDePasse = new System.Windows.Forms.Label();
@@ -40,37 +39,39 @@
             // lblTitreAdministrateur
             // 
             this.lblTitreAdministrateur.AutoSize = true;
-            this.lblTitreAdministrateur.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTitreAdministrateur.Location = new System.Drawing.Point(12, 9);
+            this.lblTitreAdministrateur.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitreAdministrateur.Location = new System.Drawing.Point(2, 9);
             this.lblTitreAdministrateur.Name = "lblTitreAdministrateur";
-            this.lblTitreAdministrateur.Size = new System.Drawing.Size(221, 25);
+            this.lblTitreAdministrateur.Size = new System.Drawing.Size(198, 21);
             this.lblTitreAdministrateur.TabIndex = 0;
-            this.lblTitreAdministrateur.Text = "Administrateur connection";
+            this.lblTitreAdministrateur.Text = "Connexion Administateur";
             // 
             // lblIdentifiant
             // 
             this.lblIdentifiant.AutoSize = true;
-            this.lblIdentifiant.Location = new System.Drawing.Point(45, 50);
+            this.lblIdentifiant.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIdentifiant.Location = new System.Drawing.Point(39, 46);
             this.lblIdentifiant.Name = "lblIdentifiant";
-            this.lblIdentifiant.Size = new System.Drawing.Size(61, 15);
+            this.lblIdentifiant.Size = new System.Drawing.Size(56, 14);
             this.lblIdentifiant.TabIndex = 1;
             this.lblIdentifiant.Text = "Identifiant";
             // 
             // lblMotDePasse
             // 
             this.lblMotDePasse.AutoSize = true;
-            this.lblMotDePasse.Location = new System.Drawing.Point(45, 105);
+            this.lblMotDePasse.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMotDePasse.Location = new System.Drawing.Point(39, 98);
             this.lblMotDePasse.Name = "lblMotDePasse";
-            this.lblMotDePasse.Size = new System.Drawing.Size(77, 15);
+            this.lblMotDePasse.Size = new System.Drawing.Size(67, 14);
             this.lblMotDePasse.TabIndex = 2;
             this.lblMotDePasse.Text = "Mot de passe";
             // 
             // cmdValiderAdministrateur
             // 
             this.cmdValiderAdministrateur.BackColor = System.Drawing.Color.Lavender;
-            this.cmdValiderAdministrateur.Location = new System.Drawing.Point(45, 164);
+            this.cmdValiderAdministrateur.Location = new System.Drawing.Point(39, 153);
             this.cmdValiderAdministrateur.Name = "cmdValiderAdministrateur";
-            this.cmdValiderAdministrateur.Size = new System.Drawing.Size(137, 23);
+            this.cmdValiderAdministrateur.Size = new System.Drawing.Size(117, 22);
             this.cmdValiderAdministrateur.TabIndex = 3;
             this.cmdValiderAdministrateur.Text = "Valider";
             this.cmdValiderAdministrateur.UseVisualStyleBackColor = false;
@@ -78,32 +79,32 @@
             // 
             // txtIdentifiant
             // 
-            this.txtIdentifiant.Location = new System.Drawing.Point(45, 68);
+            this.txtIdentifiant.Location = new System.Drawing.Point(39, 64);
             this.txtIdentifiant.Name = "txtIdentifiant";
-            this.txtIdentifiant.Size = new System.Drawing.Size(137, 23);
+            this.txtIdentifiant.Size = new System.Drawing.Size(118, 20);
             this.txtIdentifiant.TabIndex = 4;
             // 
             // txtMotDePasse
             // 
-            this.txtMotDePasse.Location = new System.Drawing.Point(45, 123);
+            this.txtMotDePasse.Location = new System.Drawing.Point(39, 115);
             this.txtMotDePasse.Name = "txtMotDePasse";
-            this.txtMotDePasse.Size = new System.Drawing.Size(137, 23);
+            this.txtMotDePasse.Size = new System.Drawing.Size(118, 20);
             this.txtMotDePasse.TabIndex = 5;
             // 
             // frmConnexionAdmin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(234, 211);
+            this.ClientSize = new System.Drawing.Size(201, 197);
             this.Controls.Add(this.txtMotDePasse);
             this.Controls.Add(this.txtIdentifiant);
             this.Controls.Add(this.cmdValiderAdministrateur);
             this.Controls.Add(this.lblMotDePasse);
             this.Controls.Add(this.lblIdentifiant);
             this.Controls.Add(this.lblTitreAdministrateur);
+            this.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            //this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmConnexionAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ConnexionAdmin";

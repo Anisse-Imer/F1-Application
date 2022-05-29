@@ -1,6 +1,6 @@
 ﻿namespace F1_Application
 {
-    partial class AjouterArret
+    partial class frmAjouterArret
     {
         /// <summary>
         /// Required designer variable.
@@ -40,9 +40,9 @@
             // cmdAnnulerAjouterArret
             // 
             this.cmdAnnulerAjouterArret.BackColor = System.Drawing.Color.Silver;
-            this.cmdAnnulerAjouterArret.Location = new System.Drawing.Point(12, 328);
+            this.cmdAnnulerAjouterArret.Location = new System.Drawing.Point(10, 284);
             this.cmdAnnulerAjouterArret.Name = "cmdAnnulerAjouterArret";
-            this.cmdAnnulerAjouterArret.Size = new System.Drawing.Size(78, 34);
+            this.cmdAnnulerAjouterArret.Size = new System.Drawing.Size(67, 29);
             this.cmdAnnulerAjouterArret.TabIndex = 23;
             this.cmdAnnulerAjouterArret.Text = "Annuler";
             this.cmdAnnulerAjouterArret.UseVisualStyleBackColor = false;
@@ -50,9 +50,9 @@
             // cmdConfirmerAjouterArret
             // 
             this.cmdConfirmerAjouterArret.BackColor = System.Drawing.Color.Silver;
-            this.cmdConfirmerAjouterArret.Location = new System.Drawing.Point(128, 328);
+            this.cmdConfirmerAjouterArret.Location = new System.Drawing.Point(110, 284);
             this.cmdConfirmerAjouterArret.Name = "cmdConfirmerAjouterArret";
-            this.cmdConfirmerAjouterArret.Size = new System.Drawing.Size(85, 34);
+            this.cmdConfirmerAjouterArret.Size = new System.Drawing.Size(73, 29);
             this.cmdConfirmerAjouterArret.TabIndex = 22;
             this.cmdConfirmerAjouterArret.Text = "Confirmer";
             this.cmdConfirmerAjouterArret.UseVisualStyleBackColor = false;
@@ -60,9 +60,10 @@
             // lblArretsReseau
             // 
             this.lblArretsReseau.AutoSize = true;
-            this.lblArretsReseau.Location = new System.Drawing.Point(12, 105);
+            this.lblArretsReseau.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblArretsReseau.Location = new System.Drawing.Point(10, 91);
             this.lblArretsReseau.Name = "lblArretsReseau";
-            this.lblArretsReseau.Size = new System.Drawing.Size(112, 15);
+            this.lblArretsReseau.Size = new System.Drawing.Size(100, 14);
             this.lblArretsReseau.TabIndex = 20;
             this.lblArretsReseau.Text = "Arrêts sur le réseau :";
             this.lblArretsReseau.Click += new System.EventHandler(this.lblArretsAjouterLigne_Click);
@@ -70,44 +71,44 @@
             // lblAjouterArret
             // 
             this.lblAjouterArret.AutoSize = true;
-            this.lblAjouterArret.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblAjouterArret.Location = new System.Drawing.Point(12, 9);
+            this.lblAjouterArret.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAjouterArret.Location = new System.Drawing.Point(5, 9);
             this.lblAjouterArret.Name = "lblAjouterArret";
-            this.lblAjouterArret.Size = new System.Drawing.Size(201, 31);
+            this.lblAjouterArret.Size = new System.Drawing.Size(177, 27);
             this.lblAjouterArret.TabIndex = 16;
             this.lblAjouterArret.Text = "Ajouter une arret";
             // 
             // lstArretsReseau
             // 
             this.lstArretsReseau.FormattingEnabled = true;
-            this.lstArretsReseau.ItemHeight = 15;
-            this.lstArretsReseau.Location = new System.Drawing.Point(12, 123);
+            this.lstArretsReseau.Location = new System.Drawing.Point(10, 107);
             this.lstArretsReseau.Name = "lstArretsReseau";
-            this.lstArretsReseau.Size = new System.Drawing.Size(201, 199);
+            this.lstArretsReseau.Size = new System.Drawing.Size(173, 173);
             this.lstArretsReseau.TabIndex = 24;
             // 
             // lblNomArret
             // 
             this.lblNomArret.AutoSize = true;
-            this.lblNomArret.Location = new System.Drawing.Point(12, 49);
+            this.lblNomArret.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNomArret.Location = new System.Drawing.Point(10, 42);
             this.lblNomArret.Name = "lblNomArret";
-            this.lblNomArret.Size = new System.Drawing.Size(123, 15);
+            this.lblNomArret.Size = new System.Drawing.Size(108, 14);
             this.lblNomArret.TabIndex = 4;
             this.lblNomArret.Text = "Nom du nouvel arret :";
             // 
             // txtNomArret
             // 
-            this.txtNomArret.Location = new System.Drawing.Point(12, 67);
+            this.txtNomArret.Location = new System.Drawing.Point(10, 58);
             this.txtNomArret.Name = "txtNomArret";
-            this.txtNomArret.Size = new System.Drawing.Size(201, 23);
+            this.txtNomArret.Size = new System.Drawing.Size(173, 20);
             this.txtNomArret.TabIndex = 5;
             // 
-            // AjouterArret
+            // frmAjouterArret
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(219, 371);
+            this.ClientSize = new System.Drawing.Size(188, 322);
             this.Controls.Add(this.lblNomArret);
             this.Controls.Add(this.txtNomArret);
             this.Controls.Add(this.lstArretsReseau);
@@ -115,7 +116,7 @@
             this.Controls.Add(this.cmdConfirmerAjouterArret);
             this.Controls.Add(this.lblArretsReseau);
             this.Controls.Add(this.lblAjouterArret);
-            this.Name = "AjouterArret";
+            this.Name = "frmAjouterArret";
             this.Text = "AjouterArret";
             this.ResumeLayout(false);
             this.PerformLayout();

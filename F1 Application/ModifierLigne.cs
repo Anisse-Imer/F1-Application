@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace F1_Application
 {
-    public partial class ModifierLigne : Form
+    public partial class frmModifierLigne : Form
     {
-        public ModifierLigne()
+        public frmModifierLigne()
         {
             InitializeComponent();
         }

@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace F1_Application
 {
-    public partial class GestionLignes : Form
+    public partial class frmGestionLignes : Form
     {
-        public GestionLignes()
+        public frmGestionLignes()
         {
             InitializeComponent();
         }

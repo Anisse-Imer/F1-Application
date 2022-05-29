@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace F1_Application
 {
-    public partial class AjouterArret : Form
+    public partial class frmAjouterArret : Form
     {
-        public AjouterArret()
+        public frmAjouterArret()
         {
             InitializeComponent();
         }

@@ -40,7 +40,7 @@
             // 
             this.lblTitreGestionArret.AutoSize = true;
             this.lblTitreGestionArret.Font = new System.Drawing.Font("Times New Roman", 20F);
-            this.lblTitreGestionArret.Location = new System.Drawing.Point(62, 12);
+            this.lblTitreGestionArret.Location = new System.Drawing.Point(78, 9);
             this.lblTitreGestionArret.Name = "lblTitreGestionArret";
             this.lblTitreGestionArret.Size = new System.Drawing.Size(257, 31);
             this.lblTitreGestionArret.TabIndex = 11;
@@ -50,7 +50,7 @@
             // 
             this.cmdAnnulerGestionArret.BackColor = System.Drawing.Color.Silver;
             this.cmdAnnulerGestionArret.Font = new System.Drawing.Font("Times New Roman", 9F);
-            this.cmdAnnulerGestionArret.Location = new System.Drawing.Point(10, 224);
+            this.cmdAnnulerGestionArret.Location = new System.Drawing.Point(12, 134);
             this.cmdAnnulerGestionArret.Name = "cmdAnnulerGestionArret";
             this.cmdAnnulerGestionArret.Size = new System.Drawing.Size(87, 28);
             this.cmdAnnulerGestionArret.TabIndex = 10;
@@ -62,9 +62,9 @@
             // 
             this.cmdModifierArret.BackColor = System.Drawing.Color.Lavender;
             this.cmdModifierArret.Font = new System.Drawing.Font("Times New Roman", 9F);
-            this.cmdModifierArret.Location = new System.Drawing.Point(166, 170);
+            this.cmdModifierArret.Location = new System.Drawing.Point(173, 80);
             this.cmdModifierArret.Name = "cmdModifierArret";
-            this.cmdModifierArret.Size = new System.Drawing.Size(99, 36);
+            this.cmdModifierArret.Size = new System.Drawing.Size(99, 47);
             this.cmdModifierArret.TabIndex = 9;
             this.cmdModifierArret.Text = "Modifier un arret";
             this.cmdModifierArret.UseVisualStyleBackColor = false;
@@ -74,9 +74,9 @@
             // 
             this.cmdAjouterArret.BackColor = System.Drawing.Color.Lavender;
             this.cmdAjouterArret.Font = new System.Drawing.Font("Times New Roman", 9F);
-            this.cmdAjouterArret.Location = new System.Drawing.Point(271, 170);
+            this.cmdAjouterArret.Location = new System.Drawing.Point(278, 80);
             this.cmdAjouterArret.Name = "cmdAjouterArret";
-            this.cmdAjouterArret.Size = new System.Drawing.Size(99, 36);
+            this.cmdAjouterArret.Size = new System.Drawing.Size(99, 47);
             this.cmdAjouterArret.TabIndex = 8;
             this.cmdAjouterArret.Text = "Ajouter un nouvel arret";
             this.cmdAjouterArret.UseVisualStyleBackColor = false;
@@ -85,9 +85,9 @@
             // 
             this.cmdSupprimerArret.BackColor = System.Drawing.Color.Lavender;
             this.cmdSupprimerArret.Font = new System.Drawing.Font("Times New Roman", 9F);
-            this.cmdSupprimerArret.Location = new System.Drawing.Point(62, 170);
+            this.cmdSupprimerArret.Location = new System.Drawing.Point(68, 80);
             this.cmdSupprimerArret.Name = "cmdSupprimerArret";
-            this.cmdSupprimerArret.Size = new System.Drawing.Size(99, 36);
+            this.cmdSupprimerArret.Size = new System.Drawing.Size(99, 47);
             this.cmdSupprimerArret.TabIndex = 7;
             this.cmdSupprimerArret.Text = "Supprimer l\'arret";
             this.cmdSupprimerArret.UseVisualStyleBackColor = false;
@@ -105,7 +105,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(432, 261);
+            this.ClientSize = new System.Drawing.Size(432, 174);
             this.Controls.Add(this.cboArret);
             this.Controls.Add(this.lblTitreGestionArret);
             this.Controls.Add(this.cmdAnnulerGestionArret);
