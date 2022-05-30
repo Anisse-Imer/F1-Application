@@ -514,11 +514,14 @@ namespace ConnexionBD
             return couleur;
         }
 
-        public static string[] GetPassageDebut(int num_Ligne, int heure, int minute)
+        public static int[] GetPassageDebut(int num_Ligne)
         {
 
-            string sql = $"SELECT * FROM Passage WHERE N_ligne = {num_Ligne} AND HOUR(Heure_debut) > heure";
-            string[] Passage = new string[5];
+            // string sql = $"SELECT HOUR(Heure_debut), MINUTE(Heure_debut) FROM Passage WHERE N_ligne = {num_Ligne} AND ((HOUR(Heure_debut) < {heure}) OR (HOUR(Heure_debut) <= {heure} AND MINUTE(Heure_debut) <= {minute})) ";
+            string sql = $"SELECT HOUR(Heure_debut), MINUTE(Heure_debut) FROM Passage WHERE N_ligne = {num_Ligne}";
+            int[] Heure_Debut_Passage = new int[2];
+
+            Heure_Debut_Passage[0] = -1;
 
             try
             {
@@ -528,11 +531,8 @@ namespace ConnexionBD
 
                 while (rdr.Read())
                 {
-                    Passage[0] = rdr.GetString(0);
-                    Passage[1] = rdr.GetString(1);
-                    Passage[2] = rdr.GetString(2);
-                    Passage[3] = rdr.GetString(3);
-                    Passage[4] = rdr.GetString(4);
+                    Heure_Debut_Passage[0] = rdr.GetInt32(0);
+                    Heure_Debut_Passage[1] = rdr.GetInt32(1);
 
                 }
 
@@ -544,7 +544,68 @@ namespace ConnexionBD
                 Console.WriteLine(ex.ToString());
             }
 
-            return Passage;
+            return Heure_Debut_Passage;
+        }
+
+
+        public static int[] GetPassageFin(int num_Ligne)
+        {
+
+            string sql = $"SELECT HOUR(Heure_fin), MINUTE(Heure_fin) FROM Passage WHERE N_ligne = {num_Ligne}";
+            int[] Heure_Debut_Passage = new int[2];
+
+            Heure_Debut_Passage[0] = -1;
+
+            try
+            {
+
+                MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Heure_Debut_Passage[0] = rdr.GetInt32(0);
+                    Heure_Debut_Passage[1] = rdr.GetInt32(1);
+
+                }
+
+                rdr.Close();
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return Heure_Debut_Passage;
+        }
+
+        public static int TempsEntreArret(int num_Arret1, int num_Arret2)
+        {
+
+            string sql = $"SELECT MINUTE(Temps_entre_arrets) FROM Trajet WHERE N_Arret={num_Arret1} AND N_Arret_1={num_Arret2}";
+            int temps = -1;
+
+            try
+            {
+
+                MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    temps = rdr.GetInt32(0);
+                }
+
+                rdr.Close();
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return temps;
         }
     }
 }

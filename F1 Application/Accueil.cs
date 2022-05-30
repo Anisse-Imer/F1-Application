@@ -291,19 +291,930 @@ namespace F1_Application
                             {
 
 
+                                
+
+                                lblAffichageResultatRecherche.Text = $"Vous devez prendre la ligne : {nomLigneEnCommum}\n";
+
+                                // Debug.Print(Convert.ToInt32(nudHeure.Value).ToString());
+                                int[] Heure_Debut_Passage = BDD.GetPassageDebut(ligneEnCommun);
+                                int[] Heure_Fin_Passage = BDD.GetPassageFin(ligneEnCommun);
+
+                                int heureSelectionne = Convert.ToInt32(nudHeure.Value);
+                                int minuteSelectionne = Convert.ToInt32(nudMinute.Value);
+
+                                bool heureCorrect = true;
                                 /*
-
-                                lblAffichageResultatRecherche.Text = $"Ligne : \n{nomLigneEnCommum}\n";
-
-                                Debug.Print(Convert.ToInt32(nudHeure.Value).ToString());
-                                string[] test = BDD.GetPassageDebut(ligneEnCommun, Convert.ToInt32(nudHeure.Value), Convert.ToInt32(nudMinute.Value));
-
-                                for(int i = 0; i < test.Length; i++)
+                                if (Heure_Fin_Passage[0] < Heure_Debut_Passage[0])
                                 {
-                                    lblAffichageResultatRecherche.Text += $"{test[i]}\n";
+                                    Heure_Fin_Passage[0] += 24;
+
+                                    if (heureSelectionne < Heure_Debut_Passage[0])
+                                    {
+                                        heureSelectionne += 24;
+
+                                        if (heureSelectionne > Heure_Fin_Passage[0])
+                                        {
+                                            heureCorrect = false;
+                                        }
+                                        else if (heureSelectionne == Heure_Fin_Passage[0])
+                                        {
+                                            if (minuteSelectionne > Heure_Fin_Passage[1])
+                                            {
+                                                heureCorrect = false;
+                                            }
+                                        }
+                                    }
+                                    else if (heureSelectionne == Heure_Debut_Passage[0])
+                                    {
+                                        if (minuteSelectionne < Heure_Debut_Passage[1])
+                                        {
+                                            heureCorrect = false;
+                                        }
+                                    }
+                                } 
+                                else
+                                {
+                                    if(heureSelectionne < Heure_Debut_Passage[0] || heureSelectionne > Heure_Fin_Passage[0])
+                                    {
+                                        heureCorrect = false;
+                                    }
+                                    else if (heureSelectionne == Heure_Debut_Passage[0])
+                                    {
+                                        if (minuteSelectionne < Heure_Debut_Passage[1])
+                                        {
+                                            heureCorrect = false;
+                                        }
+                                    }
+                                    else if (heureSelectionne == Heure_Fin_Passage[0])
+                                    {
+                                        if (minuteSelectionne > Heure_Fin_Passage[1])
+                                        {
+                                            heureCorrect = false;
+                                        }
+                                    }
                                 }
 
                                 */
+
+                                
+
+                                // Debug.Print(test.Length.ToString());
+
+                                // Si un bus passe à l'horaire demandé
+                                if (heureCorrect == true)
+                                {
+                                    // Debug.Print(BDD.TempsEntreArret(num_Arret_Depart, num_Arret_Arrivee).ToString());
+
+                                    if (optDépart.Checked == true)
+                                    {
+                                        int[] arretEtRangDeLarret = new int[20];
+                                        arretEtRangDeLarret = BDD.GetAllArretInLigne(ligneEnCommun);
+                                        int k = 0;
+                                        int tempsTrajetLigne = 0;
+
+                                        while (arretEtRangDeLarret[k + 1] != 0)
+                                        {
+                                            tempsTrajetLigne += BDD.TempsEntreArret(arretEtRangDeLarret[k], arretEtRangDeLarret[k + 1]);
+                                            k++;
+                                        }
+
+                                        // Debug.Print($"Temps de trajet de la ligne : {tempsTrajetLigne}");
+
+                                        int debutLigne = Heure_Debut_Passage[0] * 60 + Heure_Debut_Passage[1];
+                                        int debutTrajet = Convert.ToInt32(nudHeure.Value) * 60 + Convert.ToInt32(nudMinute.Value);
+                                        int chercheHoraire = debutLigne;
+
+                                        int DepartDuBus = -1;
+                                        int ArriveDuBus = -1;
+
+                                        // Debug.Print($"debutLigne : {debutLigne}");
+                                        // Debug.Print($"debutTrajet : {debutTrajet}");
+
+
+
+
+                                        if (BDD.GetPosition(ligneEnCommun, num_Arret_Depart) < BDD.GetPosition(ligneEnCommun, num_Arret_Arrivee))
+                                        {
+                                            // lblAffichageResultatRecherche.Text += "A l'endroit !\n";
+
+                                            while (chercheHoraire + tempsTrajetLigne < debutTrajet)
+                                            {
+                                                chercheHoraire += tempsTrajetLigne * 2;
+                                            }
+
+                                            // Debug.Print($"chercheHoraire : {chercheHoraire}");
+
+                                            int chercheHoraire2 = chercheHoraire;
+
+                                            k = 0;
+                                            while (arretEtRangDeLarret[k] != num_Arret_Depart)
+                                            {
+                                                chercheHoraire2 += BDD.TempsEntreArret(arretEtRangDeLarret[k], arretEtRangDeLarret[k + 1]);
+                                                k++;
+                                            }
+
+                                            if (chercheHoraire2 < debutTrajet)
+                                            {
+                                                chercheHoraire += tempsTrajetLigne * 2;
+                                                chercheHoraire2 = chercheHoraire;
+
+                                                k = 0;
+                                                while (arretEtRangDeLarret[k] != num_Arret_Depart)
+                                                {
+                                                    chercheHoraire2 += BDD.TempsEntreArret(arretEtRangDeLarret[k], arretEtRangDeLarret[k + 1]);
+                                                    k++;
+                                                }
+                                            }
+                                            DepartDuBus = chercheHoraire2;
+                                            ArriveDuBus = DepartDuBus;
+                                            while (arretEtRangDeLarret[k] != num_Arret_Arrivee)
+                                            {
+                                                ArriveDuBus += BDD.TempsEntreArret(arretEtRangDeLarret[k], arretEtRangDeLarret[k + 1]);
+                                                k++;
+                                            }
+
+                                            // Debug.Print($"DepartDuBus : {DepartDuBus}");
+                                            // Debug.Print($"ArriveDuBus : {ArriveDuBus}");
+
+                                            int heureDepartDuBus = DepartDuBus / 60;
+                                            int minuteDepartDuBus = DepartDuBus - (60 * heureDepartDuBus);
+
+                                            int heureArriveDuBus = ArriveDuBus / 60;
+                                            int minuteArriveDuBus = ArriveDuBus - (60 * heureArriveDuBus);
+
+                                            if(heureDepartDuBus >= 24)
+                                            {
+                                                heureDepartDuBus -= 24;
+                                            }
+
+                                            if (heureArriveDuBus >= 24)
+                                            {
+                                                heureArriveDuBus -= 24;
+                                            }
+
+                                             // Debug.Print($"heureDepartDuBus : {heureDepartDuBus}");
+                                             // Debug.Print($"minuteDepartDuBus : {minuteDepartDuBus}");
+                                             // Debug.Print($"heureArriveDuBus : {heureArriveDuBus}");
+                                             // Debug.Print($"minuteArriveDuBus : {minuteArriveDuBus}");
+
+                                            bool heureTrouveCorrect = true;
+
+                                            if (Heure_Fin_Passage[0] < Heure_Debut_Passage[0])
+                                            {
+                                                Heure_Fin_Passage[0] += 24;
+
+                                                if (heureArriveDuBus < Heure_Debut_Passage[0])
+                                                {
+                                                    heureArriveDuBus += 24;
+
+                                                    if (heureArriveDuBus > Heure_Fin_Passage[0])
+                                                    {
+                                                        heureTrouveCorrect = false;
+                                                    }
+                                                    else if (heureArriveDuBus == Heure_Fin_Passage[0])
+                                                    {
+                                                        if (minuteArriveDuBus > Heure_Fin_Passage[1])
+                                                        {
+                                                            heureTrouveCorrect = false;
+                                                        }
+                                                    }
+                                                }
+                                                else if (heureArriveDuBus == Heure_Debut_Passage[0])
+                                                {
+                                                    if (minuteArriveDuBus < Heure_Debut_Passage[1])
+                                                    {
+                                                        heureTrouveCorrect = false;
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (heureArriveDuBus < Heure_Debut_Passage[0] || heureArriveDuBus > Heure_Fin_Passage[0])
+                                                {
+                                                    heureTrouveCorrect = false;
+                                                }
+                                                else if (heureArriveDuBus == Heure_Debut_Passage[0])
+                                                {
+                                                    if (minuteArriveDuBus < Heure_Debut_Passage[1])
+                                                    {
+                                                        heureTrouveCorrect = false;
+                                                    }
+                                                }
+                                                else if (heureArriveDuBus == Heure_Fin_Passage[0])
+                                                {
+                                                    if (minuteArriveDuBus > Heure_Fin_Passage[1])
+                                                    {
+                                                        heureTrouveCorrect = false;
+                                                    }
+                                                }
+                                            }
+
+
+                                            if(heureTrouveCorrect == true)
+                                            {
+                                                lblAffichageResultatRecherche.Text += $"\nArrêt de départ : {BDD.GetNomArret(num_Arret_Depart)}\n";
+                                                if (heureDepartDuBus < 10)
+                                                {
+                                                    if (minuteDepartDuBus < 10)
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : 0{heureDepartDuBus}h0{minuteDepartDuBus}\n";
+                                                    }
+                                                    else
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : 0{heureDepartDuBus}h{minuteDepartDuBus}\n";
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    if (minuteDepartDuBus < 10)
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : {heureDepartDuBus}h0{minuteDepartDuBus}\n";
+                                                    }
+                                                    else
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : {heureDepartDuBus}h{minuteDepartDuBus}\n";
+                                                    }
+                                                }
+
+                                                lblAffichageResultatRecherche.Text += $"\nArrêt d'arrivée : {BDD.GetNomArret(num_Arret_Arrivee)}\n";
+
+                                                if (heureArriveDuBus < 10)
+                                                {
+                                                    if (minuteArriveDuBus < 10)
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Arrivée du bus : 0{heureArriveDuBus}h0{minuteArriveDuBus}";
+                                                    }
+                                                    else
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Arrivée du bus : 0{heureArriveDuBus}h{minuteArriveDuBus}";
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    if (minuteArriveDuBus < 10)
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Arrivée du bus : {heureArriveDuBus}h0{minuteArriveDuBus}";
+                                                    }
+                                                    else
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Arrivée du bus : {heureArriveDuBus}h{minuteArriveDuBus}";
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                lblAffichageResultatRecherche.Text = "Aucun résultat trouvé";
+                                            }
+
+                                            
+
+                                        }
+                                        else
+                                        {
+                                            chercheHoraire += tempsTrajetLigne;
+
+                                            while (chercheHoraire + tempsTrajetLigne < debutTrajet)
+                                            {
+                                                chercheHoraire += tempsTrajetLigne * 2;
+                                            }
+
+                                            // Debug.Print($"chercheHoraire : {chercheHoraire}");
+
+                                            int chercheHoraire2 = chercheHoraire;
+                                            // Debug.Print($"chercheHoraire2 test : {chercheHoraire2}");
+
+                                            int nbrArret = 0;
+                                            while (arretEtRangDeLarret[nbrArret] != 0)
+                                            {
+                                                nbrArret++;
+                                            }
+
+                                            k = nbrArret - 1;
+
+                                            while (arretEtRangDeLarret[k] != num_Arret_Depart)
+                                            {
+                                                // Debug.Print($"chercheHoraire2 test : {chercheHoraire2}");
+                                                chercheHoraire2 += BDD.TempsEntreArret(arretEtRangDeLarret[k - 1], arretEtRangDeLarret[k]);
+                                                k--;
+                                            }
+
+                                            if (chercheHoraire2 < debutTrajet)
+                                            {
+                                                chercheHoraire += tempsTrajetLigne * 2;
+                                                chercheHoraire2 = chercheHoraire;
+
+                                                k = nbrArret - 1;
+                                                while (arretEtRangDeLarret[k] != num_Arret_Depart)
+                                                {
+                                                    chercheHoraire2 += BDD.TempsEntreArret(arretEtRangDeLarret[k - 1], arretEtRangDeLarret[k]);
+                                                    k--;
+                                                }
+                                            }
+                                            DepartDuBus = chercheHoraire2;
+                                            ArriveDuBus = DepartDuBus;
+                                            while (arretEtRangDeLarret[k] != num_Arret_Arrivee)
+                                            {
+                                                ArriveDuBus += BDD.TempsEntreArret(arretEtRangDeLarret[k - 1], arretEtRangDeLarret[k]);
+                                                k--;
+                                            }
+
+                                            // Debug.Print($"DepartDuBus : {DepartDuBus}");
+                                            // Debug.Print($"ArriveDuBus : {ArriveDuBus}");
+
+                                            int heureDepartDuBus = DepartDuBus / 60;
+                                            int minuteDepartDuBus = DepartDuBus - (60 * heureDepartDuBus);
+
+                                            int heureArriveDuBus = ArriveDuBus / 60;
+                                            int minuteArriveDuBus = ArriveDuBus - (60 * heureArriveDuBus);
+
+                                            if (heureDepartDuBus >= 24)
+                                            {
+                                                heureDepartDuBus -= 24;
+                                            }
+
+                                            if (heureArriveDuBus >= 24)
+                                            {
+                                                heureArriveDuBus -= 24;
+                                            }
+
+                                            // Debug.Print($"heureDepartDuBus : {heureDepartDuBus}");
+                                            // Debug.Print($"minuteDepartDuBus : {minuteDepartDuBus}");
+                                            // Debug.Print($"heureArriveDuBus : {heureArriveDuBus}");
+                                            // Debug.Print($"minuteArriveDuBus : {minuteArriveDuBus}");
+
+                                            bool heureTrouveCorrect = true;
+
+                                            if (Heure_Fin_Passage[0] < Heure_Debut_Passage[0])
+                                            {
+                                                Heure_Fin_Passage[0] += 24;
+
+                                                if (heureArriveDuBus < Heure_Debut_Passage[0])
+                                                {
+                                                    heureArriveDuBus += 24;
+
+                                                    if (heureArriveDuBus > Heure_Fin_Passage[0])
+                                                    {
+                                                        heureTrouveCorrect = false;
+                                                    }
+                                                    else if (heureArriveDuBus == Heure_Fin_Passage[0])
+                                                    {
+                                                        if (minuteArriveDuBus > Heure_Fin_Passage[1])
+                                                        {
+                                                            heureTrouveCorrect = false;
+                                                        }
+                                                    }
+                                                }
+                                                else if (heureArriveDuBus == Heure_Debut_Passage[0])
+                                                {
+                                                    if (minuteArriveDuBus < Heure_Debut_Passage[1])
+                                                    {
+                                                        heureTrouveCorrect = false;
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (heureArriveDuBus < Heure_Debut_Passage[0] || heureArriveDuBus > Heure_Fin_Passage[0])
+                                                {
+                                                    heureTrouveCorrect = false;
+                                                }
+                                                else if (heureArriveDuBus == Heure_Debut_Passage[0])
+                                                {
+                                                    if (minuteArriveDuBus < Heure_Debut_Passage[1])
+                                                    {
+                                                        heureTrouveCorrect = false;
+                                                    }
+                                                }
+                                                else if (heureArriveDuBus == Heure_Fin_Passage[0])
+                                                {
+                                                    if (minuteArriveDuBus > Heure_Fin_Passage[1])
+                                                    {
+                                                        heureTrouveCorrect = false;
+                                                    }
+                                                }
+                                            }
+
+
+                                            if (heureTrouveCorrect == true)
+                                            {
+
+                                                lblAffichageResultatRecherche.Text += $"\nArrêt de départ : {BDD.GetNomArret(num_Arret_Depart)}\n";
+                                                if (heureDepartDuBus < 10)
+                                                {
+                                                    if (minuteDepartDuBus < 10)
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : 0{heureDepartDuBus}h0{minuteDepartDuBus}\n";
+                                                    }
+                                                    else
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : 0{heureDepartDuBus}h{minuteDepartDuBus}\n";
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    if (minuteDepartDuBus < 10)
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : {heureDepartDuBus}h0{minuteDepartDuBus}\n";
+                                                    }
+                                                    else
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : {heureDepartDuBus}h{minuteDepartDuBus}\n";
+                                                    }
+                                                }
+
+                                                lblAffichageResultatRecherche.Text += $"\nArrêt d'arrivée : {BDD.GetNomArret(num_Arret_Arrivee)}\n";
+
+                                                if (heureArriveDuBus < 10)
+                                                {
+                                                    if (minuteArriveDuBus < 10)
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Arrivée du bus : 0{heureArriveDuBus}h0{minuteArriveDuBus}";
+                                                    }
+                                                    else
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Arrivée du bus : 0{heureArriveDuBus}h{minuteArriveDuBus}";
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    if (minuteArriveDuBus < 10)
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Arrivée du bus : {heureArriveDuBus}h0{minuteArriveDuBus}";
+                                                    }
+                                                    else
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Arrivée du bus : {heureArriveDuBus}h{minuteArriveDuBus}";
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                lblAffichageResultatRecherche.Text = "Aucun résultat trouvé";
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // Pour si Heure d'arrivée coché :
+
+                                        int[] arretEtRangDeLarret = new int[20];
+                                        arretEtRangDeLarret = BDD.GetAllArretInLigne(ligneEnCommun);
+                                        int k = 0;
+                                        int tempsTrajetLigne = 0;
+
+                                        while (arretEtRangDeLarret[k + 1] != 0)
+                                        {
+                                            tempsTrajetLigne += BDD.TempsEntreArret(arretEtRangDeLarret[k], arretEtRangDeLarret[k + 1]);
+                                            k++;
+                                        }
+
+                                        // Debug.Print($"Temps de trajet de la ligne : {tempsTrajetLigne}");
+
+                                        int debutLigne = Heure_Debut_Passage[0] * 60 + Heure_Debut_Passage[1];
+                                        int finTrajet = Convert.ToInt32(nudHeure.Value) * 60 + Convert.ToInt32(nudMinute.Value);
+                                        int chercheHoraire = debutLigne;
+
+                                        int DepartDuBus = -1;
+                                        int ArriveDuBus = -1;
+
+                                        // Debug.Print($"debutLigne : {debutLigne}");
+                                        // Debug.Print($"finTrajet : {finTrajet}");
+
+
+
+
+                                        if (BDD.GetPosition(ligneEnCommun, num_Arret_Depart) < BDD.GetPosition(ligneEnCommun, num_Arret_Arrivee))
+                                        {
+                                            // lblAffichageResultatRecherche.Text += "A l'endroit !\n";
+
+                                            while (chercheHoraire + tempsTrajetLigne < finTrajet)
+                                            {
+                                                chercheHoraire += tempsTrajetLigne * 2;
+                                            }
+                                            // Debug.Print($"chercheHoraire : {chercheHoraire}");
+                                            // Debug.Print($"chercheHoraire+tempsTrajetLigne : {chercheHoraire+tempsTrajetLigne}");
+                                            // Debug.Print($"finTrajet : {finTrajet}");
+
+                                            // Debug.Print($"chercheHoraire : {chercheHoraire}");
+
+                                            int chercheHoraire2 = chercheHoraire;
+                                            int chercheHoraire3 = chercheHoraire;
+
+                                            bool arretDepartTrouve = false;
+
+                                            int saveArretDepart = 0;
+
+                                            k = 0;
+                                            while (arretEtRangDeLarret[k] != num_Arret_Arrivee)
+                                            {
+                                                if (arretEtRangDeLarret[k] == num_Arret_Depart)
+                                                {
+                                                    arretDepartTrouve = true;
+                                                    saveArretDepart = k;
+                                                }
+
+                                                if (arretDepartTrouve == false)
+                                                {
+                                                    chercheHoraire3 += BDD.TempsEntreArret(arretEtRangDeLarret[k], arretEtRangDeLarret[k + 1]);
+                                                }
+
+                                                chercheHoraire2 += BDD.TempsEntreArret(arretEtRangDeLarret[k], arretEtRangDeLarret[k + 1]);
+                                                k++;
+                                                // Debug.Print($"arretEtRangDeLarret : {BDD.GetNomArret(arretEtRangDeLarret[k]).ToString()}");
+                                                // Debug.Print($"k : {k}");
+                                            }
+
+                                            // Debug.Print($"chercheHoraire : {chercheHoraire}");
+                                            // Debug.Print($"chercheHoraire2 : {chercheHoraire2}");
+                                            // Debug.Print($"chercheHoraire3 : {chercheHoraire3}");
+                                            // Debug.Print($"finTrajet : {finTrajet}");
+
+                                            if (chercheHoraire2 > finTrajet)
+                                            {
+                                                // Debug.Print($"TEST");
+                                                chercheHoraire -= tempsTrajetLigne * 2;
+                                                chercheHoraire2 = chercheHoraire;
+                                                chercheHoraire3 = chercheHoraire;
+
+                                                k = 0;
+                                                while (arretEtRangDeLarret[k] != num_Arret_Depart)
+                                                {
+                                                    chercheHoraire3 += BDD.TempsEntreArret(arretEtRangDeLarret[k], arretEtRangDeLarret[k + 1]);
+                                                    k++;
+                                                }
+                                            }
+
+                                            DepartDuBus = chercheHoraire3;
+                                            ArriveDuBus = DepartDuBus;
+
+                                            k = saveArretDepart;
+                                            while (arretEtRangDeLarret[k] != num_Arret_Arrivee)
+                                            { 
+
+                                                ArriveDuBus += BDD.TempsEntreArret(arretEtRangDeLarret[k], arretEtRangDeLarret[k + 1]);
+                                                k++;
+                                            }
+
+                                            // Debug.Print($"DepartDuBus : {DepartDuBus}");
+                                            // Debug.Print($"ArriveDuBus : {ArriveDuBus}");
+
+                                            int heureDepartDuBus = DepartDuBus / 60;
+                                            int minuteDepartDuBus = DepartDuBus - (60 * heureDepartDuBus);
+
+                                            int heureArriveDuBus = ArriveDuBus / 60;
+                                            int minuteArriveDuBus = ArriveDuBus - (60 * heureArriveDuBus);
+
+                                            if (heureDepartDuBus >= 24)
+                                            {
+                                                heureDepartDuBus -= 24;
+                                            }
+
+                                            if (heureArriveDuBus >= 24)
+                                            {
+                                                heureArriveDuBus -= 24;
+                                            }
+
+                                            // Debug.Print($"heureDepartDuBus : {heureDepartDuBus}");
+                                            // Debug.Print($"minuteDepartDuBus : {minuteDepartDuBus}");
+                                            // Debug.Print($"heureArriveDuBus : {heureArriveDuBus}");
+                                            // Debug.Print($"minuteArriveDuBus : {minuteArriveDuBus}");
+
+                                            bool heureTrouveCorrect = true;
+
+                                            if (Heure_Fin_Passage[0] < Heure_Debut_Passage[0])
+                                            {
+                                                Heure_Fin_Passage[0] += 24;
+
+                                                if (heureDepartDuBus < Heure_Debut_Passage[0])
+                                                {
+                                                    heureDepartDuBus += 24;
+
+                                                    if (heureDepartDuBus > Heure_Fin_Passage[0])
+                                                    {
+                                                        heureTrouveCorrect = false;
+                                                    }
+                                                    else if (heureDepartDuBus == Heure_Fin_Passage[0])
+                                                    {
+                                                        if (minuteDepartDuBus > Heure_Fin_Passage[1])
+                                                        {
+                                                            heureTrouveCorrect = false;
+                                                        }
+                                                    }
+                                                }
+                                                else if (heureDepartDuBus == Heure_Debut_Passage[0])
+                                                {
+                                                    if (minuteDepartDuBus < Heure_Debut_Passage[1])
+                                                    {
+                                                        heureTrouveCorrect = false;
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (heureDepartDuBus < Heure_Debut_Passage[0] || heureDepartDuBus > Heure_Fin_Passage[0])
+                                                {
+                                                    heureTrouveCorrect = false;
+                                                }
+                                                else if (heureDepartDuBus == Heure_Debut_Passage[0])
+                                                {
+                                                    if (minuteDepartDuBus < Heure_Debut_Passage[1])
+                                                    {
+                                                        heureTrouveCorrect = false;
+                                                    }
+                                                }
+                                                else if (heureDepartDuBus == Heure_Fin_Passage[0])
+                                                {
+                                                    if (minuteDepartDuBus > Heure_Fin_Passage[1])
+                                                    {
+                                                        heureTrouveCorrect = false;
+                                                    }
+                                                }
+                                            }
+
+
+                                            if (heureTrouveCorrect == true)
+                                            {
+
+                                                lblAffichageResultatRecherche.Text += $"\nArrêt de départ : {BDD.GetNomArret(num_Arret_Depart)}\n";
+                                                if (heureDepartDuBus < 10)
+                                                {
+                                                    if (minuteDepartDuBus < 10)
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : 0{heureDepartDuBus}h0{minuteDepartDuBus}\n";
+                                                    }
+                                                    else
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : 0{heureDepartDuBus}h{minuteDepartDuBus}\n";
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    if (minuteDepartDuBus < 10)
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : {heureDepartDuBus}h0{minuteDepartDuBus}\n";
+                                                    }
+                                                    else
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : {heureDepartDuBus}h{minuteDepartDuBus}\n";
+                                                    }
+                                                }
+
+                                                lblAffichageResultatRecherche.Text += $"\nArrêt d'arrivée : {BDD.GetNomArret(num_Arret_Arrivee)}\n";
+
+                                                if (heureArriveDuBus < 10)
+                                                {
+                                                    if (minuteArriveDuBus < 10)
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Arrivée du bus : 0{heureArriveDuBus}h0{minuteArriveDuBus}";
+                                                    }
+                                                    else
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Arrivée du bus : 0{heureArriveDuBus}h{minuteArriveDuBus}";
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    if (minuteArriveDuBus < 10)
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Arrivée du bus : {heureArriveDuBus}h0{minuteArriveDuBus}";
+                                                    }
+                                                    else
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Arrivée du bus : {heureArriveDuBus}h{minuteArriveDuBus}";
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                lblAffichageResultatRecherche.Text += "Aucun résultat trouvé";
+                                            }
+                                        }
+                                        else
+                                        {
+                                            // lblAffichageResultatRecherche.Text += "A l'envers !\n";
+
+                                            chercheHoraire += tempsTrajetLigne;
+
+                                            while (chercheHoraire + tempsTrajetLigne < finTrajet)
+                                            {
+                                                chercheHoraire += tempsTrajetLigne * 2;
+                                            }
+
+                                            // Debug.Print($"chercheHoraire : {chercheHoraire}");
+
+                                            int chercheHoraire2 = chercheHoraire;
+                                            int chercheHoraire3 = chercheHoraire;
+
+                                            bool arretArriveTrouve = false;
+
+                                            int nbrArret = 0;
+                                            while (arretEtRangDeLarret[nbrArret] != 0)
+                                            {
+                                                nbrArret++;
+                                            }
+
+                                            k = nbrArret - 1;
+                                            int saveArretDepart = 0;
+
+                                            while (arretEtRangDeLarret[k] != num_Arret_Arrivee)
+                                            {
+                                                // Debug.Print($"chercheHoraire2 : {chercheHoraire2}");
+                                                if (arretEtRangDeLarret[k] == num_Arret_Depart)
+                                                {
+                                                    arretArriveTrouve = true;
+                                                    saveArretDepart = k;
+                                                }
+
+                                                if (arretArriveTrouve == false)
+                                                {
+                                                    chercheHoraire3 += BDD.TempsEntreArret(arretEtRangDeLarret[k - 1], arretEtRangDeLarret[k]);
+                                                }
+
+                                                chercheHoraire2 += BDD.TempsEntreArret(arretEtRangDeLarret[k - 1], arretEtRangDeLarret[k]);
+                                                k--;
+                                            }
+
+                                             // Debug.Print($"chercheHoraire : {chercheHoraire}");
+                                             // Debug.Print($"chercheHoraire2 : {chercheHoraire2}");
+                                             // Debug.Print($"chercheHoraire3 : {chercheHoraire3}");
+
+                                            if (chercheHoraire2 > finTrajet)
+                                            {
+                                                chercheHoraire -= tempsTrajetLigne * 2;
+                                                chercheHoraire2 = chercheHoraire;
+                                                chercheHoraire3 = chercheHoraire;
+
+                                                k = nbrArret - 1;
+                                                while (arretEtRangDeLarret[k] != num_Arret_Depart)
+                                                {
+                                                    chercheHoraire3 += BDD.TempsEntreArret(arretEtRangDeLarret[k - 1], arretEtRangDeLarret[k]);
+                                                    k--;
+                                                }
+                                            }
+                                            // Debug.Print($"chercheHoraire3 : {chercheHoraire3}");
+                                            DepartDuBus = chercheHoraire3;
+                                            ArriveDuBus = DepartDuBus;
+
+                                            // k++;
+                                            k = saveArretDepart;
+                                            while (arretEtRangDeLarret[k] != num_Arret_Arrivee)
+                                            {
+                                                // Debug.Print($"TEST");
+                                                ArriveDuBus += BDD.TempsEntreArret(arretEtRangDeLarret[k - 1], arretEtRangDeLarret[k]);
+                                                k--;
+                                            }
+
+                                            // Debug.Print($"DepartDuBus : {DepartDuBus}");
+                                            // Debug.Print($"ArriveDuBus : {ArriveDuBus}");
+
+                                            int heureDepartDuBus = DepartDuBus / 60;
+                                            int minuteDepartDuBus = DepartDuBus - (60 * heureDepartDuBus);
+
+                                            int heureArriveDuBus = ArriveDuBus / 60;
+                                            int minuteArriveDuBus = ArriveDuBus - (60 * heureArriveDuBus);
+
+                                            if (heureDepartDuBus >= 24)
+                                            {
+                                                heureDepartDuBus -= 24;
+                                            }
+
+                                            if (heureArriveDuBus >= 24)
+                                            {
+                                                heureArriveDuBus -= 24;
+                                            }
+
+                                            // Debug.Print($"heureDepartDuBus : {heureDepartDuBus}");
+                                            // Debug.Print($"minuteDepartDuBus : {minuteDepartDuBus}");
+                                            // Debug.Print($"heureArriveDuBus : {heureArriveDuBus}");
+                                            // Debug.Print($"minuteArriveDuBus : {minuteArriveDuBus}");
+
+
+                                            bool heureTrouveCorrect = true;
+
+                                            if (Heure_Fin_Passage[0] < Heure_Debut_Passage[0])
+                                            {
+                                                Heure_Fin_Passage[0] += 24;
+
+                                                if (heureDepartDuBus < Heure_Debut_Passage[0])
+                                                {
+                                                    heureDepartDuBus += 24;
+
+                                                    if (heureDepartDuBus > Heure_Fin_Passage[0])
+                                                    {
+                                                        heureTrouveCorrect = false;
+                                                    }
+                                                    else if (heureDepartDuBus == Heure_Fin_Passage[0])
+                                                    {
+                                                        if (minuteDepartDuBus > Heure_Fin_Passage[1])
+                                                        {
+                                                            heureTrouveCorrect = false;
+                                                        }
+                                                    }
+                                                }
+                                                else if (heureDepartDuBus == Heure_Debut_Passage[0])
+                                                {
+                                                    if (minuteDepartDuBus < Heure_Debut_Passage[1])
+                                                    {
+                                                        heureTrouveCorrect = false;
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (heureDepartDuBus < Heure_Debut_Passage[0] || heureDepartDuBus > Heure_Fin_Passage[0])
+                                                {
+                                                    heureTrouveCorrect = false;
+                                                }
+                                                else if (heureDepartDuBus == Heure_Debut_Passage[0])
+                                                {
+                                                    if (minuteDepartDuBus < Heure_Debut_Passage[1])
+                                                    {
+                                                        heureTrouveCorrect = false;
+                                                    }
+                                                }
+                                                else if (heureDepartDuBus == Heure_Fin_Passage[0])
+                                                {
+                                                    if (minuteDepartDuBus > Heure_Fin_Passage[1])
+                                                    {
+                                                        heureTrouveCorrect = false;
+                                                    }
+                                                }
+                                            }
+
+
+                                            if (heureTrouveCorrect == true)
+                                            {
+
+                                                lblAffichageResultatRecherche.Text += $"\nArrêt de départ : {BDD.GetNomArret(num_Arret_Depart)}\n";
+                                                if (heureDepartDuBus < 10)
+                                                {
+                                                    if (minuteDepartDuBus < 10)
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : 0{heureDepartDuBus}h0{minuteDepartDuBus}\n";
+                                                    }
+                                                    else
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : 0{heureDepartDuBus}h{minuteDepartDuBus}\n";
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    if (minuteDepartDuBus < 10)
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : {heureDepartDuBus}h0{minuteDepartDuBus}\n";
+                                                    }
+                                                    else
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : {heureDepartDuBus}h{minuteDepartDuBus}\n";
+                                                    }
+                                                }
+
+                                                lblAffichageResultatRecherche.Text += $"\nArrêt d'arrivée : {BDD.GetNomArret(num_Arret_Arrivee)}\n";
+
+                                                if (heureArriveDuBus < 10)
+                                                {
+                                                    if (minuteArriveDuBus < 10)
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Arrivée du bus : 0{heureArriveDuBus}h0{minuteArriveDuBus}";
+                                                    }
+                                                    else
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Arrivée du bus : 0{heureArriveDuBus}h{minuteArriveDuBus}";
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    if (minuteArriveDuBus < 10)
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Arrivée du bus : {heureArriveDuBus}h0{minuteArriveDuBus}";
+                                                    }
+                                                    else
+                                                    {
+                                                        lblAffichageResultatRecherche.Text += $"Arrivée du bus : {heureArriveDuBus}h{minuteArriveDuBus}";
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                lblAffichageResultatRecherche.Text = "Aucun résultat trouvé";
+                                            }
+                                        }
+                                    }
+
+                                } 
+                                else
+                                {
+                                    lblAffichageResultatRecherche.Text = "Aucun résultat trouvé";
+                                }
+                                
                             }
                             else
                             {
