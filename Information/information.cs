@@ -4,7 +4,7 @@ namespace Information
 {
     public class information
     {
-        private static bool admin = true;
+        private static bool admin = false;
         private static int nbrArret;
         private static int nbrLigne;
 

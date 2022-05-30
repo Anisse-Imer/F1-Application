@@ -513,5 +513,38 @@ namespace ConnexionBD
 
             return couleur;
         }
+
+        public static string[] GetPassageDebut(int num_Ligne, int heure, int minute)
+        {
+
+            string sql = $"SELECT * FROM Passage WHERE N_ligne = {num_Ligne} AND HOUR(Heure_debut) > heure";
+            string[] Passage = new string[5];
+
+            try
+            {
+
+                MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Passage[0] = rdr.GetString(0);
+                    Passage[1] = rdr.GetString(1);
+                    Passage[2] = rdr.GetString(2);
+                    Passage[3] = rdr.GetString(3);
+                    Passage[4] = rdr.GetString(4);
+
+                }
+
+                rdr.Close();
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return Passage;
+        }
     }
 }

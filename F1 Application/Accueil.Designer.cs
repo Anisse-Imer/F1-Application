@@ -61,6 +61,7 @@ namespace F1_Application
             this.pnlAffichage = new System.Windows.Forms.Panel();
             this.lblVisualiserLigne = new System.Windows.Forms.Label();
             this.pnlAfficherLigne = new System.Windows.Forms.Panel();
+            this.lblAffichageResultatRecherche = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeure)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDate)).BeginInit();
@@ -403,6 +404,7 @@ namespace F1_Application
             // 
             this.pnlResultatRecherche.BackColor = System.Drawing.Color.AliceBlue;
             this.pnlResultatRecherche.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlResultatRecherche.Controls.Add(this.lblAffichageResultatRecherche);
             this.pnlResultatRecherche.Controls.Add(this.lblResultatRecherche);
             this.pnlResultatRecherche.Location = new System.Drawing.Point(1041, 2);
             this.pnlResultatRecherche.Name = "pnlResultatRecherche";
@@ -438,6 +440,16 @@ namespace F1_Application
             this.pnlAfficherLigne.Name = "pnlAfficherLigne";
             this.pnlAfficherLigne.Size = new System.Drawing.Size(723, 731);
             this.pnlAfficherLigne.TabIndex = 0;
+            // 
+            // lblAffichageResultatRecherche
+            // 
+            this.lblAffichageResultatRecherche.AutoSize = true;
+            this.lblAffichageResultatRecherche.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lblAffichageResultatRecherche.Location = new System.Drawing.Point(20, 61);
+            this.lblAffichageResultatRecherche.Name = "lblAffichageResultatRecherche";
+            this.lblAffichageResultatRecherche.Size = new System.Drawing.Size(143, 20);
+            this.lblAffichageResultatRecherche.TabIndex = 2;
+            this.lblAffichageResultatRecherche.Text = "Aucune recherche.";
             // 
             // frmAccueil
             // 
@@ -512,6 +524,7 @@ namespace F1_Application
         private System.Windows.Forms.RadioButton optArrivée;
         private System.Windows.Forms.Label lblVisualisationDemande;
         private System.Windows.Forms.Panel pnlAfficherLigne;
+        private System.Windows.Forms.Label lblAffichageResultatRecherche;
     }
 }
 

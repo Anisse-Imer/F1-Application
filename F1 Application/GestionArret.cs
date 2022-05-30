@@ -91,7 +91,7 @@ namespace F1_Application
 
                         bool arretSupprimerEtaitSurLaLigne = false;
 
-                        while (arretEtRangDeLarret[j + 1] != 0)
+                        while (arretEtRangDeLarret[j] != 0)
                         {
                             if(BDD.GetPosition(Num_Ligne, arretEtRangDeLarret[j]) != j + 1 && arretSupprimerEtaitSurLaLigne == false)
                             {

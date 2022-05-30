@@ -228,13 +228,96 @@ namespace F1_Application
             {
                 if (cboArrivee.SelectedItem != null)
                 {
-                    if(optArrivée.Checked == true || optDépart.Checked == true)
+                    if (cboDepart.SelectedItem.ToString() != cboArrivee.SelectedItem.ToString())
                     {
-                        // Trouver si les 2 arrets sont sur une même ligne
+                        if (optArrivée.Checked == true || optDépart.Checked == true)
+                        {
+                            // Trouver si les 2 arrets sont sur une même ligne
+
+                            int num_Arret_Depart = BDD.GetNumArret(cboDepart.SelectedItem.ToString());
+                            int num_Arret_Arrivee = BDD.GetNumArret(cboArrivee.SelectedItem.ToString());
+
+                            string[] ligne;
+                            ligne = BDD.GetAllLigne(); // Obtenir toutes les lignes
+
+                            bool arretsSurLaMemeLigne = false;
+                            int ligneEnCommun = -1;
+                            string nomLigneEnCommum = "Aucune";
+
+                            for (int i = 0; i < ligne.Length && arretsSurLaMemeLigne == false; i++)
+                            {
+                                bool arretTrouve = false;
+
+                                int j = 0;
+                                int num_Ligne = BDD.GetNumLigne(ligne[i].ToString());
+
+                                int[] arretEtRangDeLarret = new int[20];
+                                arretEtRangDeLarret = BDD.GetAllArretInLigne(num_Ligne);
+
+                                while (arretEtRangDeLarret[j] != 0 && arretsSurLaMemeLigne == false)
+                                {
+                                    if (arretEtRangDeLarret[j] == num_Arret_Depart)
+                                    {
+                                        if(arretTrouve == true)
+                                        {
+                                            arretsSurLaMemeLigne = true;
+                                            ligneEnCommun = num_Ligne;
+                                            nomLigneEnCommum = ligne[i].ToString();
+                                        }
+                                        else
+                                        {
+                                            arretTrouve = true;
+                                        }
+                                    } 
+                                    else if (arretEtRangDeLarret[j] == num_Arret_Arrivee)
+                                    {
+                                        if (arretTrouve == true)
+                                        {
+                                            arretsSurLaMemeLigne = true;
+                                            ligneEnCommun = num_Ligne;
+                                            nomLigneEnCommum = ligne[i].ToString();
+                                        }
+                                        else
+                                        {
+                                            arretTrouve = true;
+                                        }
+                                    }
+
+                                    j++;
+                                }
+                            }
+
+                            if(arretsSurLaMemeLigne == true)
+                            {
+
+
+                                /*
+
+                                lblAffichageResultatRecherche.Text = $"Ligne : \n{nomLigneEnCommum}\n";
+
+                                Debug.Print(Convert.ToInt32(nudHeure.Value).ToString());
+                                string[] test = BDD.GetPassageDebut(ligneEnCommun, Convert.ToInt32(nudHeure.Value), Convert.ToInt32(nudMinute.Value));
+
+                                for(int i = 0; i < test.Length; i++)
+                                {
+                                    lblAffichageResultatRecherche.Text += $"{test[i]}\n";
+                                }
+
+                                */
+                            }
+                            else
+                            {
+                                lblAffichageResultatRecherche.Text = "Aucun résultat trouvé";
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Vous devez choisir entre une heure de départ et d'arrivée !");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Vous devez choisir entre une heure de départ et d'arrivée !");
+                        MessageBox.Show("Vous devez choisir deux arret différent !");
                     }
                 }
                 else
