@@ -30,19 +30,15 @@ namespace F1_Application
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //BDD.Affiche("Ligne");
 
             bool connexionOuvertre = BDD.InitConnexion();
-            /*
-            if (connexionOuvertre)
+
+            if (connexionOuvertre != true)
             {
-                MessageBox.Show("Connexion ouverte");
+                MessageBox.Show("Echec de la connexion à la BDD");
+                Application.Exit();
             }
-            else
-            {
-                MessageBox.Show("Echec connexion");
-            }
-            */
+            
             
             int newNbrArret = BDD.GetTableCount("Arret");
             information.SetNbrArret(newNbrArret);
@@ -114,7 +110,7 @@ namespace F1_Application
                     ligne = BDD.GetAllLigne();
                     int i;
 
-                    lblVisualiserLigne.Text = $"{cboVisualiserLigne.SelectedItem.ToString()} : \n";
+                    lblVisualiserLigne.Text = "";
 
                     for (int j = 0; j < ligne.Length; j++)
                     {
@@ -124,10 +120,9 @@ namespace F1_Application
                         int[] arretEtRangDeLarret = new int[20];
                         arretEtRangDeLarret = BDD.GetAllArretInLigne(Num_Ligne);
 
-                        lblVisualiserLigne.Text += $"{ligne[j]}";
+                        lblVisualiserLigne.Text += $"{ligne[j]} :";
                         while (arretEtRangDeLarret[i + 1] != 0)
                         {
-                            // Debug.Print($"Rang {i + 1} : {BDD.GetNomArret(arretEtRangDeLarret[i])}");
 
                             if (i % 3 == 0)
                             {
@@ -136,7 +131,6 @@ namespace F1_Application
                             lblVisualiserLigne.Text += $"{BDD.GetNomArret(arretEtRangDeLarret[i])} --> ";
                             i++;
                         }
-                        // Debug.Print($"Rang {i + 1} : {BDD.GetNomArret(arretEtRangDeLarret[i])}");
                         if (i % 3 == 0)
                             lblVisualiserLigne.Text += "\n";
                         lblVisualiserLigne.Text += $"{BDD.GetNomArret(arretEtRangDeLarret[i])}";
@@ -145,19 +139,7 @@ namespace F1_Application
                 }
                 else
                 {
-                    // Test
-
-                    /*
-                    Debug.Print($"Nom de la ligne : {cboVisualiserLigne.SelectedItem.ToString()}");
-
-                    int Num_Ligne = BDD.GetNumLigne(cboVisualiserLigne.SelectedItem.ToString());
-                    Debug.Print($"Numéro de la ligne : {BDD.GetNumLigne(cboVisualiserLigne.SelectedItem.ToString())}");
-
-                    */
-
-
-
-
+                    
 
                     // Affichage de la ligne dans l'application
 
@@ -169,7 +151,6 @@ namespace F1_Application
                     lblVisualiserLigne.Text = $"{cboVisualiserLigne.SelectedItem.ToString()} : \n";
                     while (arretEtRangDeLarret[i + 1] != 0)
                     {
-                        // Debug.Print($"Rang {i + 1} : {BDD.GetNomArret(arretEtRangDeLarret[i])}");
 
                         if (i % 3 == 0)
                         {
@@ -178,7 +159,7 @@ namespace F1_Application
                         lblVisualiserLigne.Text += $"{BDD.GetNomArret(arretEtRangDeLarret[i])} --> ";
                         i++;
                     }
-                    // Debug.Print($"Rang {i + 1} : {BDD.GetNomArret(arretEtRangDeLarret[i])}");
+
                     if (i % 3 == 0)
                         lblVisualiserLigne.Text += "\n";
                     lblVisualiserLigne.Text += $"{BDD.GetNomArret(arretEtRangDeLarret[i])}";
@@ -234,6 +215,37 @@ namespace F1_Application
 
             Reload();
             this.Show();
+        }
+
+        private void pnlAffichage_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void cmdRechercher_Click(object sender, EventArgs e)
+        {
+            if(cboDepart.SelectedItem != null)
+            {
+                if (cboArrivee.SelectedItem != null)
+                {
+                    if(optArrivée.Checked == true || optDépart.Checked == true)
+                    {
+                        // Trouver si les 2 arrets sont sur une même ligne
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vous devez choisir entre une heure de départ et d'arrivée !");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vous devez choisir un arret d'arrivée !");
+                }
+            } 
+            else
+            {
+                MessageBox.Show("Vous devez choisir un arret de départ !");
+            }
         }
     }
 }

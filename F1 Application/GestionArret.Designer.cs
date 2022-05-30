@@ -96,6 +96,7 @@
             // 
             // cboArret
             // 
+            this.cboArret.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboArret.FormattingEnabled = true;
             this.cboArret.Location = new System.Drawing.Point(72, 53);
             this.cboArret.Name = "cboArret";

@@ -4,7 +4,7 @@ namespace Information
 {
     public class information
     {
-        private static bool admin = false;
+        private static bool admin = true;
         private static int nbrArret;
         private static int nbrLigne;
 
@@ -54,6 +54,11 @@ namespace Information
         public static void AddLigne()
         {
             nbrLigne = nbrLigne + 1;
+        }
+
+        public static void RemoveLigne()
+        {
+            nbrLigne = nbrLigne - 1;
         }
 
         public static int GetNbrLigne()

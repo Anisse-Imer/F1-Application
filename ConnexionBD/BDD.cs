@@ -442,5 +442,76 @@ namespace ConnexionBD
 
             return retour;
         }
+
+        public static bool SupprimerLignePositionnement(int num_Ligne)
+        {
+            bool retour = true;
+
+            string sql = $"DELETE FROM Positionnement WHERE N_ligne = {num_Ligne}";
+
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                retour = false;
+            }
+
+            return retour;
+        }
+
+        public static bool SupprimerLigne(int num_Ligne)
+        {
+            bool retour = true;
+
+            string sql = $"DELETE FROM Ligne WHERE N_ligne = {num_Ligne}";
+
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                retour = false;
+            }
+
+            return retour;
+        }
+
+
+        public static string GetCouleur(int num_Ligne)
+        {
+
+            string sql = $"SELECT Couleur_ligne FROM Ligne WHERE N_ligne = {num_Ligne}";
+            string couleur = "rouge";
+
+            try
+            {
+
+                MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    couleur = rdr.GetString(0);
+                }
+
+                rdr.Close();
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return couleur;
+        }
     }
 }

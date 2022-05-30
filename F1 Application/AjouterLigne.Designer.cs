@@ -167,6 +167,7 @@
             // 
             // cboCouleur
             // 
+            this.cboCouleur.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCouleur.FormattingEnabled = true;
             this.cboCouleur.Location = new System.Drawing.Point(4, 153);
             this.cboCouleur.Name = "cboCouleur";

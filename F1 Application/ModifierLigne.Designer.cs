@@ -32,16 +32,17 @@
             this.cmdConfirmerModifierLigne = new System.Windows.Forms.Button();
             this.cmdAnnulerModifierLigne = new System.Windows.Forms.Button();
             this.pnlNomNombreArrêt = new System.Windows.Forms.Panel();
-            this.nudNombreArrets = new System.Windows.Forms.NumericUpDown();
             this.lblNombreArrets = new System.Windows.Forms.Label();
             this.txtNomLigne = new System.Windows.Forms.TextBox();
             this.lblNomLigne = new System.Windows.Forms.Label();
-            this.pnlRangArrets = new System.Windows.Forms.Panel();
             this.clstListeArrets = new System.Windows.Forms.CheckedListBox();
             this.lblArretsModifierLigne = new System.Windows.Forms.Label();
             this.lblRangArretsModifierLigne = new System.Windows.Forms.Label();
+            this.lblNbrArretSelectionner = new System.Windows.Forms.Label();
+            this.flpRangDesArret = new System.Windows.Forms.FlowLayoutPanel();
+            this.cboLigneAModifier = new System.Windows.Forms.ComboBox();
+            this.cboCouleur = new System.Windows.Forms.ComboBox();
             this.pnlNomNombreArrêt.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudNombreArrets)).BeginInit();
             this.SuspendLayout();
             // 
             // lblModifierLigne
@@ -64,6 +65,7 @@
             this.cmdConfirmerModifierLigne.TabIndex = 1;
             this.cmdConfirmerModifierLigne.Text = "Confirmer";
             this.cmdConfirmerModifierLigne.UseVisualStyleBackColor = false;
+            this.cmdConfirmerModifierLigne.Click += new System.EventHandler(this.cmdConfirmerModifierLigne_Click);
             // 
             // cmdAnnulerModifierLigne
             // 
@@ -74,12 +76,13 @@
             this.cmdAnnulerModifierLigne.TabIndex = 2;
             this.cmdAnnulerModifierLigne.Text = "Annuler";
             this.cmdAnnulerModifierLigne.UseVisualStyleBackColor = false;
+            this.cmdAnnulerModifierLigne.Click += new System.EventHandler(this.cmdAnnulerModifierLigne_Click);
             // 
             // pnlNomNombreArrêt
             // 
             this.pnlNomNombreArrêt.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.pnlNomNombreArrêt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlNomNombreArrêt.Controls.Add(this.nudNombreArrets);
+            this.pnlNomNombreArrêt.Controls.Add(this.lblNbrArretSelectionner);
             this.pnlNomNombreArrêt.Controls.Add(this.lblNombreArrets);
             this.pnlNomNombreArrêt.Controls.Add(this.txtNomLigne);
             this.pnlNomNombreArrêt.Controls.Add(this.lblNomLigne);
@@ -87,13 +90,6 @@
             this.pnlNomNombreArrêt.Name = "pnlNomNombreArrêt";
             this.pnlNomNombreArrêt.Size = new System.Drawing.Size(361, 51);
             this.pnlNomNombreArrêt.TabIndex = 3;
-            // 
-            // nudNombreArrets
-            // 
-            this.nudNombreArrets.Location = new System.Drawing.Point(206, 26);
-            this.nudNombreArrets.Name = "nudNombreArrets";
-            this.nudNombreArrets.Size = new System.Drawing.Size(140, 20);
-            this.nudNombreArrets.TabIndex = 4;
             // 
             // lblNombreArrets
             // 
@@ -120,15 +116,6 @@
             this.lblNomLigne.TabIndex = 4;
             this.lblNomLigne.Text = "Nom de la ligne :";
             // 
-            // pnlRangArrets
-            // 
-            this.pnlRangArrets.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.pnlRangArrets.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlRangArrets.Location = new System.Drawing.Point(243, 129);
-            this.pnlRangArrets.Name = "pnlRangArrets";
-            this.pnlRangArrets.Size = new System.Drawing.Size(218, 184);
-            this.pnlRangArrets.TabIndex = 4;
-            // 
             // clstListeArrets
             // 
             this.clstListeArrets.FormattingEnabled = true;
@@ -136,6 +123,7 @@
             this.clstListeArrets.Name = "clstListeArrets";
             this.clstListeArrets.Size = new System.Drawing.Size(138, 184);
             this.clstListeArrets.TabIndex = 5;
+            this.clstListeArrets.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clstListeArrets_ItemCheck);
             // 
             // lblArretsModifierLigne
             // 
@@ -155,16 +143,55 @@
             this.lblRangArretsModifierLigne.TabIndex = 7;
             this.lblRangArretsModifierLigne.Text = "Rang des arrêts : ";
             // 
+            // lblNbrArretSelectionner
+            // 
+            this.lblNbrArretSelectionner.AutoSize = true;
+            this.lblNbrArretSelectionner.Location = new System.Drawing.Point(224, 30);
+            this.lblNbrArretSelectionner.Name = "lblNbrArretSelectionner";
+            this.lblNbrArretSelectionner.Size = new System.Drawing.Size(13, 13);
+            this.lblNbrArretSelectionner.TabIndex = 7;
+            this.lblNbrArretSelectionner.Text = "0";
+            // 
+            // flpRangDesArret
+            // 
+            this.flpRangDesArret.AutoScroll = true;
+            this.flpRangDesArret.BackColor = System.Drawing.Color.Green;
+            this.flpRangDesArret.Location = new System.Drawing.Point(274, 135);
+            this.flpRangDesArret.Name = "flpRangDesArret";
+            this.flpRangDesArret.Size = new System.Drawing.Size(245, 177);
+            this.flpRangDesArret.TabIndex = 9;
+            // 
+            // cboLigneAModifier
+            // 
+            this.cboLigneAModifier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLigneAModifier.FormattingEnabled = true;
+            this.cboLigneAModifier.Location = new System.Drawing.Point(4, 7);
+            this.cboLigneAModifier.Name = "cboLigneAModifier";
+            this.cboLigneAModifier.Size = new System.Drawing.Size(130, 21);
+            this.cboLigneAModifier.TabIndex = 10;
+            this.cboLigneAModifier.SelectedValueChanged += new System.EventHandler(this.cboLigneAModifier_SelectedValueChanged);
+            // 
+            // cboCouleur
+            // 
+            this.cboCouleur.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCouleur.FormattingEnabled = true;
+            this.cboCouleur.Location = new System.Drawing.Point(1, 129);
+            this.cboCouleur.Name = "cboCouleur";
+            this.cboCouleur.Size = new System.Drawing.Size(92, 21);
+            this.cboCouleur.TabIndex = 8;
+            // 
             // frmModifierLigne
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(552, 400);
+            this.Controls.Add(this.cboLigneAModifier);
+            this.Controls.Add(this.flpRangDesArret);
+            this.Controls.Add(this.cboCouleur);
             this.Controls.Add(this.lblRangArretsModifierLigne);
             this.Controls.Add(this.lblArretsModifierLigne);
             this.Controls.Add(this.clstListeArrets);
-            this.Controls.Add(this.pnlRangArrets);
             this.Controls.Add(this.pnlNomNombreArrêt);
             this.Controls.Add(this.cmdAnnulerModifierLigne);
             this.Controls.Add(this.cmdConfirmerModifierLigne);
@@ -172,9 +199,9 @@
             this.Name = "frmModifierLigne";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModifierLigne";
+            this.Load += new System.EventHandler(this.frmModifierLigne_Load);
             this.pnlNomNombreArrêt.ResumeLayout(false);
             this.pnlNomNombreArrêt.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudNombreArrets)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,13 +213,15 @@
         private System.Windows.Forms.Button cmdConfirmerModifierLigne;
         private System.Windows.Forms.Button cmdAnnulerModifierLigne;
         private System.Windows.Forms.Panel pnlNomNombreArrêt;
-        private System.Windows.Forms.NumericUpDown nudNombreArrets;
         private System.Windows.Forms.Label lblNombreArrets;
         private System.Windows.Forms.TextBox txtNomLigne;
         private System.Windows.Forms.Label lblNomLigne;
-        private System.Windows.Forms.Panel pnlRangArrets;
         private System.Windows.Forms.CheckedListBox clstListeArrets;
         private System.Windows.Forms.Label lblArretsModifierLigne;
         private System.Windows.Forms.Label lblRangArretsModifierLigne;
+        private System.Windows.Forms.Label lblNbrArretSelectionner;
+        private System.Windows.Forms.FlowLayoutPanel flpRangDesArret;
+        private System.Windows.Forms.ComboBox cboLigneAModifier;
+        private System.Windows.Forms.ComboBox cboCouleur;
     }
 }

@@ -46,6 +46,7 @@
             this.cmdSupprimerLigne.TabIndex = 0;
             this.cmdSupprimerLigne.Text = "Supprimer la ligne";
             this.cmdSupprimerLigne.UseVisualStyleBackColor = false;
+            this.cmdSupprimerLigne.Click += new System.EventHandler(this.cmdSupprimerLigne_Click);
             // 
             // cmdAjouterLigne
             // 
@@ -69,6 +70,7 @@
             this.cmdModifierLigne.TabIndex = 2;
             this.cmdModifierLigne.Text = "Modifier la ligne";
             this.cmdModifierLigne.UseVisualStyleBackColor = false;
+            this.cmdModifierLigne.Click += new System.EventHandler(this.cmdModifierLigne_Click);
             // 
             // cmdAnnulerGestionLigne
             // 
@@ -94,6 +96,7 @@
             // 
             // cboSelectionLigne
             // 
+            this.cboSelectionLigne.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSelectionLigne.FormattingEnabled = true;
             this.cboSelectionLigne.Location = new System.Drawing.Point(62, 52);
             this.cboSelectionLigne.Name = "cboSelectionLigne";

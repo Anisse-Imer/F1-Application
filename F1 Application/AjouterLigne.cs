@@ -32,11 +32,11 @@ namespace F1_Application
                 clstListeArrets.Items.Add(arret[i]);
             }
 
-            cboCouleur.Items.Add("rouge");
-            cboCouleur.Items.Add("bleu");
-            cboCouleur.Items.Add("vert");
-            cboCouleur.Items.Add("orange");
-            cboCouleur.Items.Add("rose");
+            cboCouleur.Items.Add("Rouge");
+            cboCouleur.Items.Add("Bleu");
+            cboCouleur.Items.Add("Vert");
+            cboCouleur.Items.Add("Orange");
+            cboCouleur.Items.Add("Rose");
         }
 
         NumericUpDown[] listeNUD = new NumericUpDown[20];

@@ -60,6 +60,7 @@ namespace F1_Application
             this.pnlResultatRecherche = new System.Windows.Forms.Panel();
             this.pnlAffichage = new System.Windows.Forms.Panel();
             this.lblVisualiserLigne = new System.Windows.Forms.Label();
+            this.pnlAfficherLigne = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeure)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDate)).BeginInit();
@@ -69,6 +70,7 @@ namespace F1_Application
             this.pnlAdministrateur.SuspendLayout();
             this.pnlResultatRecherche.SuspendLayout();
             this.pnlAffichage.SuspendLayout();
+            this.pnlAfficherLigne.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblRecherche
@@ -116,6 +118,7 @@ namespace F1_Application
             // cboDepart
             // 
             this.cboDepart.BackColor = System.Drawing.Color.White;
+            this.cboDepart.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboDepart.ForeColor = System.Drawing.SystemColors.ButtonShadow;
             this.cboDepart.FormattingEnabled = true;
             this.cboDepart.Location = new System.Drawing.Point(58, 90);
@@ -125,6 +128,7 @@ namespace F1_Application
             // 
             // cboArrivee
             // 
+            this.cboArrivee.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboArrivee.FormattingEnabled = true;
             this.cboArrivee.Location = new System.Drawing.Point(58, 140);
             this.cboArrivee.Name = "cboArrivee";
@@ -198,6 +202,7 @@ namespace F1_Application
             this.cmdRechercher.TabIndex = 19;
             this.cmdRechercher.Text = "Rechercher";
             this.cmdRechercher.UseVisualStyleBackColor = false;
+            this.cmdRechercher.Click += new System.EventHandler(this.cmdRechercher_Click);
             // 
             // lblVisualisation
             // 
@@ -212,6 +217,7 @@ namespace F1_Application
             // 
             // cboVisualiserLigne
             // 
+            this.cboVisualiserLigne.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboVisualiserLigne.FormattingEnabled = true;
             this.cboVisualiserLigne.Location = new System.Drawing.Point(56, 83);
             this.cboVisualiserLigne.Name = "cboVisualiserLigne";
@@ -407,21 +413,31 @@ namespace F1_Application
             // 
             this.pnlAffichage.BackColor = System.Drawing.Color.Azure;
             this.pnlAffichage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlAffichage.Controls.Add(this.lblVisualiserLigne);
+            this.pnlAffichage.Controls.Add(this.pnlAfficherLigne);
             this.pnlAffichage.Location = new System.Drawing.Point(308, 2);
             this.pnlAffichage.Name = "pnlAffichage";
             this.pnlAffichage.Size = new System.Drawing.Size(734, 746);
             this.pnlAffichage.TabIndex = 31;
+            this.pnlAffichage.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAffichage_Paint);
             // 
             // lblVisualiserLigne
             // 
             this.lblVisualiserLigne.AutoSize = true;
             this.lblVisualiserLigne.Font = new System.Drawing.Font("Perpetua", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVisualiserLigne.Location = new System.Drawing.Point(5, 6);
+            this.lblVisualiserLigne.Location = new System.Drawing.Point(18, 22);
             this.lblVisualiserLigne.Name = "lblVisualiserLigne";
             this.lblVisualiserLigne.Size = new System.Drawing.Size(276, 33);
             this.lblVisualiserLigne.TabIndex = 0;
             this.lblVisualiserLigne.Text = "Aucune ligne selectionné";
+            // 
+            // pnlAfficherLigne
+            // 
+            this.pnlAfficherLigne.AutoScroll = true;
+            this.pnlAfficherLigne.Controls.Add(this.lblVisualiserLigne);
+            this.pnlAfficherLigne.Location = new System.Drawing.Point(9, 10);
+            this.pnlAfficherLigne.Name = "pnlAfficherLigne";
+            this.pnlAfficherLigne.Size = new System.Drawing.Size(723, 731);
+            this.pnlAfficherLigne.TabIndex = 0;
             // 
             // frmAccueil
             // 
@@ -456,7 +472,8 @@ namespace F1_Application
             this.pnlResultatRecherche.ResumeLayout(false);
             this.pnlResultatRecherche.PerformLayout();
             this.pnlAffichage.ResumeLayout(false);
-            this.pnlAffichage.PerformLayout();
+            this.pnlAfficherLigne.ResumeLayout(false);
+            this.pnlAfficherLigne.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -494,6 +511,7 @@ namespace F1_Application
         private System.Windows.Forms.RadioButton optDépart;
         private System.Windows.Forms.RadioButton optArrivée;
         private System.Windows.Forms.Label lblVisualisationDemande;
+        private System.Windows.Forms.Panel pnlAfficherLigne;
     }
 }
 
