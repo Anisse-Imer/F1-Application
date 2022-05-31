@@ -58,10 +58,10 @@ namespace F1_Application
             this.pnlAdministrateur = new System.Windows.Forms.Panel();
             this.lblResultatRecherche = new System.Windows.Forms.Label();
             this.pnlResultatRecherche = new System.Windows.Forms.Panel();
-            this.pnlAffichage = new System.Windows.Forms.Panel();
-            this.lblVisualiserLigne = new System.Windows.Forms.Label();
-            this.pnlAfficherLigne = new System.Windows.Forms.Panel();
             this.lblAffichageResultatRecherche = new System.Windows.Forms.Label();
+            this.pnlAffichage = new System.Windows.Forms.Panel();
+            this.pnlAfficherLigne = new System.Windows.Forms.Panel();
+            this.lblVisualiserLigne = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeure)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDate)).BeginInit();
@@ -184,7 +184,7 @@ namespace F1_Application
             // 
             this.cmdVisualisation.BackColor = System.Drawing.Color.Lavender;
             this.cmdVisualisation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmdVisualisation.Location = new System.Drawing.Point(56, 110);
+            this.cmdVisualisation.Location = new System.Drawing.Point(56, 100);
             this.cmdVisualisation.Name = "cmdVisualisation";
             this.cmdVisualisation.Size = new System.Drawing.Size(182, 26);
             this.cmdVisualisation.TabIndex = 18;
@@ -210,7 +210,7 @@ namespace F1_Application
             this.lblVisualisation.AutoSize = true;
             this.lblVisualisation.BackColor = System.Drawing.Color.AliceBlue;
             this.lblVisualisation.Font = new System.Drawing.Font("Perpetua", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVisualisation.Location = new System.Drawing.Point(19, 23);
+            this.lblVisualisation.Location = new System.Drawing.Point(30, 13);
             this.lblVisualisation.Name = "lblVisualisation";
             this.lblVisualisation.Size = new System.Drawing.Size(255, 33);
             this.lblVisualisation.TabIndex = 20;
@@ -220,7 +220,7 @@ namespace F1_Application
             // 
             this.cboVisualiserLigne.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboVisualiserLigne.FormattingEnabled = true;
-            this.cboVisualiserLigne.Location = new System.Drawing.Point(56, 83);
+            this.cboVisualiserLigne.Location = new System.Drawing.Point(56, 73);
             this.cboVisualiserLigne.Name = "cboVisualiserLigne";
             this.cboVisualiserLigne.Size = new System.Drawing.Size(182, 21);
             this.cboVisualiserLigne.TabIndex = 21;
@@ -229,7 +229,7 @@ namespace F1_Application
             // 
             this.cmdConnexionAdmin.BackColor = System.Drawing.Color.Lavender;
             this.cmdConnexionAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmdConnexionAdmin.Location = new System.Drawing.Point(36, 57);
+            this.cmdConnexionAdmin.Location = new System.Drawing.Point(36, 38);
             this.cmdConnexionAdmin.Name = "cmdConnexionAdmin";
             this.cmdConnexionAdmin.Size = new System.Drawing.Size(233, 91);
             this.cmdConnexionAdmin.TabIndex = 22;
@@ -242,7 +242,7 @@ namespace F1_Application
             this.lblAdministrateur.AutoSize = true;
             this.lblAdministrateur.BackColor = System.Drawing.Color.AliceBlue;
             this.lblAdministrateur.Font = new System.Drawing.Font("Perpetua", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdministrateur.Location = new System.Drawing.Point(33, 12);
+            this.lblAdministrateur.Location = new System.Drawing.Point(33, 2);
             this.lblAdministrateur.Name = "lblAdministrateur";
             this.lblAdministrateur.Size = new System.Drawing.Size(241, 33);
             this.lblAdministrateur.TabIndex = 23;
@@ -253,7 +253,7 @@ namespace F1_Application
             // 
             this.cmdGererLignes.BackColor = System.Drawing.Color.Lavender;
             this.cmdGererLignes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmdGererLignes.Location = new System.Drawing.Point(60, 72);
+            this.cmdGererLignes.Location = new System.Drawing.Point(58, 49);
             this.cmdGererLignes.Name = "cmdGererLignes";
             this.cmdGererLignes.Size = new System.Drawing.Size(91, 35);
             this.cmdGererLignes.TabIndex = 24;
@@ -266,7 +266,7 @@ namespace F1_Application
             // 
             this.cmdGererArrêts.BackColor = System.Drawing.Color.Lavender;
             this.cmdGererArrêts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmdGererArrêts.Location = new System.Drawing.Point(157, 72);
+            this.cmdGererArrêts.Location = new System.Drawing.Point(161, 49);
             this.cmdGererArrêts.Name = "cmdGererArrêts";
             this.cmdGererArrêts.Size = new System.Drawing.Size(91, 35);
             this.cmdGererArrêts.TabIndex = 25;
@@ -279,7 +279,7 @@ namespace F1_Application
             // 
             this.cmdDeconnexionAdmin.BackColor = System.Drawing.Color.Lavender;
             this.cmdDeconnexionAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmdDeconnexionAdmin.Location = new System.Drawing.Point(36, 112);
+            this.cmdDeconnexionAdmin.Location = new System.Drawing.Point(36, 93);
             this.cmdDeconnexionAdmin.Name = "cmdDeconnexionAdmin";
             this.cmdDeconnexionAdmin.Size = new System.Drawing.Size(233, 36);
             this.cmdDeconnexionAdmin.TabIndex = 26;
@@ -363,13 +363,13 @@ namespace F1_Application
             this.pnlVisualisation.Controls.Add(this.cmdVisualisation);
             this.pnlVisualisation.Location = new System.Drawing.Point(1, 357);
             this.pnlVisualisation.Name = "pnlVisualisation";
-            this.pnlVisualisation.Size = new System.Drawing.Size(307, 185);
+            this.pnlVisualisation.Size = new System.Drawing.Size(307, 141);
             this.pnlVisualisation.TabIndex = 28;
             // 
             // lblVisualisationDemande
             // 
             this.lblVisualisationDemande.AutoSize = true;
-            this.lblVisualisationDemande.Location = new System.Drawing.Point(57, 67);
+            this.lblVisualisationDemande.Location = new System.Drawing.Point(59, 54);
             this.lblVisualisationDemande.Name = "lblVisualisationDemande";
             this.lblVisualisationDemande.Size = new System.Drawing.Size(160, 13);
             this.lblVisualisationDemande.TabIndex = 22;
@@ -384,9 +384,9 @@ namespace F1_Application
             this.pnlAdministrateur.Controls.Add(this.cmdDeconnexionAdmin);
             this.pnlAdministrateur.Controls.Add(this.lblAdministrateur);
             this.pnlAdministrateur.Controls.Add(this.cmdConnexionAdmin);
-            this.pnlAdministrateur.Location = new System.Drawing.Point(1, 542);
+            this.pnlAdministrateur.Location = new System.Drawing.Point(1, 498);
             this.pnlAdministrateur.Name = "pnlAdministrateur";
-            this.pnlAdministrateur.Size = new System.Drawing.Size(307, 206);
+            this.pnlAdministrateur.Size = new System.Drawing.Size(307, 154);
             this.pnlAdministrateur.TabIndex = 29;
             // 
             // lblResultatRecherche
@@ -406,40 +406,10 @@ namespace F1_Application
             this.pnlResultatRecherche.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlResultatRecherche.Controls.Add(this.lblAffichageResultatRecherche);
             this.pnlResultatRecherche.Controls.Add(this.lblResultatRecherche);
-            this.pnlResultatRecherche.Location = new System.Drawing.Point(1041, 2);
+            this.pnlResultatRecherche.Location = new System.Drawing.Point(909, 2);
             this.pnlResultatRecherche.Name = "pnlResultatRecherche";
-            this.pnlResultatRecherche.Size = new System.Drawing.Size(327, 746);
+            this.pnlResultatRecherche.Size = new System.Drawing.Size(327, 650);
             this.pnlResultatRecherche.TabIndex = 30;
-            // 
-            // pnlAffichage
-            // 
-            this.pnlAffichage.BackColor = System.Drawing.Color.Azure;
-            this.pnlAffichage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlAffichage.Controls.Add(this.pnlAfficherLigne);
-            this.pnlAffichage.Location = new System.Drawing.Point(308, 2);
-            this.pnlAffichage.Name = "pnlAffichage";
-            this.pnlAffichage.Size = new System.Drawing.Size(734, 746);
-            this.pnlAffichage.TabIndex = 31;
-            this.pnlAffichage.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAffichage_Paint);
-            // 
-            // lblVisualiserLigne
-            // 
-            this.lblVisualiserLigne.AutoSize = true;
-            this.lblVisualiserLigne.Font = new System.Drawing.Font("Perpetua", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVisualiserLigne.Location = new System.Drawing.Point(18, 22);
-            this.lblVisualiserLigne.Name = "lblVisualiserLigne";
-            this.lblVisualiserLigne.Size = new System.Drawing.Size(276, 33);
-            this.lblVisualiserLigne.TabIndex = 0;
-            this.lblVisualiserLigne.Text = "Aucune ligne selectionné";
-            // 
-            // pnlAfficherLigne
-            // 
-            this.pnlAfficherLigne.AutoScroll = true;
-            this.pnlAfficherLigne.Controls.Add(this.lblVisualiserLigne);
-            this.pnlAfficherLigne.Location = new System.Drawing.Point(9, 10);
-            this.pnlAfficherLigne.Name = "pnlAfficherLigne";
-            this.pnlAfficherLigne.Size = new System.Drawing.Size(723, 731);
-            this.pnlAfficherLigne.TabIndex = 0;
             // 
             // lblAffichageResultatRecherche
             // 
@@ -451,11 +421,41 @@ namespace F1_Application
             this.lblAffichageResultatRecherche.TabIndex = 2;
             this.lblAffichageResultatRecherche.Text = "Aucune recherche.";
             // 
+            // pnlAffichage
+            // 
+            this.pnlAffichage.BackColor = System.Drawing.Color.Azure;
+            this.pnlAffichage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlAffichage.Controls.Add(this.pnlAfficherLigne);
+            this.pnlAffichage.Location = new System.Drawing.Point(308, 2);
+            this.pnlAffichage.Name = "pnlAffichage";
+            this.pnlAffichage.Size = new System.Drawing.Size(602, 650);
+            this.pnlAffichage.TabIndex = 31;
+            this.pnlAffichage.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAffichage_Paint);
+            // 
+            // pnlAfficherLigne
+            // 
+            this.pnlAfficherLigne.AutoScroll = true;
+            this.pnlAfficherLigne.Controls.Add(this.lblVisualiserLigne);
+            this.pnlAfficherLigne.Location = new System.Drawing.Point(9, 10);
+            this.pnlAfficherLigne.Name = "pnlAfficherLigne";
+            this.pnlAfficherLigne.Size = new System.Drawing.Size(591, 639);
+            this.pnlAfficherLigne.TabIndex = 0;
+            // 
+            // lblVisualiserLigne
+            // 
+            this.lblVisualiserLigne.AutoSize = true;
+            this.lblVisualiserLigne.Font = new System.Drawing.Font("Perpetua", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVisualiserLigne.Location = new System.Drawing.Point(18, 22);
+            this.lblVisualiserLigne.Name = "lblVisualiserLigne";
+            this.lblVisualiserLigne.Size = new System.Drawing.Size(276, 33);
+            this.lblVisualiserLigne.TabIndex = 0;
+            this.lblVisualiserLigne.Text = "Aucune ligne selectionné";
+            // 
             // frmAccueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.ClientSize = new System.Drawing.Size(1238, 644);
             this.Controls.Add(this.pbDate);
             this.Controls.Add(this.cboArrivee);
             this.Controls.Add(this.cboDepart);
