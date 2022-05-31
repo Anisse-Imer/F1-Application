@@ -40,9 +40,9 @@
             // 
             this.cmdSupprimerLigne.BackColor = System.Drawing.Color.Lavender;
             this.cmdSupprimerLigne.Font = new System.Drawing.Font("Times New Roman", 9F);
-            this.cmdSupprimerLigne.Location = new System.Drawing.Point(63, 169);
+            this.cmdSupprimerLigne.Location = new System.Drawing.Point(62, 79);
             this.cmdSupprimerLigne.Name = "cmdSupprimerLigne";
-            this.cmdSupprimerLigne.Size = new System.Drawing.Size(99, 36);
+            this.cmdSupprimerLigne.Size = new System.Drawing.Size(99, 48);
             this.cmdSupprimerLigne.TabIndex = 0;
             this.cmdSupprimerLigne.Text = "Supprimer la ligne";
             this.cmdSupprimerLigne.UseVisualStyleBackColor = false;
@@ -52,9 +52,9 @@
             // 
             this.cmdAjouterLigne.BackColor = System.Drawing.Color.Lavender;
             this.cmdAjouterLigne.Font = new System.Drawing.Font("Times New Roman", 9F);
-            this.cmdAjouterLigne.Location = new System.Drawing.Point(272, 169);
+            this.cmdAjouterLigne.Location = new System.Drawing.Point(271, 79);
             this.cmdAjouterLigne.Name = "cmdAjouterLigne";
-            this.cmdAjouterLigne.Size = new System.Drawing.Size(99, 36);
+            this.cmdAjouterLigne.Size = new System.Drawing.Size(99, 48);
             this.cmdAjouterLigne.TabIndex = 1;
             this.cmdAjouterLigne.Text = "Ajouter une nouvelle ligne";
             this.cmdAjouterLigne.UseVisualStyleBackColor = false;
@@ -64,9 +64,9 @@
             // 
             this.cmdModifierLigne.BackColor = System.Drawing.Color.Lavender;
             this.cmdModifierLigne.Font = new System.Drawing.Font("Times New Roman", 9F);
-            this.cmdModifierLigne.Location = new System.Drawing.Point(167, 169);
+            this.cmdModifierLigne.Location = new System.Drawing.Point(167, 79);
             this.cmdModifierLigne.Name = "cmdModifierLigne";
-            this.cmdModifierLigne.Size = new System.Drawing.Size(99, 36);
+            this.cmdModifierLigne.Size = new System.Drawing.Size(99, 48);
             this.cmdModifierLigne.TabIndex = 2;
             this.cmdModifierLigne.Text = "Modifier la ligne";
             this.cmdModifierLigne.UseVisualStyleBackColor = false;
@@ -76,7 +76,7 @@
             // 
             this.cmdAnnulerGestionLigne.BackColor = System.Drawing.Color.Silver;
             this.cmdAnnulerGestionLigne.Font = new System.Drawing.Font("Times New Roman", 9F);
-            this.cmdAnnulerGestionLigne.Location = new System.Drawing.Point(11, 223);
+            this.cmdAnnulerGestionLigne.Location = new System.Drawing.Point(12, 133);
             this.cmdAnnulerGestionLigne.Name = "cmdAnnulerGestionLigne";
             this.cmdAnnulerGestionLigne.Size = new System.Drawing.Size(87, 28);
             this.cmdAnnulerGestionLigne.TabIndex = 3;
@@ -108,7 +108,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(432, 261);
+            this.ClientSize = new System.Drawing.Size(432, 167);
             this.Controls.Add(this.cboSelectionLigne);
             this.Controls.Add(this.lblTitreGestionLigne);
             this.Controls.Add(this.cmdAnnulerGestionLigne);

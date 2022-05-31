@@ -20,6 +20,7 @@ namespace F1_Application
 
         private void frmGestionArret_Load(object sender, EventArgs e)
         {
+            this.Icon = Properties.Resources.chaperon_rouge;
             string[] arret;
             arret = BDD.GetAllArret();
             for (int i = 0; i < arret.Length; i++)

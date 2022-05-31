@@ -108,6 +108,7 @@
             this.Name = "frmConnexionAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ConnexionAdmin";
+            this.Load += new System.EventHandler(this.frmConnexionAdmin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

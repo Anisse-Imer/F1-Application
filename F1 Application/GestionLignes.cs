@@ -28,6 +28,7 @@ namespace F1_Application
 
         private void frmGestionLignes_Load(object sender, EventArgs e)
         {
+            this.Icon = Properties.Resources.chaperon_rouge;
             ReloadLigne();
         }
 

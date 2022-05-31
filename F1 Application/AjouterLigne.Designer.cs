@@ -49,7 +49,7 @@
             // 
             this.lblRangArretsAjouterLigne.AutoSize = true;
             this.lblRangArretsAjouterLigne.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRangArretsAjouterLigne.Location = new System.Drawing.Point(264, 132);
+            this.lblRangArretsAjouterLigne.Location = new System.Drawing.Point(234, 137);
             this.lblRangArretsAjouterLigne.Name = "lblRangArretsAjouterLigne";
             this.lblRangArretsAjouterLigne.Size = new System.Drawing.Size(85, 14);
             this.lblRangArretsAjouterLigne.TabIndex = 13;
@@ -59,7 +59,7 @@
             // 
             this.lblArretsAjouterLigne.AutoSize = true;
             this.lblArretsAjouterLigne.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblArretsAjouterLigne.Location = new System.Drawing.Point(97, 132);
+            this.lblArretsAjouterLigne.Location = new System.Drawing.Point(67, 137);
             this.lblArretsAjouterLigne.Name = "lblArretsAjouterLigne";
             this.lblArretsAjouterLigne.Size = new System.Drawing.Size(94, 14);
             this.lblArretsAjouterLigne.TabIndex = 12;
@@ -68,7 +68,7 @@
             // clstListeArrets
             // 
             this.clstListeArrets.FormattingEnabled = true;
-            this.clstListeArrets.Location = new System.Drawing.Point(95, 150);
+            this.clstListeArrets.Location = new System.Drawing.Point(65, 155);
             this.clstListeArrets.Name = "clstListeArrets";
             this.clstListeArrets.Size = new System.Drawing.Size(161, 199);
             this.clstListeArrets.TabIndex = 11;
@@ -78,20 +78,22 @@
             // 
             this.pnlNomNombreArrets.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.pnlNomNombreArrets.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlNomNombreArrets.Controls.Add(this.cboCouleur);
+            this.pnlNomNombreArrets.Controls.Add(this.lblCouleur);
             this.pnlNomNombreArrets.Controls.Add(this.lblNbrArretSelectionne);
             this.pnlNomNombreArrets.Controls.Add(this.lblNombreArrets);
             this.pnlNomNombreArrets.Controls.Add(this.txtNomLigne);
             this.pnlNomNombreArrets.Controls.Add(this.lblNomLigne);
-            this.pnlNomNombreArrets.Location = new System.Drawing.Point(97, 62);
+            this.pnlNomNombreArrets.Location = new System.Drawing.Point(67, 67);
             this.pnlNomNombreArrets.Name = "pnlNomNombreArrets";
-            this.pnlNomNombreArrets.Size = new System.Drawing.Size(361, 55);
+            this.pnlNomNombreArrets.Size = new System.Drawing.Size(418, 55);
             this.pnlNomNombreArrets.TabIndex = 9;
             // 
             // lblNbrArretSelectionne
             // 
             this.lblNbrArretSelectionne.AutoSize = true;
             this.lblNbrArretSelectionne.Font = new System.Drawing.Font("Times New Roman", 10F);
-            this.lblNbrArretSelectionne.Location = new System.Drawing.Point(252, 32);
+            this.lblNbrArretSelectionne.Location = new System.Drawing.Point(213, 30);
             this.lblNbrArretSelectionne.Name = "lblNbrArretSelectionne";
             this.lblNbrArretSelectionne.Size = new System.Drawing.Size(15, 16);
             this.lblNbrArretSelectionne.TabIndex = 7;
@@ -101,7 +103,7 @@
             // 
             this.lblNombreArrets.AutoSize = true;
             this.lblNombreArrets.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombreArrets.Location = new System.Drawing.Point(217, 11);
+            this.lblNombreArrets.Location = new System.Drawing.Point(181, 11);
             this.lblNombreArrets.Name = "lblNombreArrets";
             this.lblNombreArrets.Size = new System.Drawing.Size(86, 14);
             this.lblNombreArrets.TabIndex = 6;
@@ -128,7 +130,7 @@
             // 
             this.lblAjouterLigne.AutoSize = true;
             this.lblAjouterLigne.Font = new System.Drawing.Font("Times New Roman", 20F);
-            this.lblAjouterLigne.Location = new System.Drawing.Point(183, 18);
+            this.lblAjouterLigne.Location = new System.Drawing.Point(153, 23);
             this.lblAjouterLigne.Name = "lblAjouterLigne";
             this.lblAjouterLigne.Size = new System.Drawing.Size(217, 31);
             this.lblAjouterLigne.TabIndex = 8;
@@ -160,7 +162,7 @@
             // 
             this.flpRangArret.AutoScroll = true;
             this.flpRangArret.BackColor = System.Drawing.Color.Green;
-            this.flpRangArret.Location = new System.Drawing.Point(267, 149);
+            this.flpRangArret.Location = new System.Drawing.Point(237, 154);
             this.flpRangArret.Name = "flpRangArret";
             this.flpRangArret.Size = new System.Drawing.Size(248, 199);
             this.flpRangArret.TabIndex = 16;
@@ -169,15 +171,15 @@
             // 
             this.cboCouleur.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCouleur.FormattingEnabled = true;
-            this.cboCouleur.Location = new System.Drawing.Point(4, 153);
+            this.cboCouleur.Location = new System.Drawing.Point(273, 28);
             this.cboCouleur.Name = "cboCouleur";
-            this.cboCouleur.Size = new System.Drawing.Size(82, 22);
+            this.cboCouleur.Size = new System.Drawing.Size(140, 22);
             this.cboCouleur.TabIndex = 17;
             // 
             // lblCouleur
             // 
             this.lblCouleur.AutoSize = true;
-            this.lblCouleur.Location = new System.Drawing.Point(0, 132);
+            this.lblCouleur.Location = new System.Drawing.Point(287, 11);
             this.lblCouleur.Name = "lblCouleur";
             this.lblCouleur.Size = new System.Drawing.Size(91, 14);
             this.lblCouleur.TabIndex = 18;
@@ -188,8 +190,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(552, 431);
-            this.Controls.Add(this.lblCouleur);
-            this.Controls.Add(this.cboCouleur);
             this.Controls.Add(this.flpRangArret);
             this.Controls.Add(this.cmdAnnulerAjouterLigne);
             this.Controls.Add(this.cmdConfirmerAjouterLigne);

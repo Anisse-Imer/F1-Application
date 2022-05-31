@@ -13,8 +13,10 @@ namespace F1_Application
 {
     public partial class frmModifierArret : Form
     {
+      //  int arretselec;
         public frmModifierArret()
         {
+           // arretselec = arret;
             InitializeComponent();
         }
 
@@ -25,6 +27,7 @@ namespace F1_Application
 
         private void frmModifierArret_Load(object sender, EventArgs e)
         {
+            this.Icon = Properties.Resources.chaperon_rouge;
             string[] arret;
             arret = BDD.GetAllArret();
             for (int i = 0; i < arret.Length; i++)

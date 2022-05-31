@@ -81,6 +81,16 @@ namespace F1_Application.Properties {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
+        /// </summary>
+        internal static System.Drawing.Icon chaperon_rouge {
+            get {
+                object obj = ResourceManager.GetObject("chaperon_rouge", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap horolge_image {

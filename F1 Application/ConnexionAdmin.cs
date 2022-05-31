@@ -40,5 +40,10 @@ namespace F1_Application
                 MessageBox.Show($"Identifiant ou mot de passe incorrect", "Erreur");
             }
         }
+
+        private void frmConnexionAdmin_Load(object sender, EventArgs e)
+        {
+            this.Icon = Properties.Resources.chaperon_rouge;
+        }
     }
 }

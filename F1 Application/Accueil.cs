@@ -33,6 +33,8 @@ namespace F1_Application
 
             bool connexionOuvertre = BDD.InitConnexion();
 
+            this.Icon = Properties.Resources.chaperon_rouge;
+
             if (connexionOuvertre != true)
             {
                 MessageBox.Show("Echec de la connexion à la BDD");
