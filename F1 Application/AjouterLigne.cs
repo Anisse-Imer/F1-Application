@@ -203,10 +203,12 @@ namespace F1_Application
                                     {
                                         MessageBox.Show("Une erreur est survenue lors de la création d'une des positions !");
                                     }
+                                    else
+                                    {
+                                        MessageBox.Show("Ligne créée avec succès !");
+                                    }
 
                                     information.AddLigne();
-
-                                    MessageBox.Show("Ligne créée avec succès !");
                                     this.Close();
                                 }
                                 else

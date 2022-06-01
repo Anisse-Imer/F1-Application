@@ -13,9 +13,11 @@ namespace F1_Application
 {
     public partial class frmModifierLigne : Form
     {
-        public frmModifierLigne()
+        int ligneSelectionner;
+        public frmModifierLigne(int ligne)
         {
             InitializeComponent();
+            ligneSelectionner = ligne;
         }
 
         private void lblModifierLigne_Click(object sender, EventArgs e)
@@ -28,6 +30,11 @@ namespace F1_Application
             this.Close();
         }
 
+
+        NumericUpDown[] listeNUD = new NumericUpDown[20];
+        Label[] listeLBL = new Label[20];
+        bool ligneSelection = true;
+
         private void frmModifierLigne_Load(object sender, EventArgs e)
         {
             this.Icon = Properties.Resources.chaperon_rouge;
@@ -38,69 +45,55 @@ namespace F1_Application
                 clstListeArrets.Items.Add(arret[i]);
             }
 
-            string[] ligne;
-            ligne = BDD.GetAllLigne();
-            for (int i = 0; i < ligne.Length; i++)
-            {
-                cboLigneAModifier.Items.Add(ligne[i]);
-            }
-
             cboCouleur.Items.Add("Rouge");
             cboCouleur.Items.Add("Bleu");
             cboCouleur.Items.Add("Vert");
             cboCouleur.Items.Add("Orange");
             cboCouleur.Items.Add("Rose");
-        }
 
-        NumericUpDown[] listeNUD = new NumericUpDown[20];
-        Label[] listeLBL = new Label[20];
-        bool ligneSelection = true;
-
-        private void cboLigneAModifier_SelectedValueChanged(object sender, EventArgs e)
-        {
             ligneSelection = true;
             flpRangDesArret.Controls.Clear();
 
-            int num_Ligne = BDD.GetNumLigne(cboLigneAModifier.SelectedItem.ToString());
+            int num_Ligne = ligneSelectionner;
 
             string couleurLigne = BDD.GetCouleur(num_Ligne);
 
             bool flag = false;
-            for(int i=0; i < cboCouleur.Items.Count; i++)
+            for (int i = 0; i < cboCouleur.Items.Count; i++)
             {
-                if(cboCouleur.Items[i].ToString() == couleurLigne.ToString())
+                if (cboCouleur.Items[i].ToString() == couleurLigne.ToString())
                 {
                     flag = true;
                     cboCouleur.SelectedIndex = i;
                 }
             }
 
-            if(flag == false)
+            if (flag == false)
             {
                 cboCouleur.Items.Add(couleurLigne);
                 cboCouleur.SelectedIndex = cboCouleur.Items.Count - 1;
             }
-            
 
-            txtNomLigne.Text = cboLigneAModifier.SelectedItem.ToString();
+
+            txtNomLigne.Text = BDD.GetNomLigne(num_Ligne);
 
             int[] arretEtRangDeLarret = new int[20];
             arretEtRangDeLarret = BDD.GetAllArretInLigne(num_Ligne);
 
             string[] nomArretEtRangDeLarret = new string[20];
 
-            for(int i=0; i < 20; i++)
+            for (int i = 0; i < 20; i++)
             {
                 nomArretEtRangDeLarret[i] = BDD.GetNomArret(arretEtRangDeLarret[i]).ToString();
             }
 
             int nbrArret = 0;
-            
-            for(int i=0; i < clstListeArrets.Items.Count; i++)
+
+            for (int i = 0; i < clstListeArrets.Items.Count; i++)
             {
 
                 bool arretDansLigne = false;
-                for (int j = 0; arretEtRangDeLarret[j] != 0 && arretDansLigne == false ; j++)
+                for (int j = 0; arretEtRangDeLarret[j] != 0 && arretDansLigne == false; j++)
                 {
                     // Debug.Print(arretEtRangDeLarret[j].ToString());
                     if (clstListeArrets.Items[i].ToString() == nomArretEtRangDeLarret[j].ToString())
@@ -142,13 +135,14 @@ namespace F1_Application
 
             lblNbrArretSelectionner.Text = nbrArret.ToString();
 
-            for(int i = 0; i < nbrArret; i++)
+            for (int i = 0; i < nbrArret; i++)
             {
                 listeNUD[i].Maximum = nbrArret;
             }
 
             ligneSelection = false;
         }
+
 
         private void clstListeArrets_ItemCheck(object sender, ItemCheckEventArgs e)
         {
@@ -261,7 +255,7 @@ namespace F1_Application
                 ligne = BDD.GetAllLigne();
                 for (int i = 0; i < ligne.Length; i++)
                 {
-                    if (ligne[i] == txtNomLigne.Text.ToString() && txtNomLigne.Text.ToString() != cboLigneAModifier.SelectedItem.ToString())
+                    if (ligne[i] == txtNomLigne.Text.ToString() && txtNomLigne.Text.ToString() != BDD.GetNomArret(ligneSelectionner))
                     {
                         flag = true;
                     }
@@ -298,7 +292,7 @@ namespace F1_Application
 
                                 // Suppression de l'ancienne ligne
 
-                                int num_Ligne = BDD.GetNumLigne(cboLigneAModifier.SelectedItem.ToString());
+                                int num_Ligne = ligneSelectionner;
                                 BDD.SupprimerLignePositionnement(num_Ligne);
                                 BDD.SupprimerLigne(num_Ligne);
 

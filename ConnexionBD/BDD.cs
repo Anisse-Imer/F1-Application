@@ -15,6 +15,11 @@ namespace ConnexionBD
 
         private static MySqlConnection maCnx;
 
+
+        /// <summary>
+        /// Initialise la connexion avec la BDD
+        /// </summary>
+        /// <returns>true ou false selon si la fonction a réussi à se connecter à la BDD</returns>
         public static bool InitConnexion()
         {
             string serveur = "10.1.139.236";
@@ -37,14 +42,20 @@ namespace ConnexionBD
             }
         }
 
-
+        /// <summary>
+        /// Ferme la connexion avec la CDD
+        /// </summary>
         public static void FermerConnexion()
         {
             if (maCnx.State == System.Data.ConnectionState.Open)
                 maCnx.Close();
         }
 
-
+        /// <summary>
+        /// Permet de savoir le nombre d'entrée dans une table
+        /// </summary>
+        /// <param name="tablename">Le nom de la table choisi</param>
+        /// <returns>Le nombre d'entrée dans une table</returns>
         public static int GetTableCount(string tablename)
         {
             int compteur = 0;
@@ -72,6 +83,10 @@ namespace ConnexionBD
             return compteur;
         }
 
+        /// <summary>
+        /// Permet d'obtenir tout les noms des arrêts du réseau
+        /// </summary>
+        /// <returns>Les noms des arrêts du réseau</returns>
         public static string[] GetAllArret()
         {
 
@@ -113,7 +128,10 @@ namespace ConnexionBD
             return arret;
         }
 
-
+        /// <summary>
+        /// Permet d'obtenir tout les noms des lignes du réseau
+        /// </summary>
+        /// <returns>Les noms des lignes du réseau</returns>
         public static string[] GetAllLigne()
         {
 
@@ -147,6 +165,11 @@ namespace ConnexionBD
             return ligne;
         }
 
+        /// <summary>
+        /// Permet d'obtenir le numéro d'une ligne en fonction de son nom
+        /// </summary>
+        /// <param name="nomDeLaLigne">Le nom de la ligne</param>
+        /// <returns>Le numéro de la ligne</returns>
         public static int GetNumLigne(string nomDeLaLigne)
         {
 
@@ -175,6 +198,45 @@ namespace ConnexionBD
             return numeroDeLaLigne;
         }
 
+
+        /// <summary>
+        /// Permet d'obtenir le nom d'une ligne en fonction de son numéro
+        /// </summary>
+        /// <param name="numDeLaLigne">Le numéro de la ligne</param>
+        /// <returns>Le nom de la ligne</returns>
+        public static string GetNomLigne(int numDeLaLigne)
+        {
+
+            string sql = $"SELECT Nom_ligne FROM Ligne WHERE N_ligne = {numDeLaLigne}";
+            string nomDeLaLigne = "";
+
+            try
+            {
+
+                MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    nomDeLaLigne = rdr.GetString(0);
+                }
+
+                rdr.Close();
+                cmd.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return nomDeLaLigne;
+        }
+
+        /// <summary>
+        /// Permet d'obtenir le nom d'un arrêt en fonction de son numéro
+        /// </summary>
+        /// <param name="numDeLarret">Le numéro de l'arrêt</param>
+        /// <returns>Le nom de l'arrêt</returns>
         public static string GetNomArret(int numDeLarret)
         {
 
@@ -203,6 +265,11 @@ namespace ConnexionBD
             return nomDeLarret;
         }
 
+        /// <summary>
+        /// Permet d'obtenir le numéro d'un arrêt en fonction de son nom
+        /// </summary>
+        /// <param name="nomDeLarret">Le nom de l'arrêt</param>
+        /// <returns>Le numéro de l'arrêt</returns>
         public static int GetNumArret(string nomDeLarret)
         {
             
@@ -231,6 +298,11 @@ namespace ConnexionBD
             return numArret;
         }
 
+        /// <summary>
+        /// Permet d'obtenir tout les arrêts d'une ligne
+        /// </summary>
+        /// <param name="Num_ligne">Le numéro de la ligne</param>
+        /// <returns>Le numéro des arrêts de la ligne</returns>
         public static int[] GetAllArretInLigne(int Num_ligne)
         {
 
@@ -263,6 +335,12 @@ namespace ConnexionBD
             return arretEtRangDeLarret;
         }
 
+        /// <summary>
+        /// Permet de modifier le nom d'un arrêt
+        /// </summary>
+        /// <param name="numArret">Le numéro de l'arrêt</param>
+        /// <param name="nouveauNomArret">Le nouveau nom de l'arrêt</param>
+        /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
         public static bool ModifierNomArret(int numArret, string nouveauNomArret)
         {
             bool retour = true;
@@ -284,6 +362,11 @@ namespace ConnexionBD
             return retour;
         }
 
+        /// <summary>
+        /// Permet de rajout un arrêt dans le réseau
+        /// </summary>
+        /// <param name="nomArret">Le nom de l'arrêt</param>
+        /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
         public static int AjoutArret(string nomArret)
         {
             int retour = -1;
@@ -306,6 +389,11 @@ namespace ConnexionBD
             return retour;
         }
 
+        /// <summary>
+        /// Permet de supprimer un arrêt de la table Positionnement
+        /// </summary>
+        /// <param name="num_Arret">Le numéro de l'arrêt</param>
+        /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
         public static bool SupprimerUnArretDesLignes(int num_Arret)
         {
             bool retour = true;
@@ -327,7 +415,12 @@ namespace ConnexionBD
             return retour;
         }
 
-
+        /// <summary>
+        /// Permet d'ajouter une ligne
+        /// </summary>
+        /// <param name="nomLigne">Le nom de la ligne</param>
+        /// <param name="couleurLigne">La couleur de la ligne</param>
+        /// <returns>Le numéro de la nouvelle ligne</returns>
         public static int AjoutLigne(string nomLigne, string couleurLigne)
         {
             int retour = -1;
@@ -350,7 +443,13 @@ namespace ConnexionBD
             return retour;
         }
 
-
+        /// <summary>
+        /// Permet d'ajouter le positionnement d'un arrêt sur une ligne
+        /// </summary>
+        /// <param name="n_Ligne">Le numéro de la ligne</param>
+        /// <param name="n_Arret">Le numéro de l'arrêt</param>
+        /// <param name="rang_Arret">Le rang de l'arrêt</param>
+        /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
         public static bool AjoutPositionnement(int n_Ligne, int n_Arret, int rang_Arret)
         {
             bool retour = true;
@@ -373,6 +472,12 @@ namespace ConnexionBD
             return retour;
         }
 
+        /// <summary>
+        /// Permet d'obtenir la position d'un arrêt sur une ligne
+        /// </summary>
+        /// <param name="Num_ligne">Le numéro de la ligne</param>
+        /// <param name="Num_Arret">Le numéro de l'arrêt</param>
+        /// <returns>La position de l'arrêt</returns>
         public static int GetPosition(int Num_ligne, int Num_Arret)
         {
 
@@ -401,6 +506,13 @@ namespace ConnexionBD
             return rang;
         }
 
+        /// <summary>
+        /// Permet de modifier le positionnement d'un arrêt sur une ligne
+        /// </summary>
+        /// <param name="Num_ligne">Le numéro de la ligne</param>
+        /// <param name="Num_Arret">Le numéro de l'arrêt</param>
+        /// <param name="Rang_Arret">Le rang de l'arrêt</param>
+        /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
         public static bool SetPosition(int Num_ligne, int Num_Arret, int Rang_Arret)
         {
             bool retour = true;
@@ -422,6 +534,11 @@ namespace ConnexionBD
             return retour;
         }
 
+        /// <summary>
+        /// Permet de supprimer un arrêt
+        /// </summary>
+        /// <param name="num_Arret">Le numéro de l'arrêt</param>
+        /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
         public static bool SupprimerArret(int num_Arret)
         {
             bool retour = true;
@@ -443,6 +560,11 @@ namespace ConnexionBD
             return retour;
         }
 
+        /// <summary>
+        /// Permet de supprimer une ligne de la table Positionnement
+        /// </summary>
+        /// <param name="num_Ligne">Le numéro de la ligne</param>
+        /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
         public static bool SupprimerLignePositionnement(int num_Ligne)
         {
             bool retour = true;
@@ -464,6 +586,11 @@ namespace ConnexionBD
             return retour;
         }
 
+        /// <summary>
+        /// Permet de supprimer une ligne
+        /// </summary>
+        /// <param name="num_Ligne">Le numéro de la ligne</param>
+        /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
         public static bool SupprimerLigne(int num_Ligne)
         {
             bool retour = true;
@@ -485,7 +612,11 @@ namespace ConnexionBD
             return retour;
         }
 
-
+        /// <summary>
+        /// Permet d'obtenir la couleur d'une ligne
+        /// </summary>
+        /// <param name="num_Ligne">Le numéro de la ligne</param>
+        /// <returns>La couleur</returns>
         public static string GetCouleur(int num_Ligne)
         {
 
@@ -514,6 +645,11 @@ namespace ConnexionBD
             return couleur;
         }
 
+        /// <summary>
+        /// Permet d'obtenir l'heure de début d'une ligne
+        /// </summary>
+        /// <param name="num_Ligne">Le numéro de la ligne</param>
+        /// <returns>L'heure et la minute du début de la ligne</returns>
         public static int[] GetPassageDebut(int num_Ligne)
         {
 
@@ -547,7 +683,11 @@ namespace ConnexionBD
             return Heure_Debut_Passage;
         }
 
-
+        /// <summary>
+        /// Permet d'obtenir l'heure de la fin d'une ligne
+        /// </summary>
+        /// <param name="num_Ligne">Le numéro de la ligne</param>
+        /// <returns>L'heure et la minute de la fin de la ligne</returns>
         public static int[] GetPassageFin(int num_Ligne)
         {
 
@@ -580,6 +720,12 @@ namespace ConnexionBD
             return Heure_Debut_Passage;
         }
 
+        /// <summary>
+        /// Permet d'obtenir le temps entre deux arrêts
+        /// </summary>
+        /// <param name="num_Arret1">Le numéro de l'arrêt 1</param>
+        /// <param name="num_Arret2">Le numéro de l'arrêt 2</param>
+        /// <returns>Le temps entre les deux arrêts</returns>
         public static int TempsEntreArret(int num_Arret1, int num_Arret2)
         {
 

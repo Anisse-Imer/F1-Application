@@ -36,8 +36,15 @@ namespace F1_Application
 
         private void cmdModifierArret_Click(object sender, EventArgs e)
         {
-            frmModifierArret modifierArret = new frmModifierArret();
-            modifierArret.ShowDialog();
+            if (cboArret.SelectedItem != null)
+            {
+                frmModifierArret modifierArret = new frmModifierArret(BDD.GetNumArret(cboArret.SelectedItem.ToString()));
+                modifierArret.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Vous devez selectionner un arrêt !");
+            }
 
             ReloadArret();
         }
@@ -50,6 +57,9 @@ namespace F1_Application
             ReloadArret();
         }
 
+        /// <summary>
+        /// Permet de reload la combobox des arrêts
+        /// </summary>
         private void ReloadArret()
         {
             cboArret.Items.Clear();

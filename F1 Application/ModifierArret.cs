@@ -13,10 +13,10 @@ namespace F1_Application
 {
     public partial class frmModifierArret : Form
     {
-      //  int arretselec;
-        public frmModifierArret()
+        int arretSelectionne;
+        public frmModifierArret(int arret)
         {
-           // arretselec = arret;
+            arretSelectionne = arret;
             InitializeComponent();
         }
 
@@ -34,35 +34,31 @@ namespace F1_Application
             {
                 lstArretsReseau.Items.Add(arret[i]);
             }
+
+            txtNomArret.Text = BDD.GetNomArret(arretSelectionne);
         }
 
         private void cmdConfirmerModifierArret_Click(object sender, EventArgs e)
         {
-            if(lstArretsReseau.SelectedItem != null)
+            if(txtNomArret != null && txtNomArret.TextLength >= 3)
             {
-                if(txtNomArret != null && txtNomArret.TextLength >= 3)
+                int numArret = arretSelectionne;
+
+                bool resultat = BDD.ModifierNomArret(numArret, txtNomArret.Text.ToString());
+
+                if (resultat)
                 {
-                    int numArret = BDD.GetNumArret(lstArretsReseau.SelectedItem.ToString());
-
-                    bool resultat = BDD.ModifierNomArret(numArret, txtNomArret.Text.ToString());
-
-                    if (resultat)
-                    {
-                        MessageBox.Show($"Le nom de l'arret a bien été modifié en : {txtNomArret.Text.ToString()} !");
-                        this.Close();
-                    } else
-                    {
-                        MessageBox.Show("Une erreur est survenue !");
-                    }
-                }
+                    MessageBox.Show($"Le nom de l'arret a bien été modifié en : {txtNomArret.Text.ToString()} !");
+                    this.Close();
+                } 
                 else
                 {
-                    MessageBox.Show("Le nouveau nom doit faire au moins 3 caractères !");
+                    MessageBox.Show("Une erreur est survenue !");
                 }
             }
             else
             {
-                MessageBox.Show("Vous devez selectionner un arret !");
+                MessageBox.Show("Le nouveau nom doit faire au moins 3 caractères !");
             }
         }
     }

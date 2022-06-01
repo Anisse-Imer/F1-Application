@@ -150,6 +150,7 @@ namespace F1_Application
                     int[] arretEtRangDeLarret = new int[20];
                     arretEtRangDeLarret = BDD.GetAllArretInLigne(Num_Ligne);
 
+                    
                     lblVisualiserLigne.Text = $"{cboVisualiserLigne.SelectedItem.ToString()} : \n";
                     while (arretEtRangDeLarret[i + 1] != 0)
                     {
@@ -182,7 +183,9 @@ namespace F1_Application
         }
 
 
-
+        /// <summary>
+        /// Permet de reload les combobox des arrêts et des lignes
+        /// </summary>
         private void Reload()
         {
             cboDepart.Items.Clear();

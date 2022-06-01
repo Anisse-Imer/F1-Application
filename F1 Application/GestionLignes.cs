@@ -32,7 +32,9 @@ namespace F1_Application
             ReloadLigne();
         }
 
-
+        /// <summary>
+        /// Permet de reload la combobox des lignes
+        /// </summary>
         private void ReloadLigne()
         {
             cboSelectionLigne.Items.Clear();
@@ -96,8 +98,15 @@ namespace F1_Application
 
         private void cmdModifierLigne_Click(object sender, EventArgs e)
         {
-            frmModifierLigne modifierLigne = new frmModifierLigne();
-            modifierLigne.ShowDialog();
+            if (cboSelectionLigne.SelectedItem != null)
+            {
+                frmModifierLigne modifierLigne = new frmModifierLigne(BDD.GetNumLigne(cboSelectionLigne.SelectedItem.ToString()));
+                modifierLigne.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Vous devez selectionner une ligne !");
+            }
 
             ReloadLigne();
         }
