@@ -237,7 +237,8 @@ namespace F1_Application
                     {
                         if (optArrivée.Checked == true || optDépart.Checked == true)
                         {
-                            // Trouver si les 2 arrets sont sur une même ligne
+
+                            
 
                             int num_Arret_Depart = BDD.GetNumArret(cboDepart.SelectedItem.ToString());
                             int num_Arret_Arrivee = BDD.GetNumArret(cboArrivee.SelectedItem.ToString());
@@ -299,6 +300,8 @@ namespace F1_Application
                                 
 
                                 lblAffichageResultatRecherche.Text = $"Vous devez prendre la ligne : {nomLigneEnCommum}\n";
+
+                                lblAffichageResultatRecherche.Text += $"Couleur : {BDD.GetCouleur(ligneEnCommun)}\n";
 
                                 // Debug.Print(Convert.ToInt32(nudHeure.Value).ToString());
                                 int[] Heure_Debut_Passage = BDD.GetPassageDebut(ligneEnCommun);

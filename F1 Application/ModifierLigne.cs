@@ -46,10 +46,32 @@ namespace F1_Application
             }
 
             cboCouleur.Items.Add("Rouge");
-            cboCouleur.Items.Add("Bleu");
-            cboCouleur.Items.Add("Vert");
             cboCouleur.Items.Add("Orange");
+            cboCouleur.Items.Add("Jaune");    
+            cboCouleur.Items.Add("Vert");
+            cboCouleur.Items.Add("Bleu");
+            cboCouleur.Items.Add("Violet");
             cboCouleur.Items.Add("Rose");
+            cboCouleur.Items.Add("Noir");
+            cboCouleur.Items.Add("Cyan");
+            cboCouleur.Items.Add("Marron");
+
+            string[] ligne;
+            ligne = BDD.GetAllLigne();
+            for (int i = 0; i < ligne.Length; i++)
+            {
+                int numLigne = BDD.GetNumLigne(ligne[i]);
+                for (int y = 0; y < cboCouleur.Items.Count; y++)
+                {
+                    if (ligne[i] != BDD.GetNomLigne(ligneSelectionner))
+                    {
+                        if (cboCouleur.Items[y].ToString() == BDD.GetCouleur(numLigne).ToString())
+                        {
+                            cboCouleur.Items.RemoveAt(y);
+                        }
+                    }
+                }
+            }
 
             ligneSelection = true;
             flpRangDesArret.Controls.Clear();
@@ -187,6 +209,16 @@ namespace F1_Application
 
                             NumericUpDown nud = new NumericUpDown();
                             nud.Name = $"nudArret{i}";
+                            int positionArret = BDD.GetPosition(ligneSelectionner, BDD.GetNumArret(clstListeArrets.CheckedItems[i].ToString()));
+                            if (positionArret != -1)
+                            {
+                                nud.Value = positionArret;
+                            }
+                            else
+                            {
+                                nud.Value = 1;
+                            }
+                            
                             nud.Minimum = 1;
                             nud.Maximum = newNbrArretSelectionnet;
                             nud.AutoSize = false;
@@ -255,7 +287,7 @@ namespace F1_Application
                 ligne = BDD.GetAllLigne();
                 for (int i = 0; i < ligne.Length; i++)
                 {
-                    if (ligne[i] == txtNomLigne.Text.ToString() && txtNomLigne.Text.ToString() != BDD.GetNomArret(ligneSelectionner))
+                    if (ligne[i] == txtNomLigne.Text.ToString() && txtNomLigne.Text.ToString() != BDD.GetNomLigne(ligneSelectionner))
                     {
                         flag = true;
                     }

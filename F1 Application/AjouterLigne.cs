@@ -34,10 +34,29 @@ namespace F1_Application
             }
 
             cboCouleur.Items.Add("Rouge");
-            cboCouleur.Items.Add("Bleu");
-            cboCouleur.Items.Add("Vert");
             cboCouleur.Items.Add("Orange");
+            cboCouleur.Items.Add("Jaune");
+            cboCouleur.Items.Add("Vert");
+            cboCouleur.Items.Add("Bleu");
+            cboCouleur.Items.Add("Violet");
             cboCouleur.Items.Add("Rose");
+            cboCouleur.Items.Add("Noir");
+            cboCouleur.Items.Add("Cyan");
+            cboCouleur.Items.Add("Marron");
+
+            string[] ligne;
+            ligne = BDD.GetAllLigne();
+            for (int i = 0; i < ligne.Length; i++)
+            {
+                int numLigne = BDD.GetNumLigne(ligne[i]);
+                for (int y = 0; y < cboCouleur.Items.Count; y++)
+                {
+                    if (cboCouleur.Items[y].ToString() == BDD.GetCouleur(numLigne).ToString())
+                    {
+                        cboCouleur.Items.RemoveAt(y);
+                    }
+                }
+            }
         }
 
         NumericUpDown[] listeNUD = new NumericUpDown[20];
@@ -146,6 +165,7 @@ namespace F1_Application
             if (txtNomLigne != null && txtNomLigne.TextLength >= 3)
             {
                 bool flag = false;
+                
 
                 string[] ligne;
                 ligne = BDD.GetAllLigne();
@@ -181,10 +201,13 @@ namespace F1_Application
                             }
                         }
 
+
+
                         if(rangIdentique == false)
                         {
                             if(cboCouleur.SelectedItem != null)
                             {
+
                                 int n_Ligne = BDD.AjoutLigne(txtNomLigne.Text.ToString(), cboCouleur.SelectedItem.ToString());
 
                                 if (n_Ligne != 1)
