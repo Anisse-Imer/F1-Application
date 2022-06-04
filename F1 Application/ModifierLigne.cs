@@ -460,5 +460,15 @@ namespace F1_Application
                 MessageBox.Show("Le nom doit faire au moins 3 caractères !");
             }
         }
+
+        private void lblDebutLigne_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblNomLigne_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

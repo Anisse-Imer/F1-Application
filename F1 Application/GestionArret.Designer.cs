@@ -117,7 +117,7 @@
             this.Controls.Add(this.cmdSupprimerArret);
             this.Name = "frmGestionArret";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "GestionArret";
+            this.Text = "Le guide du petit arpenteur";
             this.Load += new System.EventHandler(this.frmGestionArret_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

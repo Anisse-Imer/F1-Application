@@ -25,6 +25,7 @@ namespace F1_Application
 
         private void frmTempsEntreArret_Load(object sender, EventArgs e)
         {
+            this.Icon = Properties.Resources.chaperon_rouge;
             lblArret.Text = $"Le temps entre {BDD.GetNomArret(premiereArret).ToString()}" +
                 $" et {BDD.GetNomArret(deuxiemeArret).ToString()} est inconnu.\n" +
                 $"Definissez le :";

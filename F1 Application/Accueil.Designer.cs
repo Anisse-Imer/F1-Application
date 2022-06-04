@@ -49,6 +49,7 @@ namespace F1_Application
             this.cmdGererArrêts = new System.Windows.Forms.Button();
             this.cmdDeconnexionAdmin = new System.Windows.Forms.Button();
             this.pnlRecherche = new System.Windows.Forms.Panel();
+            this.cmdInversion = new System.Windows.Forms.Button();
             this.lblArriveeOuDepart = new System.Windows.Forms.Label();
             this.optDépart = new System.Windows.Forms.RadioButton();
             this.optArrivée = new System.Windows.Forms.RadioButton();
@@ -292,6 +293,7 @@ namespace F1_Application
             // 
             this.pnlRecherche.BackColor = System.Drawing.Color.AliceBlue;
             this.pnlRecherche.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlRecherche.Controls.Add(this.cmdInversion);
             this.pnlRecherche.Controls.Add(this.lblArriveeOuDepart);
             this.pnlRecherche.Controls.Add(this.cmdRechercher);
             this.pnlRecherche.Controls.Add(this.optDépart);
@@ -308,6 +310,16 @@ namespace F1_Application
             this.pnlRecherche.Name = "pnlRecherche";
             this.pnlRecherche.Size = new System.Drawing.Size(307, 356);
             this.pnlRecherche.TabIndex = 27;
+            // 
+            // cmdInversion
+            // 
+            this.cmdInversion.BackgroundImage = global::F1_Application.Properties.Resources.flèches_inverse;
+            this.cmdInversion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmdInversion.Location = new System.Drawing.Point(250, 111);
+            this.cmdInversion.Name = "cmdInversion";
+            this.cmdInversion.Size = new System.Drawing.Size(32, 32);
+            this.cmdInversion.TabIndex = 32;
+            this.cmdInversion.UseVisualStyleBackColor = true;
             // 
             // lblArriveeOuDepart
             // 
@@ -525,6 +537,7 @@ namespace F1_Application
         private System.Windows.Forms.Label lblVisualisationDemande;
         private System.Windows.Forms.Panel pnlAfficherLigne;
         private System.Windows.Forms.Label lblAffichageResultatRecherche;
+        private System.Windows.Forms.Button cmdInversion;
     }
 }
 

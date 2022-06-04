@@ -119,7 +119,7 @@
             this.Controls.Add(this.lblModifierArret);
             this.Name = "frmModifierArret";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ModifierArret";
+            this.Text = "Le guide du petit arpenteur";
             this.Load += new System.EventHandler(this.frmModifierArret_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

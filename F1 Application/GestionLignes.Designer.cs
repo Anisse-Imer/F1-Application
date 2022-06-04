@@ -117,7 +117,7 @@
             this.Controls.Add(this.cmdSupprimerLigne);
             this.Name = "frmGestionLignes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "GestionLignes";
+            this.Text = "Le guide du petit arpenteur";
             this.Load += new System.EventHandler(this.frmGestionLignes_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

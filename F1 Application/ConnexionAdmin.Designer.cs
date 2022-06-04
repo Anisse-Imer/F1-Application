@@ -107,7 +107,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmConnexionAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ConnexionAdmin";
+            this.Text = "Le guide du petit arpenteur";
             this.Load += new System.EventHandler(this.frmConnexionAdmin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
