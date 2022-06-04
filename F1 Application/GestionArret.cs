@@ -87,6 +87,10 @@ namespace F1_Application
 
                     BDD.SupprimerUnArretDesLignes(num_Arret);
 
+                    // Supprimer l'arrêt de tout les Trajet
+
+                    BDD.SupprimerTempsArret(num_Arret);
+
                     // Remettre les lignes dans le bon ordre
 
                     string[] ligne;

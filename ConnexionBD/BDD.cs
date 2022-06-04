@@ -473,6 +473,34 @@ namespace ConnexionBD
         }
 
         /// <summary>
+        /// Permet de modifier le positionnement d'un arrêt sur une ligne
+        /// </summary>
+        /// <param name="numLigne">Le numéro de la ligne</param>
+        /// <param name="numArret">Le numéro de l'arrêt</param>
+        /// <param name="rangArret">Le rang de l'arrêt</param>
+        /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
+        public static bool ModifierPositionnement(int numLigne, int numArret, int rangArret)
+        {
+            bool retour = true;
+
+            string sql = $"UPDATE Positionnement SET Rang_Arret={rangArret} WHERE N_Arret={numArret} AND N_ligne={numLigne}";
+
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                retour = false;
+            }
+
+            return retour;
+        }
+
+        /// <summary>
         /// Permet d'obtenir la position d'un arrêt sur une ligne
         /// </summary>
         /// <param name="Num_ligne">Le numéro de la ligne</param>
@@ -746,12 +774,351 @@ namespace ConnexionBD
                 rdr.Close();
                 cmd.Dispose();
             }
-            catch (Exception ex)
+            finally
             {
-                Console.WriteLine(ex.ToString());
+                sql = $"SELECT MINUTE(Temps_entre_arrets) FROM Trajet WHERE N_Arret={num_Arret2} AND N_Arret_1={num_Arret1}";
+
+                try
+                {
+
+                    MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+                    MySqlDataReader rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+                        temps = rdr.GetInt32(0);
+                    }
+
+                    rdr.Close();
+                    cmd.Dispose();
+                }
+                catch
+                {
+                    
+                }
             }
 
             return temps;
         }
+
+        /// <summary>
+        /// Permet d'ajouter un temps entre deux arrêts
+        /// </summary>
+        /// <param name="numArret1">Le numéro du première arrêt</param>
+        /// <param name="numArret2">Le numéro du deuxième arrêt</param>
+        /// <param name="tempsEntreArret">Le temps entre les deux arrêts</param>
+        /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
+        public static bool AjoutTempsEntreArret(int numArret1, int numArret2, int tempsEntreArret)
+        {
+            bool retour = true;
+
+            string temps;
+            if(tempsEntreArret < 10){
+                temps = $"00:0{tempsEntreArret}:00.0000";
+            }
+            else
+            {
+                temps = $"00:{tempsEntreArret}:00.0000";
+            }
+            string sql = $"INSERT INTO Trajet (N_Arret,N_Arret_1,Temps_entre_arrets) VALUES ({numArret1},{numArret2},'{temps}')";
+
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                retour = false;
+            }
+
+            return retour;
+        }
+
+        /// <summary>
+        /// permet de supprimet un temps entre deux arrêt
+        /// </summary>
+        /// <param name="num_Arret">l'arrêt que l'on veut supprimer</param>
+        /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
+        public static bool SupprimerTempsArret(int num_Arret)
+        {
+            bool retour = true;
+
+            string sql = $"DELETE FROM Trajet WHERE N_Arret = {num_Arret}";
+
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sql = $"DELETE FROM Trajet WHERE N_Arret_1 = {num_Arret}";
+
+                cmd = new MySqlCommand(sql, maCnx);
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    retour = false;
+                }
+            }
+
+            return retour;
+        }
+
+        /// <summary>
+        /// Permet d'ajouter un bus
+        /// </summary>
+        /// <returns>le numéro du nouveau bus</returns>
+        public static int AjoutBus()
+        {
+            int retour = -1;
+
+            string sql = $"INSERT INTO Bus (Nb_Place_Bus) VALUES (50)";
+
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                retour = (int)cmd.LastInsertedId;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+            }
+
+            return retour;
+        }
+
+
+        public static bool AjoutPassage(int numLigne, int heureDebutLigne, int minuteDebutLigne, int heureFinLigne, int minuteFinLigne, int numBus)
+        {
+            bool retour = true;
+
+            string debutLigne;
+            string finLigne;
+
+            if (heureDebutLigne < 10)
+            {
+                if(minuteDebutLigne < 10)
+                {
+                    debutLigne = $"0{heureDebutLigne}:0{minuteDebutLigne}:00.0000";
+                }
+                else
+                {
+                    debutLigne = $"0{heureDebutLigne}:{minuteDebutLigne}:00.0000";
+                }
+                
+            }
+            else
+            {
+                if (minuteDebutLigne < 10)
+                {
+                    debutLigne = $"{heureDebutLigne}:0{minuteDebutLigne}:00.0000";
+                }
+                else
+                {
+                    debutLigne = $"{heureDebutLigne}:{minuteDebutLigne}:00.0000";
+                }
+            }
+
+
+            if (heureFinLigne < 10)
+            {
+                if (minuteFinLigne < 10)
+                {
+                    finLigne = $"0{heureFinLigne}:0{minuteFinLigne}:00.0000";
+                }
+                else
+                {
+                    finLigne = $"0{heureFinLigne}:{minuteFinLigne}:00.0000";
+                }
+
+            }
+            else
+            {
+                if (minuteDebutLigne < 10)
+                {
+                    finLigne = $"{heureFinLigne}:0{minuteFinLigne}:00.0000";
+                }
+                else
+                {
+                    finLigne = $"{heureFinLigne}:{minuteFinLigne}:00.0000";
+                }
+            }
+
+
+            string sql = $"INSERT INTO Passage (Heure_debut, Heure_fin, N_ligne, N_Bus) VALUES ('{debutLigne}', '{finLigne}', {numLigne}, {numBus})";
+            
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                retour = false;
+            }
+
+            return retour;
+        }
+
+
+
+        public static bool ModifieDebutPassage(int numLigne, int heureDebutLigne, int minuteDebutLigne)
+        {
+            bool retour = true;
+
+            string debutLigne;
+
+            if (heureDebutLigne < 10)
+            {
+                if (minuteDebutLigne < 10)
+                {
+                    debutLigne = $"0{heureDebutLigne}:0{minuteDebutLigne}:00.0000";
+                }
+                else
+                {
+                    debutLigne = $"0{heureDebutLigne}:{minuteDebutLigne}:00.0000";
+                }
+
+            }
+            else
+            {
+                if (minuteDebutLigne < 10)
+                {
+                    debutLigne = $"{heureDebutLigne}:0{minuteDebutLigne}:00.0000";
+                }
+                else
+                {
+                    debutLigne = $"{heureDebutLigne}:{minuteDebutLigne}:00.0000";
+                }
+            }
+
+            string sql = $"UPDATE Passage SET Heure_debut='{debutLigne}' WHERE N_ligne={numLigne}";
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                retour = false;
+            }
+
+            return retour;
+        }
+
+
+        public static bool ModifieFinPassage(int numLigne, int heureFinLigne, int minuteFinLigne)
+        {
+            bool retour = true;
+
+            string finLigne;
+
+            if (heureFinLigne < 10)
+            {
+                if (minuteFinLigne < 10)
+                {
+                    finLigne = $"0{heureFinLigne}:0{minuteFinLigne}:00.0000";
+                }
+                else
+                {
+                    finLigne = $"0{heureFinLigne}:{minuteFinLigne}:00.0000";
+                }
+
+            }
+            else
+            {
+                if (minuteFinLigne < 10)
+                {
+                    finLigne = $"{heureFinLigne}:0{minuteFinLigne}:00.0000";
+                }
+                else
+                {
+                    finLigne = $"{heureFinLigne}:{minuteFinLigne}:00.0000";
+                }
+            }
+
+            string sql = $"UPDATE Passage SET Heure_fin='{finLigne}' WHERE N_ligne={numLigne}";
+
+
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                retour = false;
+            }
+
+            return retour;
+        }
+
+        public static bool SupprimerPassage(int num_Ligne)
+        {
+            bool retour = true;
+
+            string sql = $"DELETE FROM Passage WHERE N_ligne = {num_Ligne}";
+
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                retour = false;
+            }
+
+            return retour;
+        }
+
+        public static bool SupprimerUnArretDuneLignes(int numLigne, int numArret)
+        {
+            bool retour = true;
+
+            string sql = $"DELETE FROM Positionnement WHERE N_ligne = {numLigne} AND N_Arret = {numArret}";
+
+            MySqlCommand cmd = new MySqlCommand(sql, maCnx);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                retour = false;
+            }
+
+            return retour;
+        }
     }
+
 }

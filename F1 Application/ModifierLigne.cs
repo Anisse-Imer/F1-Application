@@ -33,7 +33,7 @@ namespace F1_Application
 
         NumericUpDown[] listeNUD = new NumericUpDown[20];
         Label[] listeLBL = new Label[20];
-        bool ligneSelection = true;
+        bool ligneSelection = true; // empeche pendant le chargement du formulaire que clstListeArrets_ItemCheck ne soit utilisée.
 
         private void frmModifierLigne_Load(object sender, EventArgs e)
         {
@@ -56,6 +56,9 @@ namespace F1_Application
             cboCouleur.Items.Add("Cyan");
             cboCouleur.Items.Add("Marron");
 
+
+            // On retire les couleurs qui sont déjà prises
+
             string[] ligne;
             ligne = BDD.GetAllLigne();
             for (int i = 0; i < ligne.Length; i++)
@@ -74,11 +77,8 @@ namespace F1_Application
             }
 
             ligneSelection = true;
-            flpRangDesArret.Controls.Clear();
 
-            int num_Ligne = ligneSelectionner;
-
-            string couleurLigne = BDD.GetCouleur(num_Ligne);
+            string couleurLigne = BDD.GetCouleur(ligneSelectionner);
 
             bool flag = false;
             for (int i = 0; i < cboCouleur.Items.Count; i++)
@@ -97,10 +97,10 @@ namespace F1_Application
             }
 
 
-            txtNomLigne.Text = BDD.GetNomLigne(num_Ligne);
+            txtNomLigne.Text = BDD.GetNomLigne(ligneSelectionner);
 
             int[] arretEtRangDeLarret = new int[20];
-            arretEtRangDeLarret = BDD.GetAllArretInLigne(num_Ligne);
+            arretEtRangDeLarret = BDD.GetAllArretInLigne(ligneSelectionner);
 
             string[] nomArretEtRangDeLarret = new string[20];
 
@@ -117,10 +117,11 @@ namespace F1_Application
                 bool arretDansLigne = false;
                 for (int j = 0; arretEtRangDeLarret[j] != 0 && arretDansLigne == false; j++)
                 {
-                    // Debug.Print(arretEtRangDeLarret[j].ToString());
+
                     if (clstListeArrets.Items[i].ToString() == nomArretEtRangDeLarret[j].ToString())
                     {
                         clstListeArrets.SetItemChecked(i, true);
+
                         arretDansLigne = true;
 
                         Label lbl = new Label();
@@ -148,6 +149,7 @@ namespace F1_Application
 
                         nbrArret++;
                     }
+
                     else
                     {
                         clstListeArrets.SetItemChecked(i, false);
@@ -161,6 +163,15 @@ namespace F1_Application
             {
                 listeNUD[i].Maximum = nbrArret;
             }
+
+            int[] Heure_Debut_Passage = BDD.GetPassageDebut(ligneSelectionner);
+            int[] Heure_Fin_Passage = BDD.GetPassageFin(ligneSelectionner);
+
+            nudHeureDebutLigne.Value = Heure_Debut_Passage[0];
+            nudMinuteDebutLigne.Value = Heure_Debut_Passage[1];
+
+            nudHeureFinLigne.Value = Heure_Fin_Passage[0];
+            nudMinuteFinLigne.Value = Heure_Fin_Passage[1];
 
             ligneSelection = false;
         }
@@ -281,6 +292,9 @@ namespace F1_Application
         {
             if (txtNomLigne != null && txtNomLigne.TextLength >= 3)
             {
+
+                // On vérifie que le nom de la ligne n'est pas déjà pris
+
                 bool flag = false;
 
                 string[] ligne;
@@ -295,7 +309,9 @@ namespace F1_Application
 
                 if (flag == false)
                 {
-                    // Debug.Print(flpRangArret.Controls.Count.ToString());
+
+                    // On vérifie que tout les rangs sont différents
+
                     if (flpRangDesArret.Controls.Count >= 6 && flpRangDesArret.Controls.Count <= 40)
                     {
                         int[] verif = new int[flpRangDesArret.Controls.Count / 2];
@@ -305,8 +321,6 @@ namespace F1_Application
                         for (int i = 0; i < flpRangDesArret.Controls.Count / 2 && rangIdentique == false; i++)
                         {
                             verif[i] = Convert.ToInt32(listeNUD[i].Value);
-                            // Debug.Print(listeNUD[i].Value.ToString());
-                            // Debug.Print(listeLBL[i].Text.ToString());
 
                             for (int j = 0; j < i; j++)
                             {
@@ -322,42 +336,102 @@ namespace F1_Application
                             if (cboCouleur.SelectedItem != null)
                             {
 
-                                // Suppression de l'ancienne ligne
+                                // On modifie l'horaire de la ligne
 
-                                int num_Ligne = ligneSelectionner;
-                                BDD.SupprimerLignePositionnement(num_Ligne);
-                                BDD.SupprimerLigne(num_Ligne);
+                                BDD.ModifieDebutPassage(ligneSelectionner, Convert.ToInt32(nudHeureDebutLigne.Value), Convert.ToInt32(nudMinuteDebutLigne.Value));
+                                BDD.ModifieFinPassage(ligneSelectionner, Convert.ToInt32(nudHeureFinLigne.Value), Convert.ToInt32(nudMinuteFinLigne.Value));
 
+                                // Tri des rangs des arrêts
 
-                                // Ajout de la nouvelle ligne
-
-                                int n_Ligne = BDD.AjoutLigne(txtNomLigne.Text.ToString(), cboCouleur.SelectedItem.ToString());
-
-                                if (n_Ligne != 1)
+                                for (int i = 0; i < flpRangDesArret.Controls.Count / 2 == true; i++)
                                 {
-
-                                    bool ajoutPosition = true;
-
-                                    for (int i = 0; i < flpRangDesArret.Controls.Count / 2 && ajoutPosition == true; i++)
+                                    int minimum = i;
+                                    for (int j = i + 1; j < flpRangDesArret.Controls.Count / 2; j++)
                                     {
-                                        int n_Arret = BDD.GetNumArret(listeLBL[i].Text.ToString());
-
-                                        ajoutPosition = BDD.AjoutPositionnement(n_Ligne, n_Arret, Convert.ToInt32(listeNUD[i].Value));
+                                        if (Convert.ToInt32(listeNUD[j].Value) < Convert.ToInt32(listeNUD[minimum].Value))
+                                        {
+                                            minimum = j;
+                                        }
                                     }
+
+                                    if (minimum != i)
+                                    {
+                                        int saveNud = Convert.ToInt32(listeNUD[i].Value);
+                                        listeNUD[i].Value = Convert.ToInt32(listeNUD[minimum].Value);
+                                        listeNUD[minimum].Value = saveNud;
+
+                                        string saveLbl = listeLBL[i].Text.ToString();
+                                        listeLBL[i].Text = listeLBL[minimum].Text;
+                                        listeLBL[minimum].Text = saveLbl;
+                                    }
+                                }
+
+                                // On demande à l'utilisateur de saisir un temps entre 2 arrêts si celui-ci n'existe pas
+
+                                for (int i = 0; i < (flpRangDesArret.Controls.Count / 2) - 1; i++)
+                                {
+                                    int numArret1 = BDD.GetNumArret(listeLBL[i].Text.ToString());
+                                    int numArret2 = BDD.GetNumArret(listeLBL[i + 1].Text.ToString());
+
+                                    int tempsEntreArret = BDD.TempsEntreArret(numArret1, numArret2);
+
+                                    if (tempsEntreArret == -1)
+                                    {
+                                        frmTempsEntreArret tempsEntreArretFormulaire = new frmTempsEntreArret(numArret1, numArret2);
+                                        tempsEntreArretFormulaire.ShowDialog();
+                                    }
+
+
+                                    tempsEntreArret = BDD.TempsEntreArret(numArret1, numArret2);
+
+                                }
+
+                                // Supprimer les arrêts qui ne sont plus dans la ligne
+
+                                int[] arretEtRangDeLarret = new int[20];
+                                arretEtRangDeLarret = BDD.GetAllArretInLigne(ligneSelectionner);
+
+                                for (int i = 0; i < arretEtRangDeLarret.Length; i++)
+                                {
+                                    bool arretDansLigneModifiee = false;
+                                    for (int j = 0; j < flpRangDesArret.Controls.Count / 2; j++)
+                                    {
+                                        if (arretEtRangDeLarret[i] == BDD.GetNumArret(listeLBL[j].ToString()))
+                                            arretDansLigneModifiee = true;
+                                    }
+
+                                    if (arretDansLigneModifiee == false)
+                                        BDD.SupprimerUnArretDuneLignes(ligneSelectionner, arretEtRangDeLarret[i]);
+                                }
+
+                                bool ajoutOuModificationPosition = true;
+                                bool ajoutPosition;
+
+                                for (int i = 0; i < flpRangDesArret.Controls.Count / 2 && ajoutOuModificationPosition == true; i++)
+                                {
+                                    int n_Arret = BDD.GetNumArret(listeLBL[i].Text.ToString());
+
+                                    ajoutPosition = BDD.AjoutPositionnement(ligneSelectionner, n_Arret, Convert.ToInt32(listeNUD[i].Value));
 
                                     if (ajoutPosition == false)
                                     {
-                                        MessageBox.Show("Une erreur est survenue lors de la modification d'une des positions !");
+                                        ajoutOuModificationPosition = BDD.ModifierPositionnement(ligneSelectionner, n_Arret, Convert.ToInt32(listeNUD[i].Value));
                                     }
 
-                                    MessageBox.Show("Ligne modifié avec succès !");
-                                    this.Close();
+
+                                }
+
+                                if (ajoutOuModificationPosition == false)
+                                {
+                                    MessageBox.Show("Une erreur est survenue lors de la modification d'une des positions !");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Une erreur est survenue lors de la modification de la ligne !");
+                                    MessageBox.Show("Ligne modifié avec succès !");
+                                    this.Close();
                                 }
-                                
+
+
                             }
                             else
                             {

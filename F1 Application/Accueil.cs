@@ -450,16 +450,6 @@ namespace F1_Application
                                             int heureArriveDuBus = ArriveDuBus / 60;
                                             int minuteArriveDuBus = ArriveDuBus - (60 * heureArriveDuBus);
 
-                                            if(heureDepartDuBus >= 24)
-                                            {
-                                                heureDepartDuBus -= 24;
-                                            }
-
-                                            if (heureArriveDuBus >= 24)
-                                            {
-                                                heureArriveDuBus -= 24;
-                                            }
-
                                              // Debug.Print($"heureDepartDuBus : {heureDepartDuBus}");
                                              // Debug.Print($"minuteDepartDuBus : {minuteDepartDuBus}");
                                              // Debug.Print($"heureArriveDuBus : {heureArriveDuBus}");
@@ -517,8 +507,13 @@ namespace F1_Application
                                                 }
                                             }
 
+                                            if (heureDepartDuBus >= 24)
+                                                heureDepartDuBus -= 24;
 
-                                            if(heureTrouveCorrect == true)
+                                            if (heureArriveDuBus >= 24)
+                                                heureArriveDuBus -= 24;
+
+                                            if (heureTrouveCorrect == true)
                                             {
                                                 lblAffichageResultatRecherche.Text += $"\nArrêt de départ : {BDD.GetNomArret(num_Arret_Depart)}\n";
                                                 if (heureDepartDuBus < 10)
@@ -703,6 +698,12 @@ namespace F1_Application
                                                     }
                                                 }
                                             }
+
+                                            if (heureDepartDuBus >= 24)
+                                                heureDepartDuBus -= 24;
+
+                                            if (heureArriveDuBus >= 24)
+                                                heureArriveDuBus -= 24;
 
 
                                             if (heureTrouveCorrect == true)
@@ -943,6 +944,12 @@ namespace F1_Application
                                                 }
                                             }
 
+                                            if (heureDepartDuBus >= 24)
+                                                heureDepartDuBus -= 24;
+
+                                            if (heureArriveDuBus >= 24)
+                                                heureArriveDuBus -= 24;
+
 
                                             if (heureTrouveCorrect == true)
                                             {
@@ -1000,7 +1007,7 @@ namespace F1_Application
                                             }
                                             else
                                             {
-                                                lblAffichageResultatRecherche.Text += "Aucun résultat trouvé";
+                                                lblAffichageResultatRecherche.Text = "Aucun résultat trouvé";
                                             }
                                         }
                                         else
@@ -1155,6 +1162,11 @@ namespace F1_Application
                                                 }
                                             }
 
+                                            if (heureDepartDuBus >= 24)
+                                                heureDepartDuBus -= 24;
+
+                                            if (heureArriveDuBus >= 24)
+                                                heureArriveDuBus -= 24;
 
                                             if (heureTrouveCorrect == true)
                                             {

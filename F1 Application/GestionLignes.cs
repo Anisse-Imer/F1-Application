@@ -62,13 +62,22 @@ namespace F1_Application
                 {
                     int num_Ligne = BDD.GetNumLigne(cboSelectionLigne.SelectedItem.ToString());
 
+                    // Supprimet la ligne de la table passage
+
+                    bool supressionPassage = BDD.SupprimerPassage(num_Ligne);
+
+                    if (supressionPassage == false)
+                    {
+                        MessageBox.Show("Un erreur est survenue lors de la supression de la ligne dans la table Passage !");
+                    }
+
                     // Supprimer la ligne de la table positionnement
 
                     bool supressionPosition = BDD.SupprimerLignePositionnement(num_Ligne);
 
                     if(supressionPosition == false)
                     {
-                        MessageBox.Show("Un erreur est survenue lors de la supression de la ligne dans la table Positionnement!");
+                        MessageBox.Show("Un erreur est survenue lors de la supression de la ligne dans la table Positionnement !");
                     }
 
                     // Supprimer la ligne définitivement

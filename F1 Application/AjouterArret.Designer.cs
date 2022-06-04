@@ -119,6 +119,7 @@
             this.Controls.Add(this.lblArretsReseau);
             this.Controls.Add(this.lblAjouterArret);
             this.Name = "frmAjouterArret";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AjouterArret";
             this.Load += new System.EventHandler(this.frmAjouterArret_Load);
             this.ResumeLayout(false);

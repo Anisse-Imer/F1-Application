@@ -42,7 +42,21 @@
             this.cmdAnnulerAjouterLigne = new System.Windows.Forms.Button();
             this.cmdConfirmerAjouterLigne = new System.Windows.Forms.Button();
             this.flpRangArret = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblDebutLigne = new System.Windows.Forms.Label();
+            this.lblHeureDebutLigne = new System.Windows.Forms.Label();
+            this.lblMinuteDebutLigne = new System.Windows.Forms.Label();
+            this.lblFinLigne = new System.Windows.Forms.Label();
+            this.lblHeureFinLigne = new System.Windows.Forms.Label();
+            this.lblMinuteFinLigne = new System.Windows.Forms.Label();
+            this.nudHeureDebutLigne = new System.Windows.Forms.NumericUpDown();
+            this.nudMinuteDebutLigne = new System.Windows.Forms.NumericUpDown();
+            this.nudHeureFinLigne = new System.Windows.Forms.NumericUpDown();
+            this.nudMinuteFinLigne = new System.Windows.Forms.NumericUpDown();
             this.pnlNomNombreArrets.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeureDebutLigne)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMinuteDebutLigne)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeureFinLigne)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMinuteFinLigne)).BeginInit();
             this.SuspendLayout();
             // 
             // lblRangArretsAjouterLigne
@@ -59,7 +73,7 @@
             // 
             this.lblArretsAjouterLigne.AutoSize = true;
             this.lblArretsAjouterLigne.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblArretsAjouterLigne.Location = new System.Drawing.Point(67, 137);
+            this.lblArretsAjouterLigne.Location = new System.Drawing.Point(62, 137);
             this.lblArretsAjouterLigne.Name = "lblArretsAjouterLigne";
             this.lblArretsAjouterLigne.Size = new System.Drawing.Size(94, 14);
             this.lblArretsAjouterLigne.TabIndex = 12;
@@ -68,7 +82,7 @@
             // clstListeArrets
             // 
             this.clstListeArrets.FormattingEnabled = true;
-            this.clstListeArrets.Location = new System.Drawing.Point(65, 155);
+            this.clstListeArrets.Location = new System.Drawing.Point(65, 154);
             this.clstListeArrets.Name = "clstListeArrets";
             this.clstListeArrets.Size = new System.Drawing.Size(161, 199);
             this.clstListeArrets.TabIndex = 11;
@@ -185,11 +199,123 @@
             this.flpRangArret.Size = new System.Drawing.Size(248, 199);
             this.flpRangArret.TabIndex = 16;
             // 
+            // lblDebutLigne
+            // 
+            this.lblDebutLigne.AutoSize = true;
+            this.lblDebutLigne.Location = new System.Drawing.Point(547, 94);
+            this.lblDebutLigne.Name = "lblDebutLigne";
+            this.lblDebutLigne.Size = new System.Drawing.Size(89, 14);
+            this.lblDebutLigne.TabIndex = 17;
+            this.lblDebutLigne.Text = "Début de la ligne :";
+            // 
+            // lblHeureDebutLigne
+            // 
+            this.lblHeureDebutLigne.AutoSize = true;
+            this.lblHeureDebutLigne.Location = new System.Drawing.Point(547, 108);
+            this.lblHeureDebutLigne.Name = "lblHeureDebutLigne";
+            this.lblHeureDebutLigne.Size = new System.Drawing.Size(34, 14);
+            this.lblHeureDebutLigne.TabIndex = 18;
+            this.lblHeureDebutLigne.Text = "Heure";
+            // 
+            // lblMinuteDebutLigne
+            // 
+            this.lblMinuteDebutLigne.AutoSize = true;
+            this.lblMinuteDebutLigne.Location = new System.Drawing.Point(626, 109);
+            this.lblMinuteDebutLigne.Name = "lblMinuteDebutLigne";
+            this.lblMinuteDebutLigne.Size = new System.Drawing.Size(40, 14);
+            this.lblMinuteDebutLigne.TabIndex = 19;
+            this.lblMinuteDebutLigne.Text = "Minute";
+            // 
+            // lblFinLigne
+            // 
+            this.lblFinLigne.AutoSize = true;
+            this.lblFinLigne.Location = new System.Drawing.Point(547, 188);
+            this.lblFinLigne.Name = "lblFinLigne";
+            this.lblFinLigne.Size = new System.Drawing.Size(77, 14);
+            this.lblFinLigne.TabIndex = 20;
+            this.lblFinLigne.Text = "Fin de la ligne :";
+            // 
+            // lblHeureFinLigne
+            // 
+            this.lblHeureFinLigne.AutoSize = true;
+            this.lblHeureFinLigne.Location = new System.Drawing.Point(547, 202);
+            this.lblHeureFinLigne.Name = "lblHeureFinLigne";
+            this.lblHeureFinLigne.Size = new System.Drawing.Size(34, 14);
+            this.lblHeureFinLigne.TabIndex = 21;
+            this.lblHeureFinLigne.Text = "Heure";
+            // 
+            // lblMinuteFinLigne
+            // 
+            this.lblMinuteFinLigne.AutoSize = true;
+            this.lblMinuteFinLigne.Location = new System.Drawing.Point(626, 202);
+            this.lblMinuteFinLigne.Name = "lblMinuteFinLigne";
+            this.lblMinuteFinLigne.Size = new System.Drawing.Size(40, 14);
+            this.lblMinuteFinLigne.TabIndex = 22;
+            this.lblMinuteFinLigne.Text = "Minute";
+            // 
+            // nudHeureDebutLigne
+            // 
+            this.nudHeureDebutLigne.Location = new System.Drawing.Point(552, 126);
+            this.nudHeureDebutLigne.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.nudHeureDebutLigne.Name = "nudHeureDebutLigne";
+            this.nudHeureDebutLigne.Size = new System.Drawing.Size(39, 20);
+            this.nudHeureDebutLigne.TabIndex = 23;
+            // 
+            // nudMinuteDebutLigne
+            // 
+            this.nudMinuteDebutLigne.Location = new System.Drawing.Point(629, 126);
+            this.nudMinuteDebutLigne.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.nudMinuteDebutLigne.Name = "nudMinuteDebutLigne";
+            this.nudMinuteDebutLigne.Size = new System.Drawing.Size(37, 20);
+            this.nudMinuteDebutLigne.TabIndex = 24;
+            // 
+            // nudHeureFinLigne
+            // 
+            this.nudHeureFinLigne.Location = new System.Drawing.Point(550, 226);
+            this.nudHeureFinLigne.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.nudHeureFinLigne.Name = "nudHeureFinLigne";
+            this.nudHeureFinLigne.Size = new System.Drawing.Size(40, 20);
+            this.nudHeureFinLigne.TabIndex = 25;
+            // 
+            // nudMinuteFinLigne
+            // 
+            this.nudMinuteFinLigne.Location = new System.Drawing.Point(630, 226);
+            this.nudMinuteFinLigne.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.nudMinuteFinLigne.Name = "nudMinuteFinLigne";
+            this.nudMinuteFinLigne.Size = new System.Drawing.Size(36, 20);
+            this.nudMinuteFinLigne.TabIndex = 26;
+            // 
             // frmAjouterLigne
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(552, 431);
+            this.ClientSize = new System.Drawing.Size(716, 431);
+            this.Controls.Add(this.nudMinuteFinLigne);
+            this.Controls.Add(this.nudHeureFinLigne);
+            this.Controls.Add(this.nudMinuteDebutLigne);
+            this.Controls.Add(this.nudHeureDebutLigne);
+            this.Controls.Add(this.lblMinuteFinLigne);
+            this.Controls.Add(this.lblHeureFinLigne);
+            this.Controls.Add(this.lblFinLigne);
+            this.Controls.Add(this.lblMinuteDebutLigne);
+            this.Controls.Add(this.lblHeureDebutLigne);
+            this.Controls.Add(this.lblDebutLigne);
             this.Controls.Add(this.flpRangArret);
             this.Controls.Add(this.cmdAnnulerAjouterLigne);
             this.Controls.Add(this.cmdConfirmerAjouterLigne);
@@ -206,6 +332,10 @@
             this.Load += new System.EventHandler(this.frmAjouterLigne_Load);
             this.pnlNomNombreArrets.ResumeLayout(false);
             this.pnlNomNombreArrets.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeureDebutLigne)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMinuteDebutLigne)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeureFinLigne)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMinuteFinLigne)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,5 +357,15 @@
         private System.Windows.Forms.FlowLayoutPanel flpRangArret;
         private System.Windows.Forms.ComboBox cboCouleur;
         private System.Windows.Forms.Label lblCouleur;
+        private System.Windows.Forms.Label lblDebutLigne;
+        private System.Windows.Forms.Label lblHeureDebutLigne;
+        private System.Windows.Forms.Label lblMinuteDebutLigne;
+        private System.Windows.Forms.Label lblFinLigne;
+        private System.Windows.Forms.Label lblHeureFinLigne;
+        private System.Windows.Forms.Label lblMinuteFinLigne;
+        private System.Windows.Forms.NumericUpDown nudHeureDebutLigne;
+        private System.Windows.Forms.NumericUpDown nudMinuteDebutLigne;
+        private System.Windows.Forms.NumericUpDown nudHeureFinLigne;
+        private System.Windows.Forms.NumericUpDown nudMinuteFinLigne;
     }
 }

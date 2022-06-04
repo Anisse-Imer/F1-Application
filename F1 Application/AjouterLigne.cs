@@ -208,35 +208,99 @@ namespace F1_Application
                             if(cboCouleur.SelectedItem != null)
                             {
 
-                                int n_Ligne = BDD.AjoutLigne(txtNomLigne.Text.ToString(), cboCouleur.SelectedItem.ToString());
-
-                                if (n_Ligne != 1)
+                                if (nudHeureDebutLigne.Value != nudHeureFinLigne.Value)
                                 {
 
-                                    bool ajoutPosition = true;
+                                    int n_Ligne = BDD.AjoutLigne(txtNomLigne.Text.ToString(), cboCouleur.SelectedItem.ToString());
 
-                                    for (int i = 0; i < flpRangArret.Controls.Count / 2 && ajoutPosition == true; i++)
+                                    if (n_Ligne != 1)
                                     {
-                                        int n_Arret = BDD.GetNumArret(listeLBL[i].Text.ToString());
 
-                                        ajoutPosition = BDD.AjoutPositionnement(n_Ligne, n_Arret, Convert.ToInt32(listeNUD[i].Value));
-                                    }
+                                        // On créer un bus pour la ligne
 
-                                    if(ajoutPosition == false)
-                                    {
-                                        MessageBox.Show("Une erreur est survenue lors de la création d'une des positions !");
+                                        int numBus = BDD.AjoutBus();
+
+                                        // On ajoute les horaires de la ligne
+
+                                        BDD.AjoutPassage(n_Ligne, Convert.ToInt32(nudHeureDebutLigne.Value), Convert.ToInt32(nudMinuteDebutLigne.Value), Convert.ToInt32(nudHeureFinLigne.Value), Convert.ToInt32(nudMinuteFinLigne.Value), numBus);
+
+
+                                        // Tri des rangs des arrêts
+
+                                        for (int i = 0; i < flpRangArret.Controls.Count / 2 == true; i++)
+                                        {
+                                            int minimum = i;
+                                            for (int j = i + 1; j < flpRangArret.Controls.Count / 2; j++)
+                                            {
+                                                if (Convert.ToInt32(listeNUD[j].Value) < Convert.ToInt32(listeNUD[minimum].Value))
+                                                {
+                                                    minimum = j;
+                                                }
+                                            }
+
+                                            if (minimum != i)
+                                            {
+                                                int saveNud = Convert.ToInt32(listeNUD[i].Value);
+                                                listeNUD[i].Value = Convert.ToInt32(listeNUD[minimum].Value);
+                                                listeNUD[minimum].Value = saveNud;
+
+                                                string saveLbl = listeLBL[i].Text.ToString();
+                                                listeLBL[i].Text = listeLBL[minimum].Text;
+                                                listeLBL[minimum].Text = saveLbl;
+                                            }
+                                        }
+
+                                        // On demande à l'utilisateur de saisir un temps entre 2 arrêts si celui-ci n'existe pas
+
+                                        for (int i = 0; i < (flpRangArret.Controls.Count / 2) - 1; i++)
+                                        {
+                                            int numArret1 = BDD.GetNumArret(listeLBL[i].Text.ToString());
+                                            int numArret2 = BDD.GetNumArret(listeLBL[i + 1].Text.ToString());
+
+                                            int tempsEntreArret = BDD.TempsEntreArret(numArret1, numArret2);
+
+                                            if (tempsEntreArret == -1)
+                                            {
+                                                frmTempsEntreArret tempsEntreArretFormulaire = new frmTempsEntreArret(numArret1, numArret2);
+                                                tempsEntreArretFormulaire.ShowDialog();
+                                            }
+
+
+                                            tempsEntreArret = BDD.TempsEntreArret(numArret1, numArret2);
+
+                                        }
+
+                                        // On ajoute les positions des arrêts
+
+                                        bool ajoutPosition = true;
+
+                                        for (int i = 0; i < flpRangArret.Controls.Count / 2 && ajoutPosition == true; i++)
+                                        {
+                                            int n_Arret = BDD.GetNumArret(listeLBL[i].Text.ToString());
+                                            // Debug.Print($"{listeLBL[i].Text.ToString()}");
+                                            ajoutPosition = BDD.AjoutPositionnement(n_Ligne, n_Arret, Convert.ToInt32(listeNUD[i].Value));
+                                        }
+
+                                        if (ajoutPosition == false)
+                                        {
+                                            MessageBox.Show("Une erreur est survenue lors de la création d'une des positions !");
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("Ligne créée avec succès !");
+                                        }
+
+                                        information.AddLigne();
+                                        this.Close();
                                     }
                                     else
                                     {
-                                        MessageBox.Show("Ligne créée avec succès !");
+                                        MessageBox.Show("Une erreur est survenue lors de la création de la ligne !");
                                     }
-
-                                    information.AddLigne();
-                                    this.Close();
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Une erreur est survenue lors de la création de la ligne !");
+                                    MessageBox.Show("L'heure de début et de fin de la ligne doivent être différent !");
                                 }
                             }
                             else
