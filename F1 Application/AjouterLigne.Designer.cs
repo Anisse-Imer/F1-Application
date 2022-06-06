@@ -121,9 +121,9 @@
             this.lblCouleur.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCouleur.Location = new System.Drawing.Point(276, 10);
             this.lblCouleur.Name = "lblCouleur";
-            this.lblCouleur.Size = new System.Drawing.Size(106, 15);
+            this.lblCouleur.Size = new System.Drawing.Size(112, 15);
             this.lblCouleur.TabIndex = 18;
-            this.lblCouleur.Text = "Couleur de la ligne";
+            this.lblCouleur.Text = "Couleur de la ligne :";
             // 
             // lblNbrArretSelectionne
             // 
@@ -131,7 +131,7 @@
             this.lblNbrArretSelectionne.Font = new System.Drawing.Font("Times New Roman", 10F);
             this.lblNbrArretSelectionne.Location = new System.Drawing.Point(213, 30);
             this.lblNbrArretSelectionne.Name = "lblNbrArretSelectionne";
-            this.lblNbrArretSelectionne.Size = new System.Drawing.Size(14, 16);
+            this.lblNbrArretSelectionne.Size = new System.Drawing.Size(15, 16);
             this.lblNbrArretSelectionne.TabIndex = 7;
             this.lblNbrArretSelectionne.Text = "0";
             // 

@@ -43,7 +43,7 @@ namespace ConnexionBD
         }
 
         /// <summary>
-        /// Ferme la connexion avec la CDD
+        /// Ferme la connexion avec la BDD
         /// </summary>
         public static void FermerConnexion()
         {
@@ -52,10 +52,10 @@ namespace ConnexionBD
         }
 
         /// <summary>
-        /// Permet de savoir le nombre d'entrée dans une table
+        /// Permet de savoir le nombre d'entrées dans une table
         /// </summary>
         /// <param name="tablename">Le nom de la table choisi</param>
-        /// <returns>Le nombre d'entrée dans une table</returns>
+        /// <returns>Le nombre d'entrées dans une table</returns>
         public static int GetTableCount(string tablename)
         {
             int compteur = 0;
@@ -91,7 +91,7 @@ namespace ConnexionBD
         {
 
             int nbrArret = information.GetNbrArret();
-            //Debug.Print($"Nombre d'arret : {nbrArret}");
+
             string[] arret = new string[nbrArret];
             int compteur = 0;
 
@@ -105,14 +105,6 @@ namespace ConnexionBD
 
                 while (rdr.Read())
                 {
-                    /*
-                    for (int i = 0; i < rdr.FieldCount; i++)
-                    {
-                        Debug.Print(rdr.GetValue(i).ToString());
-                    }
-                    */
-                    //Debug.Print(rdr.GetValue(1).ToString());
-
                     arret[compteur] = rdr.GetValue(1).ToString();
                     compteur++;
                 }
@@ -136,7 +128,6 @@ namespace ConnexionBD
         {
 
             int nbrLigne = information.GetNbrLigne();
-            //Debug.Print($"Nombre de ligne : {nbrLigne}");
             string[] ligne = new string[nbrLigne];
             int compteur = 0;
 
@@ -299,14 +290,14 @@ namespace ConnexionBD
         }
 
         /// <summary>
-        /// Permet d'obtenir tout les arrêts d'une ligne
+        /// Permet d'obtenir tous les arrêts d'une ligne
         /// </summary>
-        /// <param name="Num_ligne">Le numéro de la ligne</param>
-        /// <returns>Le numéro des arrêts de la ligne</returns>
-        public static int[] GetAllArretInLigne(int Num_ligne)
+        /// <param name="numLigne">Le numéro de la ligne</param>
+        /// <returns>Les numéros des arrêts de la ligne</returns>
+        public static int[] GetAllArretInLigne(int numLigne)
         {
 
-            string sql = $"SELECT * FROM Positionnement WHERE N_ligne = {Num_ligne} GROUP BY Rang_Arret";
+            string sql = $"SELECT * FROM Positionnement WHERE N_ligne = {numLigne} GROUP BY Rang_Arret";
             int[] arretEtRangDeLarret = new int[20];
             int compteur = 0;
 
@@ -363,7 +354,7 @@ namespace ConnexionBD
         }
 
         /// <summary>
-        /// Permet de rajout un arrêt dans le réseau
+        /// Permet de rajouter un arrêt dans le réseau
         /// </summary>
         /// <param name="nomArret">Le nom de l'arrêt</param>
         /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
@@ -392,13 +383,13 @@ namespace ConnexionBD
         /// <summary>
         /// Permet de supprimer un arrêt de la table Positionnement
         /// </summary>
-        /// <param name="num_Arret">Le numéro de l'arrêt</param>
+        /// <param name="numArret">Le numéro de l'arrêt</param>
         /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
-        public static bool SupprimerUnArretDesLignes(int num_Arret)
+        public static bool SupprimerUnArretDesLignes(int numArret)
         {
             bool retour = true;
 
-            string sql = $"DELETE FROM Positionnement WHERE N_Arret = {num_Arret}";
+            string sql = $"DELETE FROM Positionnement WHERE N_Arret = {numArret}";
 
             MySqlCommand cmd = new MySqlCommand(sql, maCnx);
 
@@ -446,16 +437,16 @@ namespace ConnexionBD
         /// <summary>
         /// Permet d'ajouter le positionnement d'un arrêt sur une ligne
         /// </summary>
-        /// <param name="n_Ligne">Le numéro de la ligne</param>
-        /// <param name="n_Arret">Le numéro de l'arrêt</param>
-        /// <param name="rang_Arret">Le rang de l'arrêt</param>
+        /// <param name="numLigne">Le numéro de la ligne</param>
+        /// <param name="numArret">Le numéro de l'arrêt</param>
+        /// <param name="rangArret">Le rang de l'arrêt</param>
         /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
-        public static bool AjoutPositionnement(int n_Ligne, int n_Arret, int rang_Arret)
+        public static bool AjoutPositionnement(int numLigne, int numArret, int rangArret)
         {
             bool retour = true;
 
 
-            string sql = $"INSERT INTO Positionnement (N_ligne,N_Arret,Rang_Arret) VALUES ({n_Ligne},{n_Arret},{rang_Arret})";
+            string sql = $"INSERT INTO Positionnement (N_ligne,N_Arret,Rang_Arret) VALUES ({numLigne},{numArret},{rangArret})";
 
             MySqlCommand cmd = new MySqlCommand(sql, maCnx);
 
@@ -503,13 +494,13 @@ namespace ConnexionBD
         /// <summary>
         /// Permet d'obtenir la position d'un arrêt sur une ligne
         /// </summary>
-        /// <param name="Num_ligne">Le numéro de la ligne</param>
-        /// <param name="Num_Arret">Le numéro de l'arrêt</param>
+        /// <param name="numLigne">Le numéro de la ligne</param>
+        /// <param name="numArret">Le numéro de l'arrêt</param>
         /// <returns>La position de l'arrêt</returns>
-        public static int GetPosition(int Num_ligne, int Num_Arret)
+        public static int GetPosition(int numLigne, int numArret)
         {
 
-            string sql = $"SELECT * FROM Positionnement WHERE N_ligne = {Num_ligne} AND N_Arret = {Num_Arret}";
+            string sql = $"SELECT * FROM Positionnement WHERE N_ligne = {numLigne} AND N_Arret = {numArret}";
             int rang = -1;
 
             try
@@ -537,15 +528,15 @@ namespace ConnexionBD
         /// <summary>
         /// Permet de modifier le positionnement d'un arrêt sur une ligne
         /// </summary>
-        /// <param name="Num_ligne">Le numéro de la ligne</param>
-        /// <param name="Num_Arret">Le numéro de l'arrêt</param>
-        /// <param name="Rang_Arret">Le rang de l'arrêt</param>
+        /// <param name="numLigne">Le numéro de la ligne</param>
+        /// <param name="numArret">Le numéro de l'arrêt</param>
+        /// <param name="rangArret">Le rang de l'arrêt</param>
         /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
-        public static bool SetPosition(int Num_ligne, int Num_Arret, int Rang_Arret)
+        public static bool SetPosition(int numLigne, int numArret, int rangArret)
         {
             bool retour = true;
 
-            string sql = $"UPDATE Positionnement SET Rang_Arret={Rang_Arret} WHERE N_ligne={Num_ligne} AND N_Arret={Num_Arret}";
+            string sql = $"UPDATE Positionnement SET Rang_Arret={rangArret} WHERE N_ligne={numLigne} AND N_Arret={numArret}";
 
             MySqlCommand cmd = new MySqlCommand(sql, maCnx);
 
@@ -565,13 +556,13 @@ namespace ConnexionBD
         /// <summary>
         /// Permet de supprimer un arrêt
         /// </summary>
-        /// <param name="num_Arret">Le numéro de l'arrêt</param>
+        /// <param name="numArret">Le numéro de l'arrêt</param>
         /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
-        public static bool SupprimerArret(int num_Arret)
+        public static bool SupprimerArret(int numArret)
         {
             bool retour = true;
 
-            string sql = $"DELETE FROM Arret WHERE N_Arret = {num_Arret}";
+            string sql = $"DELETE FROM Arret WHERE N_Arret = {numArret}";
 
             MySqlCommand cmd = new MySqlCommand(sql, maCnx);
 
@@ -591,13 +582,13 @@ namespace ConnexionBD
         /// <summary>
         /// Permet de supprimer une ligne de la table Positionnement
         /// </summary>
-        /// <param name="num_Ligne">Le numéro de la ligne</param>
+        /// <param name="numLigne">Le numéro de la ligne</param>
         /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
-        public static bool SupprimerLignePositionnement(int num_Ligne)
+        public static bool SupprimerLignePositionnement(int numLigne)
         {
             bool retour = true;
 
-            string sql = $"DELETE FROM Positionnement WHERE N_ligne = {num_Ligne}";
+            string sql = $"DELETE FROM Positionnement WHERE N_ligne = {numLigne}";
 
             MySqlCommand cmd = new MySqlCommand(sql, maCnx);
 
@@ -617,13 +608,13 @@ namespace ConnexionBD
         /// <summary>
         /// Permet de supprimer une ligne
         /// </summary>
-        /// <param name="num_Ligne">Le numéro de la ligne</param>
+        /// <param name="numLigne">Le numéro de la ligne</param>
         /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
-        public static bool SupprimerLigne(int num_Ligne)
+        public static bool SupprimerLigne(int numLigne)
         {
             bool retour = true;
 
-            string sql = $"DELETE FROM Ligne WHERE N_ligne = {num_Ligne}";
+            string sql = $"DELETE FROM Ligne WHERE N_ligne = {numLigne}";
 
             MySqlCommand cmd = new MySqlCommand(sql, maCnx);
 
@@ -643,12 +634,12 @@ namespace ConnexionBD
         /// <summary>
         /// Permet d'obtenir la couleur d'une ligne
         /// </summary>
-        /// <param name="num_Ligne">Le numéro de la ligne</param>
+        /// <param name="numLigne">Le numéro de la ligne</param>
         /// <returns>La couleur</returns>
-        public static string GetCouleur(int num_Ligne)
+        public static string GetCouleur(int numLigne)
         {
 
-            string sql = $"SELECT Couleur_ligne FROM Ligne WHERE N_ligne = {num_Ligne}";
+            string sql = $"SELECT Couleur_ligne FROM Ligne WHERE N_ligne = {numLigne}";
             string couleur = "rouge";
 
             try
@@ -676,13 +667,12 @@ namespace ConnexionBD
         /// <summary>
         /// Permet d'obtenir l'heure de début d'une ligne
         /// </summary>
-        /// <param name="num_Ligne">Le numéro de la ligne</param>
+        /// <param name="numLigne">Le numéro de la ligne</param>
         /// <returns>L'heure et la minute du début de la ligne</returns>
-        public static int[] GetPassageDebut(int num_Ligne)
+        public static int[] GetPassageDebut(int numLigne)
         {
 
-            // string sql = $"SELECT HOUR(Heure_debut), MINUTE(Heure_debut) FROM Passage WHERE N_ligne = {num_Ligne} AND ((HOUR(Heure_debut) < {heure}) OR (HOUR(Heure_debut) <= {heure} AND MINUTE(Heure_debut) <= {minute})) ";
-            string sql = $"SELECT HOUR(Heure_debut), MINUTE(Heure_debut) FROM Passage WHERE N_ligne = {num_Ligne}";
+            string sql = $"SELECT HOUR(Heure_debut), MINUTE(Heure_debut) FROM Passage WHERE N_ligne = {numLigne}";
             int[] Heure_Debut_Passage = new int[2];
 
             Heure_Debut_Passage[0] = -1;
@@ -714,12 +704,12 @@ namespace ConnexionBD
         /// <summary>
         /// Permet d'obtenir l'heure de la fin d'une ligne
         /// </summary>
-        /// <param name="num_Ligne">Le numéro de la ligne</param>
+        /// <param name="numLigne">Le numéro de la ligne</param>
         /// <returns>L'heure et la minute de la fin de la ligne</returns>
-        public static int[] GetPassageFin(int num_Ligne)
+        public static int[] GetPassageFin(int numLigne)
         {
 
-            string sql = $"SELECT HOUR(Heure_fin), MINUTE(Heure_fin) FROM Passage WHERE N_ligne = {num_Ligne}";
+            string sql = $"SELECT HOUR(Heure_fin), MINUTE(Heure_fin) FROM Passage WHERE N_ligne = {numLigne}";
             int[] Heure_Debut_Passage = new int[2];
 
             Heure_Debut_Passage[0] = -1;
@@ -751,13 +741,13 @@ namespace ConnexionBD
         /// <summary>
         /// Permet d'obtenir le temps entre deux arrêts
         /// </summary>
-        /// <param name="num_Arret1">Le numéro de l'arrêt 1</param>
-        /// <param name="num_Arret2">Le numéro de l'arrêt 2</param>
+        /// <param name="numArret1">Le numéro de l'arrêt 1</param>
+        /// <param name="numArret2">Le numéro de l'arrêt 2</param>
         /// <returns>Le temps entre les deux arrêts</returns>
-        public static int TempsEntreArret(int num_Arret1, int num_Arret2)
+        public static int TempsEntreArret(int numArret1, int numArret2)
         {
 
-            string sql = $"SELECT MINUTE(Temps_entre_arrets) FROM Trajet WHERE N_Arret={num_Arret1} AND N_Arret_1={num_Arret2}";
+            string sql = $"SELECT MINUTE(Temps_entre_arrets) FROM Trajet WHERE N_Arret={numArret1} AND N_Arret_1={numArret2}";
             int temps = -1;
 
             try
@@ -776,7 +766,7 @@ namespace ConnexionBD
             }
             finally
             {
-                sql = $"SELECT MINUTE(Temps_entre_arrets) FROM Trajet WHERE N_Arret={num_Arret2} AND N_Arret_1={num_Arret1}";
+                sql = $"SELECT MINUTE(Temps_entre_arrets) FROM Trajet WHERE N_Arret={numArret2} AND N_Arret_1={numArret1}";
 
                 try
                 {
@@ -804,7 +794,7 @@ namespace ConnexionBD
         /// <summary>
         /// Permet d'ajouter un temps entre deux arrêts
         /// </summary>
-        /// <param name="numArret1">Le numéro du première arrêt</param>
+        /// <param name="numArret1">Le numéro du premier arrêt</param>
         /// <param name="numArret2">Le numéro du deuxième arrêt</param>
         /// <param name="tempsEntreArret">Le temps entre les deux arrêts</param>
         /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
@@ -838,15 +828,15 @@ namespace ConnexionBD
         }
 
         /// <summary>
-        /// permet de supprimet un temps entre deux arrêt
+        /// Permet de supprimer un temps entre deux arrêts
         /// </summary>
-        /// <param name="num_Arret">l'arrêt que l'on veut supprimer</param>
+        /// <param name="numArret">l'arrêt que l'on veut supprimer</param>
         /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
-        public static bool SupprimerTempsArret(int num_Arret)
+        public static bool SupprimerTempsArret(int numArret)
         {
             bool retour = true;
 
-            string sql = $"DELETE FROM Trajet WHERE N_Arret = {num_Arret}";
+            string sql = $"DELETE FROM Trajet WHERE N_Arret = {numArret}";
 
             MySqlCommand cmd = new MySqlCommand(sql, maCnx);
 
@@ -860,7 +850,7 @@ namespace ConnexionBD
             }
             finally
             {
-                sql = $"DELETE FROM Trajet WHERE N_Arret_1 = {num_Arret}";
+                sql = $"DELETE FROM Trajet WHERE N_Arret_1 = {numArret}";
 
                 cmd = new MySqlCommand(sql, maCnx);
 
@@ -904,7 +894,16 @@ namespace ConnexionBD
             return retour;
         }
 
-
+        /// <summary>
+        /// Permet d'ajouter un passage
+        /// </summary>
+        /// <param name="numLigne">le numéro de la ligne</param>
+        /// <param name="heureDebutLigne">l'heure de début de la ligne</param>
+        /// <param name="minuteDebutLigne">la minute du début de la ligne</param>
+        /// <param name="heureFinLigne">l'heure de fin de la ligne</param>
+        /// <param name="minuteFinLigne">la minute de fin de la ligne</param>
+        /// <param name="numBus">le numéro du bus</param>
+        /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
         public static bool AjoutPassage(int numLigne, int heureDebutLigne, int minuteDebutLigne, int heureFinLigne, int minuteFinLigne, int numBus)
         {
             bool retour = true;
@@ -980,7 +979,13 @@ namespace ConnexionBD
         }
 
 
-
+        /// <summary>
+        /// Permet de modifier le début d'un passage
+        /// </summary>
+        /// <param name="numLigne">le numéro de la ligne</param>
+        /// <param name="heureDebutLigne">l'heure de début de la ligne</param>
+        /// <param name="minuteDebutLigne">la minute de début de la ligne</param>
+        /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
         public static bool ModifieDebutPassage(int numLigne, int heureDebutLigne, int minuteDebutLigne)
         {
             bool retour = true;
@@ -1029,7 +1034,13 @@ namespace ConnexionBD
             return retour;
         }
 
-
+        /// <summary>
+        /// Permet de modifier la fin d'un passage
+        /// </summary>
+        /// <param name="numLigne">le numéro de la ligne</param>
+        /// <param name="heureFinLigne">l'heure de fin de la ligne</param>
+        /// <param name="minuteFinLigne">la minute de fin de la ligne</param>
+        /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
         public static bool ModifieFinPassage(int numLigne, int heureFinLigne, int minuteFinLigne)
         {
             bool retour = true;
@@ -1078,11 +1089,16 @@ namespace ConnexionBD
             return retour;
         }
 
-        public static bool SupprimerPassage(int num_Ligne)
+        /// <summary>
+        /// Permet de supprimer un passage
+        /// </summary>
+        /// <param name="numLigne">le numéro de la ligne</param>
+        /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
+        public static bool SupprimerPassage(int numLigne)
         {
             bool retour = true;
 
-            string sql = $"DELETE FROM Passage WHERE N_ligne = {num_Ligne}";
+            string sql = $"DELETE FROM Passage WHERE N_ligne = {numLigne}";
 
             MySqlCommand cmd = new MySqlCommand(sql, maCnx);
 
@@ -1099,6 +1115,12 @@ namespace ConnexionBD
             return retour;
         }
 
+        /// <summary>
+        /// Permet de supprimer un arrêt d'une ligne
+        /// </summary>
+        /// <param name="numLigne">le numéro de la ligne</param>
+        /// <param name="numArret">le numéro de l'arrêt</param>
+        /// <returns>true ou false selon si la commande a fonctionné ou non</returns>
         public static bool SupprimerUnArretDuneLignes(int numLigne, int numArret)
         {
             bool retour = true;

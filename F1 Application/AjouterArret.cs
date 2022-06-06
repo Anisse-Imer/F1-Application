@@ -31,7 +31,10 @@ namespace F1_Application
         {
             if (txtNomArret != null && txtNomArret.TextLength >= 3)
             {
-                bool flag = false;
+
+                // On regarde si un arrêt ne porte pas déjà le nom du nouvel arrêt
+
+                bool nomArretDejaExistant = false;
 
                 string[] arret;
                 arret = BDD.GetAllArret();
@@ -39,17 +42,17 @@ namespace F1_Application
                 {
                     if(arret[i] == txtNomArret.Text.ToString())
                     {
-                        flag = true;
+                        nomArretDejaExistant = true;
                     }
                 }
 
-                if(flag == false)
+                if(nomArretDejaExistant == false)
                 {
-                    int resultat = BDD.AjoutArret(txtNomArret.Text.ToString());
+                    int idNouvelArret = BDD.AjoutArret(txtNomArret.Text.ToString());
 
-                    if (resultat != -1)
+                    if (idNouvelArret != -1)
                     {
-                        MessageBox.Show($"L'arrêts {txtNomArret.Text.ToString()} a bien été ajouté, il porte le numéro {resultat} !");
+                        MessageBox.Show($"L'arrêt {txtNomArret.Text.ToString()} a bien été ajouté, il porte le numéro {idNouvelArret} !");
                         information.AddArret();
                         this.Close();
                     }

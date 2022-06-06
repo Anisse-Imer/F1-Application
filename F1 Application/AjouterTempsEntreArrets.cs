@@ -28,19 +28,25 @@ namespace F1_Application
             this.Icon = Properties.Resources.chaperon_rouge;
             lblArret.Text = $"Le temps entre {BDD.GetNomArret(premiereArret).ToString()}" +
                 $" et {BDD.GetNomArret(deuxiemeArret).ToString()} est inconnu.\n" +
-                $"Definissez le :";
+                $"Definissez-le :";
         }
 
         private void cmdConfirmer_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void frmTempsEntreArret_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show($"Voulez-vous vraiment mettre {Convert.ToInt32(nudTempsEntreArret.Value)} minute(s) ?", "Ajouter temps", MessageBoxButtons.YesNo);
 
             if (dialogResult == DialogResult.Yes)
             {
-                
                 BDD.AjoutTempsEntreArret(premiereArret, deuxiemeArret, Convert.ToInt32(nudTempsEntreArret.Value));
-
-                this.Close();
+            }
+            else
+            {
+                e.Cancel = true;
             }
         }
     }

@@ -44,6 +44,9 @@ namespace F1_Application
             cboCouleur.Items.Add("Cyan");
             cboCouleur.Items.Add("Marron");
 
+
+            // On enlève les couleurs qui sont déjà prises par des lignes
+
             string[] ligne;
             ligne = BDD.GetAllLigne();
             for (int i = 0; i < ligne.Length; i++)
@@ -65,9 +68,12 @@ namespace F1_Application
         private void clstListeArrets_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             int newNbrArretSelectionnet;
-            bool flag = false;
+            bool arretEnleve = false;
             int error = 1;
             int compteur = 0;
+
+
+            // On regarde si l'utilisateur a rajouté ou enlevé un arrêt
 
             if (e.NewValue == CheckState.Checked)
             {
@@ -76,7 +82,7 @@ namespace F1_Application
             else
             {
                 newNbrArretSelectionnet = clstListeArrets.CheckedItems.Count - 1;
-                flag = true;
+                arretEnleve = true;
                 error = -1;
             }
 
@@ -91,7 +97,7 @@ namespace F1_Application
                 for (i = 0; i < newNbrArretSelectionnet - error; i++)
                 {
 
-                    if (clstListeArrets.Items[e.Index].ToString() != clstListeArrets.CheckedItems[i].ToString() || flag == false)
+                    if (clstListeArrets.Items[e.Index].ToString() != clstListeArrets.CheckedItems[i].ToString() || arretEnleve == false)
                     {
                         Label lbl = new Label();
                         lbl.Name = $"lblArret{i}";
@@ -119,7 +125,7 @@ namespace F1_Application
                     }
                 }
 
-                if (flag == false)
+                if (arretEnleve == false)
                 {
                     Label denierLbl = new Label();
                     denierLbl.Name = $"lblArret{i}";
@@ -149,11 +155,13 @@ namespace F1_Application
             {
                 if(newNbrArretSelectionnet != 0)
                 {
+                    // Si l'utilisateur sélectionne plus que 20 arrêts
                     e.NewValue = CheckState.Unchecked;
                     MessageBox.Show("20 arrêts maximum !");
                 }
                 else
                 {
+                    // Si l'utilisateur sélectionne 0 arrêt
                     flpRangArret.Controls.Clear();
                 }
                 
@@ -164,8 +172,10 @@ namespace F1_Application
         {
             if (txtNomLigne != null && txtNomLigne.TextLength >= 3)
             {
-                bool flag = false;
-                
+
+                // On vérifie si le nom de la ligne n'est pas déjà pris
+
+                bool nomLigneDejaExistant = false;
 
                 string[] ligne;
                 ligne = BDD.GetAllLigne();
@@ -173,15 +183,18 @@ namespace F1_Application
                 {
                     if (ligne[i] == txtNomLigne.Text.ToString())
                     {
-                        flag = true;
+                        nomLigneDejaExistant = true;
                     }
                 }
 
-                if (flag == false)
+                if (nomLigneDejaExistant == false)
                 {
-                    // Debug.Print(flpRangArret.Controls.Count.ToString());
+
                     if (flpRangArret.Controls.Count >= 6 && flpRangArret.Controls.Count <= 40)
                     {
+                        // Si l'utilisateur a sélectionné entre 3 et 20 arrêts
+
+                        // On vérifie que tout les rangs des arrêts sélectionnés soient différents
                         int[] verif = new int[flpRangArret.Controls.Count / 2];
 
                         bool rangIdentique = false;
@@ -189,8 +202,6 @@ namespace F1_Application
                         for(int i = 0; i < flpRangArret.Controls.Count / 2 && rangIdentique == false; i++)
                         {
                             verif[i] = Convert.ToInt32(listeNUD[i].Value);
-                            // Debug.Print(listeNUD[i].Value.ToString());
-                            // Debug.Print(listeLBL[i].Text.ToString());
 
                             for (int j = 0; j < i; j++)
                             {
@@ -213,7 +224,7 @@ namespace F1_Application
 
                                     int n_Ligne = BDD.AjoutLigne(txtNomLigne.Text.ToString(), cboCouleur.SelectedItem.ToString());
 
-                                    if (n_Ligne != 1)
+                                    if (n_Ligne != -1)
                                     {
 
                                         // On créer un bus pour la ligne
@@ -264,20 +275,15 @@ namespace F1_Application
                                                 frmTempsEntreArret tempsEntreArretFormulaire = new frmTempsEntreArret(numArret1, numArret2);
                                                 tempsEntreArretFormulaire.ShowDialog();
                                             }
-
-
-                                            tempsEntreArret = BDD.TempsEntreArret(numArret1, numArret2);
-
                                         }
 
-                                        // On ajoute les positions des arrêts
+                                        // On ajoute les positions des arrêts sélectionné sur la ligne
 
                                         bool ajoutPosition = true;
 
                                         for (int i = 0; i < flpRangArret.Controls.Count / 2 && ajoutPosition == true; i++)
                                         {
                                             int n_Arret = BDD.GetNumArret(listeLBL[i].Text.ToString());
-                                            // Debug.Print($"{listeLBL[i].Text.ToString()}");
                                             ajoutPosition = BDD.AjoutPositionnement(n_Ligne, n_Arret, Convert.ToInt32(listeNUD[i].Value));
                                         }
 
@@ -300,24 +306,24 @@ namespace F1_Application
                                 }
                                 else
                                 {
-                                    MessageBox.Show("L'heure de début et de fin de la ligne doivent être différent !");
+                                    MessageBox.Show("L'heure de début et de fin de la ligne doivent être différents !");
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("Vous devez selectionner une couleur !");
+                                MessageBox.Show("Vous devez sélectionner une couleur !");
                             }
                         } 
                         else
                         {
-                            MessageBox.Show("Vous devez mettre des rangs différent pour chaque arrêt !");
+                            MessageBox.Show("Vous devez mettre des rangs différents pour chaque arrêt !");
                         }
 
 
                     }
                     else
                     {
-                        MessageBox.Show("Vous devez selectionner entre 3 et 20 arrêts !");
+                        MessageBox.Show("Vous devez sélectionner entre 3 et 20 arrêts !");
                     }
                 }
                 else

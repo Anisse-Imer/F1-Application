@@ -313,13 +313,14 @@ namespace F1_Application
             // 
             // cmdInversion
             // 
-            this.cmdInversion.BackgroundImage = global::F1_Application.Properties.Resources.flèches_inverse;
+            this.cmdInversion.BackgroundImage = global::F1_Application.Properties.Resources.flèches_inverse1;
             this.cmdInversion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmdInversion.Location = new System.Drawing.Point(250, 111);
             this.cmdInversion.Name = "cmdInversion";
             this.cmdInversion.Size = new System.Drawing.Size(32, 32);
             this.cmdInversion.TabIndex = 32;
             this.cmdInversion.UseVisualStyleBackColor = true;
+            this.cmdInversion.Click += new System.EventHandler(this.cmdInversion_Click);
             // 
             // lblArriveeOuDepart
             // 
@@ -459,9 +460,9 @@ namespace F1_Application
             this.lblVisualiserLigne.Font = new System.Drawing.Font("Perpetua", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVisualiserLigne.Location = new System.Drawing.Point(18, 22);
             this.lblVisualiserLigne.Name = "lblVisualiserLigne";
-            this.lblVisualiserLigne.Size = new System.Drawing.Size(276, 33);
+            this.lblVisualiserLigne.Size = new System.Drawing.Size(288, 33);
             this.lblVisualiserLigne.TabIndex = 0;
-            this.lblVisualiserLigne.Text = "Aucune ligne selectionné";
+            this.lblVisualiserLigne.Text = "Aucune ligne selectionnée";
             // 
             // frmAccueil
             // 

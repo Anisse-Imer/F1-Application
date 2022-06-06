@@ -44,7 +44,7 @@
             this.lblTitreGestionArret.Name = "lblTitreGestionArret";
             this.lblTitreGestionArret.Size = new System.Drawing.Size(257, 31);
             this.lblTitreGestionArret.TabIndex = 11;
-            this.lblTitreGestionArret.Text = "Séletionner un Arret : ";
+            this.lblTitreGestionArret.Text = "Séletionner un Arrêt : ";
             // 
             // cmdAnnulerGestionArret
             // 
@@ -66,7 +66,7 @@
             this.cmdModifierArret.Name = "cmdModifierArret";
             this.cmdModifierArret.Size = new System.Drawing.Size(99, 47);
             this.cmdModifierArret.TabIndex = 9;
-            this.cmdModifierArret.Text = "Modifier un arret";
+            this.cmdModifierArret.Text = "Modifier un arrêt";
             this.cmdModifierArret.UseVisualStyleBackColor = false;
             this.cmdModifierArret.Click += new System.EventHandler(this.cmdModifierArret_Click);
             // 
@@ -78,7 +78,7 @@
             this.cmdAjouterArret.Name = "cmdAjouterArret";
             this.cmdAjouterArret.Size = new System.Drawing.Size(99, 47);
             this.cmdAjouterArret.TabIndex = 8;
-            this.cmdAjouterArret.Text = "Ajouter un nouvel arret";
+            this.cmdAjouterArret.Text = "Ajouter un nouvel arrêt";
             this.cmdAjouterArret.UseVisualStyleBackColor = false;
             this.cmdAjouterArret.Click += new System.EventHandler(this.cmdAjouterArret_Click);
             // 
@@ -90,7 +90,7 @@
             this.cmdSupprimerArret.Name = "cmdSupprimerArret";
             this.cmdSupprimerArret.Size = new System.Drawing.Size(99, 47);
             this.cmdSupprimerArret.TabIndex = 7;
-            this.cmdSupprimerArret.Text = "Supprimer l\'arret";
+            this.cmdSupprimerArret.Text = "Supprimer l\'arrêt";
             this.cmdSupprimerArret.UseVisualStyleBackColor = false;
             this.cmdSupprimerArret.Click += new System.EventHandler(this.cmdSupprimerArret_Click);
             // 

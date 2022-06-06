@@ -32,15 +32,16 @@
             this.cmdConfirmerModifierLigne = new System.Windows.Forms.Button();
             this.cmdAnnulerModifierLigne = new System.Windows.Forms.Button();
             this.pnlNomNombreArrêt = new System.Windows.Forms.Panel();
+            this.lblCouleur = new System.Windows.Forms.Label();
             this.lblNbrArretSelectionner = new System.Windows.Forms.Label();
             this.lblNombreArrets = new System.Windows.Forms.Label();
             this.txtNomLigne = new System.Windows.Forms.TextBox();
             this.lblNomLigne = new System.Windows.Forms.Label();
+            this.cboCouleur = new System.Windows.Forms.ComboBox();
             this.clstListeArrets = new System.Windows.Forms.CheckedListBox();
             this.lblArretsModifierLigne = new System.Windows.Forms.Label();
             this.lblRangArretsModifierLigne = new System.Windows.Forms.Label();
             this.flpRangDesArret = new System.Windows.Forms.FlowLayoutPanel();
-            this.cboCouleur = new System.Windows.Forms.ComboBox();
             this.nudMinuteFinLigne = new System.Windows.Forms.NumericUpDown();
             this.nudHeureFinLigne = new System.Windows.Forms.NumericUpDown();
             this.nudMinuteDebutLigne = new System.Windows.Forms.NumericUpDown();
@@ -51,7 +52,6 @@
             this.lblMinuteDebutLigne = new System.Windows.Forms.Label();
             this.lblHeureDebutLigne = new System.Windows.Forms.Label();
             this.lblDebutLigne = new System.Windows.Forms.Label();
-            this.lblCouleur = new System.Windows.Forms.Label();
             this.pnlLigneActive = new System.Windows.Forms.Panel();
             this.pnlNomNombreArrêt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinuteFinLigne)).BeginInit();
@@ -109,6 +109,16 @@
             this.pnlNomNombreArrêt.Size = new System.Drawing.Size(419, 51);
             this.pnlNomNombreArrêt.TabIndex = 3;
             // 
+            // lblCouleur
+            // 
+            this.lblCouleur.AutoSize = true;
+            this.lblCouleur.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCouleur.Location = new System.Drawing.Point(276, 6);
+            this.lblCouleur.Name = "lblCouleur";
+            this.lblCouleur.Size = new System.Drawing.Size(112, 15);
+            this.lblCouleur.TabIndex = 37;
+            this.lblCouleur.Text = "Couleur de la ligne :";
+            // 
             // lblNbrArretSelectionner
             // 
             this.lblNbrArretSelectionner.AutoSize = true;
@@ -145,6 +155,15 @@
             this.lblNomLigne.TabIndex = 4;
             this.lblNomLigne.Text = "Nom de la ligne :";
             this.lblNomLigne.Click += new System.EventHandler(this.lblNomLigne_Click);
+            // 
+            // cboCouleur
+            // 
+            this.cboCouleur.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCouleur.FormattingEnabled = true;
+            this.cboCouleur.Location = new System.Drawing.Point(274, 24);
+            this.cboCouleur.Name = "cboCouleur";
+            this.cboCouleur.Size = new System.Drawing.Size(132, 21);
+            this.cboCouleur.TabIndex = 8;
             // 
             // clstListeArrets
             // 
@@ -184,15 +203,6 @@
             this.flpRangDesArret.Name = "flpRangDesArret";
             this.flpRangDesArret.Size = new System.Drawing.Size(274, 184);
             this.flpRangDesArret.TabIndex = 9;
-            // 
-            // cboCouleur
-            // 
-            this.cboCouleur.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboCouleur.FormattingEnabled = true;
-            this.cboCouleur.Location = new System.Drawing.Point(274, 24);
-            this.cboCouleur.Name = "cboCouleur";
-            this.cboCouleur.Size = new System.Drawing.Size(132, 21);
-            this.cboCouleur.TabIndex = 8;
             // 
             // nudMinuteFinLigne
             // 
@@ -302,16 +312,6 @@
             this.lblDebutLigne.TabIndex = 27;
             this.lblDebutLigne.Text = "Ouverture de la ligne :";
             this.lblDebutLigne.Click += new System.EventHandler(this.lblDebutLigne_Click);
-            // 
-            // lblCouleur
-            // 
-            this.lblCouleur.AutoSize = true;
-            this.lblCouleur.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCouleur.Location = new System.Drawing.Point(276, 6);
-            this.lblCouleur.Name = "lblCouleur";
-            this.lblCouleur.Size = new System.Drawing.Size(106, 15);
-            this.lblCouleur.TabIndex = 37;
-            this.lblCouleur.Text = "Couleur de la ligne";
             // 
             // pnlLigneActive
             // 

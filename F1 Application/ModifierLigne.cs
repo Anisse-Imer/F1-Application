@@ -57,7 +57,7 @@ namespace F1_Application
             cboCouleur.Items.Add("Marron");
 
 
-            // On retire les couleurs qui sont déjà prises
+            // On enlève les couleurs qui sont déjà prises par des lignes
 
             string[] ligne;
             ligne = BDD.GetAllLigne();
@@ -80,17 +80,17 @@ namespace F1_Application
 
             string couleurLigne = BDD.GetCouleur(ligneSelectionner);
 
-            bool flag = false;
+            bool couleurExiste = false;
             for (int i = 0; i < cboCouleur.Items.Count; i++)
             {
                 if (cboCouleur.Items[i].ToString() == couleurLigne.ToString())
                 {
-                    flag = true;
+                    couleurExiste = true;
                     cboCouleur.SelectedIndex = i;
                 }
             }
 
-            if (flag == false)
+            if (couleurExiste == false)
             {
                 cboCouleur.Items.Add(couleurLigne);
                 cboCouleur.SelectedIndex = cboCouleur.Items.Count - 1;
@@ -111,6 +111,7 @@ namespace F1_Application
 
             int nbrArret = 0;
 
+            // On check tout les arrêts qui sont dans la ligne à modifier
             for (int i = 0; i < clstListeArrets.Items.Count; i++)
             {
 
@@ -182,7 +183,7 @@ namespace F1_Application
             if(ligneSelection == false)
             {
                 int newNbrArretSelectionnet;
-                bool flag = false;
+                bool arretEnleve = false;
                 int error = 1;
                 int compteur = 0;
 
@@ -193,7 +194,7 @@ namespace F1_Application
                 else
                 {
                     newNbrArretSelectionnet = clstListeArrets.CheckedItems.Count - 1;
-                    flag = true;
+                    arretEnleve = true;
                     error = -1;
                 }
 
@@ -208,7 +209,7 @@ namespace F1_Application
                     for (i = 0; i < newNbrArretSelectionnet - error; i++)
                     {
 
-                        if (clstListeArrets.Items[e.Index].ToString() != clstListeArrets.CheckedItems[i].ToString() || flag == false)
+                        if (clstListeArrets.Items[e.Index].ToString() != clstListeArrets.CheckedItems[i].ToString() || arretEnleve == false)
                         {
                             Label lbl = new Label();
                             lbl.Name = $"lblArret{i}";
@@ -246,7 +247,7 @@ namespace F1_Application
                         }
                     }
 
-                    if (flag == false)
+                    if (arretEnleve == false)
                     {
                         Label denierLbl = new Label();
                         denierLbl.Name = $"lblArret{i}";
@@ -295,7 +296,7 @@ namespace F1_Application
 
                 // On vérifie que le nom de la ligne n'est pas déjà pris
 
-                bool flag = false;
+                bool nomLigneDejaExistant = false;
 
                 string[] ligne;
                 ligne = BDD.GetAllLigne();
@@ -303,17 +304,20 @@ namespace F1_Application
                 {
                     if (ligne[i] == txtNomLigne.Text.ToString() && txtNomLigne.Text.ToString() != BDD.GetNomLigne(ligneSelectionner))
                     {
-                        flag = true;
+                        nomLigneDejaExistant = true;
                     }
                 }
 
-                if (flag == false)
+                if (nomLigneDejaExistant == false)
                 {
 
-                    // On vérifie que tout les rangs sont différents
+                    
 
                     if (flpRangDesArret.Controls.Count >= 6 && flpRangDesArret.Controls.Count <= 40)
                     {
+                        // Si l'utilisateur a bien choisi entre 3 et 20 arrêts
+
+                        // On vérifie que tout les rangs sont différents
                         int[] verif = new int[flpRangDesArret.Controls.Count / 2];
 
                         bool rangIdentique = false;
@@ -380,10 +384,6 @@ namespace F1_Application
                                         frmTempsEntreArret tempsEntreArretFormulaire = new frmTempsEntreArret(numArret1, numArret2);
                                         tempsEntreArretFormulaire.ShowDialog();
                                     }
-
-
-                                    tempsEntreArret = BDD.TempsEntreArret(numArret1, numArret2);
-
                                 }
 
                                 // Supprimer les arrêts qui ne sont plus dans la ligne
@@ -403,6 +403,8 @@ namespace F1_Application
                                     if (arretDansLigneModifiee == false)
                                         BDD.SupprimerUnArretDuneLignes(ligneSelectionner, arretEtRangDeLarret[i]);
                                 }
+
+                                // On met à jour les positions des arrêts sur la ligne
 
                                 bool ajoutOuModificationPosition = true;
                                 bool ajoutPosition;
@@ -427,7 +429,7 @@ namespace F1_Application
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Ligne modifié avec succès !");
+                                    MessageBox.Show("Ligne modifiée avec succès !");
                                     this.Close();
                                 }
 
@@ -435,19 +437,19 @@ namespace F1_Application
                             }
                             else
                             {
-                                MessageBox.Show("Vous devez selectionner une couleur !");
+                                MessageBox.Show("Vous devez sélectionner une couleur !");
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Vous devez mettre des rangs différent pour chaque arrêt !");
+                            MessageBox.Show("Vous devez mettre des rangs différents pour chaque arrêt !");
                         }
 
 
                     }
                     else
                     {
-                        MessageBox.Show("Vous devez selectionner entre 3 et 20 arrêts !");
+                        MessageBox.Show("Vous devez sélectionner entre 3 et 20 arrêts !");
                     }
                 }
                 else

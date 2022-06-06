@@ -68,7 +68,7 @@ namespace F1_Application
 
                     if (supressionPassage == false)
                     {
-                        MessageBox.Show("Un erreur est survenue lors de la supression de la ligne dans la table Passage !");
+                        MessageBox.Show("Un erreur est survenue lors de la suppression de la ligne dans la table Passage !");
                     }
 
                     // Supprimer la ligne de la table positionnement
@@ -77,7 +77,7 @@ namespace F1_Application
 
                     if(supressionPosition == false)
                     {
-                        MessageBox.Show("Un erreur est survenue lors de la supression de la ligne dans la table Positionnement !");
+                        MessageBox.Show("Un erreur est survenue lors de la suppression de la ligne dans la table Positionnement !");
                     }
 
                     // Supprimer la ligne définitivement
@@ -87,11 +87,11 @@ namespace F1_Application
 
                     if (supressionLigne == false)
                     {
-                        MessageBox.Show("Un erreur est survenue lors de la supression de la ligne !");
+                        MessageBox.Show("Un erreur est survenue lors de la suppression de la ligne !");
                     } 
                     else
                     {
-                        MessageBox.Show("La ligne a bien été supprimé !");
+                        MessageBox.Show("La ligne a bien été supprimée !");
                     }
 
                     ReloadLigne();
@@ -101,7 +101,7 @@ namespace F1_Application
             }
             else
             {
-                MessageBox.Show("Vous devez selectionner une ligne !");
+                MessageBox.Show("Vous devez sélectionner une ligne !");
             }
         }
 
@@ -114,7 +114,7 @@ namespace F1_Application
             }
             else
             {
-                MessageBox.Show("Vous devez selectionner une ligne !");
+                MessageBox.Show("Vous devez sélectionner une ligne !");
             }
 
             ReloadLigne();

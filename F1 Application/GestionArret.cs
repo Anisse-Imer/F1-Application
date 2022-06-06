@@ -43,7 +43,7 @@ namespace F1_Application
             }
             else
             {
-                MessageBox.Show("Vous devez selectionner un arrêt !");
+                MessageBox.Show("Vous devez sélectionner un arrêt !");
             }
 
             ReloadArret();
@@ -110,22 +110,19 @@ namespace F1_Application
                         {
                             if(BDD.GetPosition(Num_Ligne, arretEtRangDeLarret[j]) != j + 1 && arretSupprimerEtaitSurLaLigne == false)
                             {
-                                // Debug.Print("ERROR");
                                 arretSupprimerEtaitSurLaLigne = true;
                             }
 
                             if(arretSupprimerEtaitSurLaLigne == true)
                             {
-                                // Debug.Print("TEST");
                                 bool changePosition = BDD.SetPosition(Num_Ligne, arretEtRangDeLarret[j], j+1);
 
                                 if(changePosition == false)
                                 {
-                                    MessageBox.Show("Une erreur est survenu lors de la modificaiton des positions des arrêts !");
+                                    MessageBox.Show("Une erreur est survenue lors de la modification des positions des arrêts !");
                                 }
                             }
 
-                            // Debug.Print($"Ligne {Num_Ligne} | Rang {j + 1} : {BDD.GetNomArret(arretEtRangDeLarret[j])} | Vrai rang : {BDD.GetPosition(Num_Ligne, arretEtRangDeLarret[j])}");
                             j++;
                         }
                     }
@@ -138,11 +135,11 @@ namespace F1_Application
 
                     if (supprmierArret == false)
                     {
-                        MessageBox.Show("Une erreur est survenu lors de la supression de l'arrêt !");
+                        MessageBox.Show("Une erreur est survenue lors de la suppression de l'arrêt !");
                     }
                     else
                     {
-                        MessageBox.Show("Arrêt supprimer avec succès !");
+                        MessageBox.Show("Arrêt supprimé avec succès !");
                     }
 
                     information.RemoveArret();
@@ -153,7 +150,7 @@ namespace F1_Application
             }
             else
             {
-                MessageBox.Show("Vous devez selectionner un arrêt !");
+                MessageBox.Show("Vous devez sélectionner un arrêt !");
             }
         } 
     }

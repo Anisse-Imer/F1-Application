@@ -48,7 +48,7 @@ namespace F1_Application
 
                 if (resultat)
                 {
-                    MessageBox.Show($"Le nom de l'arret a bien été modifié en : {txtNomArret.Text.ToString()} !");
+                    MessageBox.Show($"Le nom de l'arrêt a bien été modifié en : {txtNomArret.Text.ToString()} !");
                     this.Close();
                 } 
                 else

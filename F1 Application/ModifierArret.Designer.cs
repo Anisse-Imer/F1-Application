@@ -45,7 +45,7 @@
             this.lblNomArret.Name = "lblNomArret";
             this.lblNomArret.Size = new System.Drawing.Size(120, 14);
             this.lblNomArret.TabIndex = 25;
-            this.lblNomArret.Text = "Nouveau nom de l\'arret :";
+            this.lblNomArret.Text = "Nouveau nom de l\'arrêt :";
             // 
             // txtNomArret
             // 
@@ -102,7 +102,7 @@
             this.lblModifierArret.Name = "lblModifierArret";
             this.lblModifierArret.Size = new System.Drawing.Size(178, 31);
             this.lblModifierArret.TabIndex = 27;
-            this.lblModifierArret.Text = "Modifier l\'arret";
+            this.lblModifierArret.Text = "Modifier l\'arrêt";
             // 
             // frmModifierArret
             // 

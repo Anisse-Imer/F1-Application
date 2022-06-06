@@ -76,9 +76,9 @@
             this.lblAjouterArret.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAjouterArret.Location = new System.Drawing.Point(5, 9);
             this.lblAjouterArret.Name = "lblAjouterArret";
-            this.lblAjouterArret.Size = new System.Drawing.Size(177, 27);
+            this.lblAjouterArret.Size = new System.Drawing.Size(166, 27);
             this.lblAjouterArret.TabIndex = 16;
-            this.lblAjouterArret.Text = "Ajouter une arret";
+            this.lblAjouterArret.Text = "Ajouter un arrêt";
             // 
             // lstArretsReseau
             // 
@@ -96,7 +96,7 @@
             this.lblNomArret.Name = "lblNomArret";
             this.lblNomArret.Size = new System.Drawing.Size(108, 14);
             this.lblNomArret.TabIndex = 4;
-            this.lblNomArret.Text = "Nom du nouvel arret :";
+            this.lblNomArret.Text = "Nom du nouvel arrêt :";
             // 
             // txtNomArret
             // 

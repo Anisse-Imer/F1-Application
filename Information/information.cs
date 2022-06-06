@@ -24,7 +24,7 @@ namespace Information
         }
 
         /// <summary>
-        /// Permet de savoir si le monde admin est activé ou non
+        /// Permet de savoir si le mode admin est activé ou non
         /// </summary>
         /// <returns>true ou false</returns>
         public static bool GetAdminMode()
@@ -33,16 +33,16 @@ namespace Information
         }
 
         /// <summary>
-        /// Permet de modifier le nombre d'arrêt
+        /// Permet de modifier le nombre d'arrêts
         /// </summary>
-        /// <param name="newNbrArret">Le nouveau nombre d'arrêt</param>
+        /// <param name="newNbrArret">Le nouveau nombre d'arrêts</param>
         public static void SetNbrArret(int newNbrArret)
         {
             nbrArret = newNbrArret;
         }
 
         /// <summary>
-        /// Permet de rajouter 1 au nombre d'arrêt
+        /// Permet de rajouter 1 au nombre d'arrêts
         /// </summary>
         public static void AddArret()
         {
@@ -50,7 +50,7 @@ namespace Information
         }
 
         /// <summary>
-        /// Permet de retirer 1 au nombre d'arrêt
+        /// Permet de retirer 1 au nombre d'arrêts
         /// </summary>
         public static void RemoveArret()
         {
@@ -58,25 +58,25 @@ namespace Information
         }
 
         /// <summary>
-        /// Permet d'obtenir le nombre d'arrêt
+        /// Permet d'obtenir le nombre d'arrêts
         /// </summary>
-        /// <returns>Le nombre d'arrêt</returns>
+        /// <returns>Le nombre d'arrêts</returns>
         public static int GetNbrArret()
         {
             return nbrArret;
         }
 
         /// <summary>
-        /// Permet de définir le nombre de ligne
+        /// Permet de définir le nombre de lignes
         /// </summary>
-        /// <param name="newNbrLigne">Le nouveau nombre de ligne</param>
+        /// <param name="newNbrLigne">Le nouveau nombre de lignes</param>
         public static void SetNbrLigne(int newNbrLigne)
         {
             nbrLigne = newNbrLigne;
         }
 
         /// <summary>
-        /// Permet de rajouter 1 au nombre de ligne
+        /// Permet de rajouter 1 au nombre de lignes
         /// </summary>
         public static void AddLigne()
         {
@@ -84,7 +84,7 @@ namespace Information
         }
 
         /// <summary>
-        /// Permet de retirer 1 au nombre de ligne
+        /// Permet de retirer 1 au nombre de lignes
         /// </summary>
         public static void RemoveLigne()
         {
@@ -92,9 +92,9 @@ namespace Information
         }
 
         /// <summary>
-        /// Permet d'obtenir le nombre de ligne
+        /// Permet d'obtenir le nombre de lignes
         /// </summary>
-        /// <returns>Le nombre de ligne</returns>
+        /// <returns>Le nombre de lignes</returns>
         public static int GetNbrLigne()
         {
             return nbrLigne;

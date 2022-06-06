@@ -91,6 +91,7 @@ namespace F1_Application
             this.Name = "frmTempsEntreArret";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Le guide du petit arpenteur";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTempsEntreArret_FormClosing);
             this.Load += new System.EventHandler(this.frmTempsEntreArret_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudTempsEntreArret)).EndInit();
             this.ResumeLayout(false);

@@ -90,9 +90,9 @@
             this.lblTitreGestionLigne.Font = new System.Drawing.Font("Times New Roman", 20F);
             this.lblTitreGestionLigne.Location = new System.Drawing.Point(63, 11);
             this.lblTitreGestionLigne.Name = "lblTitreGestionLigne";
-            this.lblTitreGestionLigne.Size = new System.Drawing.Size(266, 31);
+            this.lblTitreGestionLigne.Size = new System.Drawing.Size(278, 31);
             this.lblTitreGestionLigne.TabIndex = 5;
-            this.lblTitreGestionLigne.Text = "Séletionner une ligne : ";
+            this.lblTitreGestionLigne.Text = "Sélectionner une ligne : ";
             // 
             // cboSelectionLigne
             // 

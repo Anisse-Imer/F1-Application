@@ -49,7 +49,6 @@ namespace F1_Application
             int newNbrLigne = BDD.GetTableCount("Ligne");
             information.SetNbrLigne(newNbrLigne);
 
-
             Reload();
         }
 
@@ -108,6 +107,9 @@ namespace F1_Application
 
                 if(cboVisualiserLigne.SelectedItem.ToString() == "Toutes les lignes")
                 {
+                    // Si on veut voir toutes les lignes du réseau
+
+                    // On récupère tous les noms des lignes
                     string[] ligne;
                     ligne = BDD.GetAllLigne();
                     int i;
@@ -116,11 +118,13 @@ namespace F1_Application
 
                     for (int j = 0; j < ligne.Length; j++)
                     {
-                        int Num_Ligne = BDD.GetNumLigne(ligne[j]);
+                        // Pour chaque ligne, on affiche ses arrêts dans l'ordre
+
+                        int numLigne = BDD.GetNumLigne(ligne[j]);
                         i = 0;
 
                         int[] arretEtRangDeLarret = new int[20];
-                        arretEtRangDeLarret = BDD.GetAllArretInLigne(Num_Ligne);
+                        arretEtRangDeLarret = BDD.GetAllArretInLigne(numLigne);
 
                         lblVisualiserLigne.Text += $"{ligne[j]} :";
                         while (arretEtRangDeLarret[i + 1] != 0)
@@ -128,8 +132,11 @@ namespace F1_Application
 
                             if (i % 3 == 0)
                             {
+                                // On saute une ligne tous les 3 arrêts
                                 lblVisualiserLigne.Text += "\n";
                             }
+
+                            // On affiche l'arrêt
                             lblVisualiserLigne.Text += $"{BDD.GetNomArret(arretEtRangDeLarret[i])} --> ";
                             i++;
                         }
@@ -143,22 +150,26 @@ namespace F1_Application
                 {
                     
 
-                    // Affichage de la ligne dans l'application
+                    // Affichage de la ligne sélectionnée dans l'application
 
                     int i = 0;
-                    int Num_Ligne = BDD.GetNumLigne(cboVisualiserLigne.SelectedItem.ToString());
+                    int numLigne = BDD.GetNumLigne(cboVisualiserLigne.SelectedItem.ToString());
                     int[] arretEtRangDeLarret = new int[20];
-                    arretEtRangDeLarret = BDD.GetAllArretInLigne(Num_Ligne);
+                    arretEtRangDeLarret = BDD.GetAllArretInLigne(numLigne);
 
                     
                     lblVisualiserLigne.Text = $"{cboVisualiserLigne.SelectedItem.ToString()} : \n";
                     while (arretEtRangDeLarret[i + 1] != 0)
                     {
+                        // Tant qu'il y a des arrêts à afficher, on continue
 
                         if (i % 3 == 0)
                         {
+                            // On saute une ligne tous les 3 arrêts
                             lblVisualiserLigne.Text += "\n";
                         }
+
+                        // On affiche l'arrêt
                         lblVisualiserLigne.Text += $"{BDD.GetNomArret(arretEtRangDeLarret[i])} --> ";
                         i++;
                     }
@@ -176,7 +187,7 @@ namespace F1_Application
             frmGestionArret gestionArret = new frmGestionArret();
             gestionArret.ShowDialog();
 
-            lblVisualiserLigne.Text = "Aucune ligne selectionné";
+            lblVisualiserLigne.Text = "Aucune ligne selectionnée";
 
             Reload();
             this.Show();
@@ -216,7 +227,7 @@ namespace F1_Application
             frmGestionLignes gestionLigne = new frmGestionLignes();
             gestionLigne.ShowDialog();
 
-            lblVisualiserLigne.Text = "Aucune ligne selectionné";
+            lblVisualiserLigne.Text = "Aucune ligne selectionnée";
 
             Reload();
             this.Show();
@@ -227,6 +238,8 @@ namespace F1_Application
 
         }
 
+
+        // C'est une version de test, par manque de temps, nous n'avons pas pu faire mieux.
         private void cmdRechercher_Click(object sender, EventArgs e)
         {
             if(cboDepart.SelectedItem != null)
@@ -303,7 +316,6 @@ namespace F1_Application
 
                                 lblAffichageResultatRecherche.Text += $"Couleur : {BDD.GetCouleur(ligneEnCommun)}\n";
 
-                                // Debug.Print(Convert.ToInt32(nudHeure.Value).ToString());
                                 int[] Heure_Debut_Passage = BDD.GetPassageDebut(ligneEnCommun);
                                 int[] Heure_Fin_Passage = BDD.GetPassageFin(ligneEnCommun);
 
@@ -311,67 +323,11 @@ namespace F1_Application
                                 int minuteSelectionne = Convert.ToInt32(nudMinute.Value);
 
                                 bool heureCorrect = true;
-                                /*
-                                if (Heure_Fin_Passage[0] < Heure_Debut_Passage[0])
-                                {
-                                    Heure_Fin_Passage[0] += 24;
-
-                                    if (heureSelectionne < Heure_Debut_Passage[0])
-                                    {
-                                        heureSelectionne += 24;
-
-                                        if (heureSelectionne > Heure_Fin_Passage[0])
-                                        {
-                                            heureCorrect = false;
-                                        }
-                                        else if (heureSelectionne == Heure_Fin_Passage[0])
-                                        {
-                                            if (minuteSelectionne > Heure_Fin_Passage[1])
-                                            {
-                                                heureCorrect = false;
-                                            }
-                                        }
-                                    }
-                                    else if (heureSelectionne == Heure_Debut_Passage[0])
-                                    {
-                                        if (minuteSelectionne < Heure_Debut_Passage[1])
-                                        {
-                                            heureCorrect = false;
-                                        }
-                                    }
-                                } 
-                                else
-                                {
-                                    if(heureSelectionne < Heure_Debut_Passage[0] || heureSelectionne > Heure_Fin_Passage[0])
-                                    {
-                                        heureCorrect = false;
-                                    }
-                                    else if (heureSelectionne == Heure_Debut_Passage[0])
-                                    {
-                                        if (minuteSelectionne < Heure_Debut_Passage[1])
-                                        {
-                                            heureCorrect = false;
-                                        }
-                                    }
-                                    else if (heureSelectionne == Heure_Fin_Passage[0])
-                                    {
-                                        if (minuteSelectionne > Heure_Fin_Passage[1])
-                                        {
-                                            heureCorrect = false;
-                                        }
-                                    }
-                                }
-
-                                */
-
                                 
-
-                                // Debug.Print(test.Length.ToString());
 
                                 // Si un bus passe à l'horaire demandé
                                 if (heureCorrect == true)
                                 {
-                                    // Debug.Print(BDD.TempsEntreArret(num_Arret_Depart, num_Arret_Arrivee).ToString());
 
                                     if (optDépart.Checked == true)
                                     {
@@ -386,8 +342,6 @@ namespace F1_Application
                                             k++;
                                         }
 
-                                        // Debug.Print($"Temps de trajet de la ligne : {tempsTrajetLigne}");
-
                                         int debutLigne = Heure_Debut_Passage[0] * 60 + Heure_Debut_Passage[1];
                                         int debutTrajet = Convert.ToInt32(nudHeure.Value) * 60 + Convert.ToInt32(nudMinute.Value);
                                         int chercheHoraire = debutLigne;
@@ -395,22 +349,17 @@ namespace F1_Application
                                         int DepartDuBus = -1;
                                         int ArriveDuBus = -1;
 
-                                        // Debug.Print($"debutLigne : {debutLigne}");
-                                        // Debug.Print($"debutTrajet : {debutTrajet}");
-
 
 
 
                                         if (BDD.GetPosition(ligneEnCommun, num_Arret_Depart) < BDD.GetPosition(ligneEnCommun, num_Arret_Arrivee))
                                         {
-                                            // lblAffichageResultatRecherche.Text += "A l'endroit !\n";
 
                                             while (chercheHoraire + tempsTrajetLigne < debutTrajet)
                                             {
                                                 chercheHoraire += tempsTrajetLigne * 2;
                                             }
 
-                                            // Debug.Print($"chercheHoraire : {chercheHoraire}");
 
                                             int chercheHoraire2 = chercheHoraire;
 
@@ -441,19 +390,11 @@ namespace F1_Application
                                                 k++;
                                             }
 
-                                            // Debug.Print($"DepartDuBus : {DepartDuBus}");
-                                            // Debug.Print($"ArriveDuBus : {ArriveDuBus}");
-
                                             int heureDepartDuBus = DepartDuBus / 60;
                                             int minuteDepartDuBus = DepartDuBus - (60 * heureDepartDuBus);
 
                                             int heureArriveDuBus = ArriveDuBus / 60;
                                             int minuteArriveDuBus = ArriveDuBus - (60 * heureArriveDuBus);
-
-                                             // Debug.Print($"heureDepartDuBus : {heureDepartDuBus}");
-                                             // Debug.Print($"minuteDepartDuBus : {minuteDepartDuBus}");
-                                             // Debug.Print($"heureArriveDuBus : {heureArriveDuBus}");
-                                             // Debug.Print($"minuteArriveDuBus : {minuteArriveDuBus}");
 
                                             bool heureTrouveCorrect = true;
 
@@ -520,11 +461,11 @@ namespace F1_Application
                                                 {
                                                     if (minuteDepartDuBus < 10)
                                                     {
-                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : 0{heureDepartDuBus}h0{minuteDepartDuBus}\n";
+                                                        lblAffichageResultatRecherche.Text += $"Départ du bus : 0{heureDepartDuBus}h0{minuteDepartDuBus}\n";
                                                     }
                                                     else
                                                     {
-                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : 0{heureDepartDuBus}h{minuteDepartDuBus}\n";
+                                                        lblAffichageResultatRecherche.Text += $"Départ du bus : 0{heureDepartDuBus}h{minuteDepartDuBus}\n";
                                                     }
 
                                                 }
@@ -532,11 +473,11 @@ namespace F1_Application
                                                 {
                                                     if (minuteDepartDuBus < 10)
                                                     {
-                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : {heureDepartDuBus}h0{minuteDepartDuBus}\n";
+                                                        lblAffichageResultatRecherche.Text += $"Départ du bus : {heureDepartDuBus}h0{minuteDepartDuBus}\n";
                                                     }
                                                     else
                                                     {
-                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : {heureDepartDuBus}h{minuteDepartDuBus}\n";
+                                                        lblAffichageResultatRecherche.Text += $"Départ du bus : {heureDepartDuBus}h{minuteDepartDuBus}\n";
                                                     }
                                                 }
 
@@ -583,10 +524,8 @@ namespace F1_Application
                                                 chercheHoraire += tempsTrajetLigne * 2;
                                             }
 
-                                            // Debug.Print($"chercheHoraire : {chercheHoraire}");
 
                                             int chercheHoraire2 = chercheHoraire;
-                                            // Debug.Print($"chercheHoraire2 test : {chercheHoraire2}");
 
                                             int nbrArret = 0;
                                             while (arretEtRangDeLarret[nbrArret] != 0)
@@ -598,7 +537,6 @@ namespace F1_Application
 
                                             while (arretEtRangDeLarret[k] != num_Arret_Depart)
                                             {
-                                                // Debug.Print($"chercheHoraire2 test : {chercheHoraire2}");
                                                 chercheHoraire2 += BDD.TempsEntreArret(arretEtRangDeLarret[k - 1], arretEtRangDeLarret[k]);
                                                 k--;
                                             }
@@ -623,9 +561,6 @@ namespace F1_Application
                                                 k--;
                                             }
 
-                                            // Debug.Print($"DepartDuBus : {DepartDuBus}");
-                                            // Debug.Print($"ArriveDuBus : {ArriveDuBus}");
-
                                             int heureDepartDuBus = DepartDuBus / 60;
                                             int minuteDepartDuBus = DepartDuBus - (60 * heureDepartDuBus);
 
@@ -642,10 +577,6 @@ namespace F1_Application
                                                 heureArriveDuBus -= 24;
                                             }
 
-                                            // Debug.Print($"heureDepartDuBus : {heureDepartDuBus}");
-                                            // Debug.Print($"minuteDepartDuBus : {minuteDepartDuBus}");
-                                            // Debug.Print($"heureArriveDuBus : {heureArriveDuBus}");
-                                            // Debug.Print($"minuteArriveDuBus : {minuteArriveDuBus}");
 
                                             bool heureTrouveCorrect = true;
 
@@ -714,11 +645,11 @@ namespace F1_Application
                                                 {
                                                     if (minuteDepartDuBus < 10)
                                                     {
-                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : 0{heureDepartDuBus}h0{minuteDepartDuBus}\n";
+                                                        lblAffichageResultatRecherche.Text += $"Départ du bus : 0{heureDepartDuBus}h0{minuteDepartDuBus}\n";
                                                     }
                                                     else
                                                     {
-                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : 0{heureDepartDuBus}h{minuteDepartDuBus}\n";
+                                                        lblAffichageResultatRecherche.Text += $"Départ du bus : 0{heureDepartDuBus}h{minuteDepartDuBus}\n";
                                                     }
 
                                                 }
@@ -726,11 +657,11 @@ namespace F1_Application
                                                 {
                                                     if (minuteDepartDuBus < 10)
                                                     {
-                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : {heureDepartDuBus}h0{minuteDepartDuBus}\n";
+                                                        lblAffichageResultatRecherche.Text += $"Départ du bus : {heureDepartDuBus}h0{minuteDepartDuBus}\n";
                                                     }
                                                     else
                                                     {
-                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : {heureDepartDuBus}h{minuteDepartDuBus}\n";
+                                                        lblAffichageResultatRecherche.Text += $"Départ du bus : {heureDepartDuBus}h{minuteDepartDuBus}\n";
                                                     }
                                                 }
 
@@ -781,7 +712,6 @@ namespace F1_Application
                                             k++;
                                         }
 
-                                        // Debug.Print($"Temps de trajet de la ligne : {tempsTrajetLigne}");
 
                                         int debutLigne = Heure_Debut_Passage[0] * 60 + Heure_Debut_Passage[1];
                                         int finTrajet = Convert.ToInt32(nudHeure.Value) * 60 + Convert.ToInt32(nudMinute.Value);
@@ -790,25 +720,14 @@ namespace F1_Application
                                         int DepartDuBus = -1;
                                         int ArriveDuBus = -1;
 
-                                        // Debug.Print($"debutLigne : {debutLigne}");
-                                        // Debug.Print($"finTrajet : {finTrajet}");
-
-
-
 
                                         if (BDD.GetPosition(ligneEnCommun, num_Arret_Depart) < BDD.GetPosition(ligneEnCommun, num_Arret_Arrivee))
                                         {
-                                            // lblAffichageResultatRecherche.Text += "A l'endroit !\n";
 
                                             while (chercheHoraire + tempsTrajetLigne < finTrajet)
                                             {
                                                 chercheHoraire += tempsTrajetLigne * 2;
                                             }
-                                            // Debug.Print($"chercheHoraire : {chercheHoraire}");
-                                            // Debug.Print($"chercheHoraire+tempsTrajetLigne : {chercheHoraire+tempsTrajetLigne}");
-                                            // Debug.Print($"finTrajet : {finTrajet}");
-
-                                            // Debug.Print($"chercheHoraire : {chercheHoraire}");
 
                                             int chercheHoraire2 = chercheHoraire;
                                             int chercheHoraire3 = chercheHoraire;
@@ -833,18 +752,11 @@ namespace F1_Application
 
                                                 chercheHoraire2 += BDD.TempsEntreArret(arretEtRangDeLarret[k], arretEtRangDeLarret[k + 1]);
                                                 k++;
-                                                // Debug.Print($"arretEtRangDeLarret : {BDD.GetNomArret(arretEtRangDeLarret[k]).ToString()}");
-                                                // Debug.Print($"k : {k}");
                                             }
 
-                                            // Debug.Print($"chercheHoraire : {chercheHoraire}");
-                                            // Debug.Print($"chercheHoraire2 : {chercheHoraire2}");
-                                            // Debug.Print($"chercheHoraire3 : {chercheHoraire3}");
-                                            // Debug.Print($"finTrajet : {finTrajet}");
 
                                             if (chercheHoraire2 > finTrajet)
                                             {
-                                                // Debug.Print($"TEST");
                                                 chercheHoraire -= tempsTrajetLigne * 2;
                                                 chercheHoraire2 = chercheHoraire;
                                                 chercheHoraire3 = chercheHoraire;
@@ -868,8 +780,6 @@ namespace F1_Application
                                                 k++;
                                             }
 
-                                            // Debug.Print($"DepartDuBus : {DepartDuBus}");
-                                            // Debug.Print($"ArriveDuBus : {ArriveDuBus}");
 
                                             int heureDepartDuBus = DepartDuBus / 60;
                                             int minuteDepartDuBus = DepartDuBus - (60 * heureDepartDuBus);
@@ -887,10 +797,6 @@ namespace F1_Application
                                                 heureArriveDuBus -= 24;
                                             }
 
-                                            // Debug.Print($"heureDepartDuBus : {heureDepartDuBus}");
-                                            // Debug.Print($"minuteDepartDuBus : {minuteDepartDuBus}");
-                                            // Debug.Print($"heureArriveDuBus : {heureArriveDuBus}");
-                                            // Debug.Print($"minuteArriveDuBus : {minuteArriveDuBus}");
 
                                             bool heureTrouveCorrect = true;
 
@@ -959,11 +865,11 @@ namespace F1_Application
                                                 {
                                                     if (minuteDepartDuBus < 10)
                                                     {
-                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : 0{heureDepartDuBus}h0{minuteDepartDuBus}\n";
+                                                        lblAffichageResultatRecherche.Text += $"Départ du bus : 0{heureDepartDuBus}h0{minuteDepartDuBus}\n";
                                                     }
                                                     else
                                                     {
-                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : 0{heureDepartDuBus}h{minuteDepartDuBus}\n";
+                                                        lblAffichageResultatRecherche.Text += $"Départ du bus : 0{heureDepartDuBus}h{minuteDepartDuBus}\n";
                                                     }
 
                                                 }
@@ -971,11 +877,11 @@ namespace F1_Application
                                                 {
                                                     if (minuteDepartDuBus < 10)
                                                     {
-                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : {heureDepartDuBus}h0{minuteDepartDuBus}\n";
+                                                        lblAffichageResultatRecherche.Text += $"Départ du bus : {heureDepartDuBus}h0{minuteDepartDuBus}\n";
                                                     }
                                                     else
                                                     {
-                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : {heureDepartDuBus}h{minuteDepartDuBus}\n";
+                                                        lblAffichageResultatRecherche.Text += $"Départ du bus : {heureDepartDuBus}h{minuteDepartDuBus}\n";
                                                     }
                                                 }
 
@@ -1012,7 +918,6 @@ namespace F1_Application
                                         }
                                         else
                                         {
-                                            // lblAffichageResultatRecherche.Text += "A l'envers !\n";
 
                                             chercheHoraire += tempsTrajetLigne;
 
@@ -1020,8 +925,6 @@ namespace F1_Application
                                             {
                                                 chercheHoraire += tempsTrajetLigne * 2;
                                             }
-
-                                            // Debug.Print($"chercheHoraire : {chercheHoraire}");
 
                                             int chercheHoraire2 = chercheHoraire;
                                             int chercheHoraire3 = chercheHoraire;
@@ -1039,7 +942,6 @@ namespace F1_Application
 
                                             while (arretEtRangDeLarret[k] != num_Arret_Arrivee)
                                             {
-                                                // Debug.Print($"chercheHoraire2 : {chercheHoraire2}");
                                                 if (arretEtRangDeLarret[k] == num_Arret_Depart)
                                                 {
                                                     arretArriveTrouve = true;
@@ -1055,9 +957,6 @@ namespace F1_Application
                                                 k--;
                                             }
 
-                                             // Debug.Print($"chercheHoraire : {chercheHoraire}");
-                                             // Debug.Print($"chercheHoraire2 : {chercheHoraire2}");
-                                             // Debug.Print($"chercheHoraire3 : {chercheHoraire3}");
 
                                             if (chercheHoraire2 > finTrajet)
                                             {
@@ -1072,21 +971,15 @@ namespace F1_Application
                                                     k--;
                                                 }
                                             }
-                                            // Debug.Print($"chercheHoraire3 : {chercheHoraire3}");
                                             DepartDuBus = chercheHoraire3;
                                             ArriveDuBus = DepartDuBus;
 
-                                            // k++;
                                             k = saveArretDepart;
                                             while (arretEtRangDeLarret[k] != num_Arret_Arrivee)
                                             {
-                                                // Debug.Print($"TEST");
                                                 ArriveDuBus += BDD.TempsEntreArret(arretEtRangDeLarret[k - 1], arretEtRangDeLarret[k]);
                                                 k--;
                                             }
-
-                                            // Debug.Print($"DepartDuBus : {DepartDuBus}");
-                                            // Debug.Print($"ArriveDuBus : {ArriveDuBus}");
 
                                             int heureDepartDuBus = DepartDuBus / 60;
                                             int minuteDepartDuBus = DepartDuBus - (60 * heureDepartDuBus);
@@ -1103,11 +996,6 @@ namespace F1_Application
                                             {
                                                 heureArriveDuBus -= 24;
                                             }
-
-                                            // Debug.Print($"heureDepartDuBus : {heureDepartDuBus}");
-                                            // Debug.Print($"minuteDepartDuBus : {minuteDepartDuBus}");
-                                            // Debug.Print($"heureArriveDuBus : {heureArriveDuBus}");
-                                            // Debug.Print($"minuteArriveDuBus : {minuteArriveDuBus}");
 
 
                                             bool heureTrouveCorrect = true;
@@ -1176,11 +1064,11 @@ namespace F1_Application
                                                 {
                                                     if (minuteDepartDuBus < 10)
                                                     {
-                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : 0{heureDepartDuBus}h0{minuteDepartDuBus}\n";
+                                                        lblAffichageResultatRecherche.Text += $"Départ du bus : 0{heureDepartDuBus}h0{minuteDepartDuBus}\n";
                                                     }
                                                     else
                                                     {
-                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : 0{heureDepartDuBus}h{minuteDepartDuBus}\n";
+                                                        lblAffichageResultatRecherche.Text += $"Départ du bus : 0{heureDepartDuBus}h{minuteDepartDuBus}\n";
                                                     }
 
                                                 }
@@ -1188,11 +1076,11 @@ namespace F1_Application
                                                 {
                                                     if (minuteDepartDuBus < 10)
                                                     {
-                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : {heureDepartDuBus}h0{minuteDepartDuBus}\n";
+                                                        lblAffichageResultatRecherche.Text += $"Départ du bus : {heureDepartDuBus}h0{minuteDepartDuBus}\n";
                                                     }
                                                     else
                                                     {
-                                                        lblAffichageResultatRecherche.Text += $"Depart du bus : {heureDepartDuBus}h{minuteDepartDuBus}\n";
+                                                        lblAffichageResultatRecherche.Text += $"Départ du bus : {heureDepartDuBus}h{minuteDepartDuBus}\n";
                                                     }
                                                 }
 
@@ -1248,18 +1136,27 @@ namespace F1_Application
                     }
                     else
                     {
-                        MessageBox.Show("Vous devez choisir deux arret différent !");
+                        MessageBox.Show("Vous devez choisir deux arrêts différents !");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Vous devez choisir un arret d'arrivée !");
+                    MessageBox.Show("Vous devez choisir un arrêt d'arrivée !");
                 }
             } 
             else
             {
-                MessageBox.Show("Vous devez choisir un arret de départ !");
+                MessageBox.Show("Vous devez choisir un arrêt de départ !");
             }
+        }
+
+        private void cmdInversion_Click(object sender, EventArgs e)
+        {
+            int arretDepart = cboDepart.SelectedIndex;
+            int arretArrivee = cboArrivee.SelectedIndex;
+
+            cboDepart.SelectedIndex = arretArrivee;
+            cboArrivee.SelectedIndex = arretDepart;
         }
     }
 }
