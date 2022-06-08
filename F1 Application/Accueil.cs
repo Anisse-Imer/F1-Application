@@ -199,6 +199,9 @@ namespace F1_Application
         /// </summary>
         private void Reload()
         {
+
+            lblAffichageResultatRecherche.Text = "Aucune recherche";
+
             cboDepart.Items.Clear();
             cboArrivee.Items.Clear();
             cboVisualiserLigne.Items.Clear();

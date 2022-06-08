@@ -42,18 +42,39 @@ namespace F1_Application
         {
             if(txtNomArret != null && txtNomArret.TextLength >= 3)
             {
-                int numArret = arretSelectionne;
+                // On regarde si un arrêt ne porte pas déjà le nouveau nom de l'arrêt
 
-                bool resultat = BDD.ModifierNomArret(numArret, txtNomArret.Text.ToString());
+                bool nomArretDejaExistant = false;
 
-                if (resultat)
+                string[] arret;
+                arret = BDD.GetAllArret();
+                for (int i = 0; i < arret.Length; i++)
                 {
-                    MessageBox.Show($"Le nom de l'arrêt a bien été modifié en : {txtNomArret.Text.ToString()} !");
-                    this.Close();
-                } 
+                    if (arret[i] == txtNomArret.Text.ToString() && BDD.GetNomArret(arretSelectionne) != txtNomArret.Text.ToString())
+                    {
+                        nomArretDejaExistant = true;
+                    }
+                }
+
+                if (nomArretDejaExistant == false)
+                {
+                    int numArret = arretSelectionne;
+
+                    bool resultat = BDD.ModifierNomArret(numArret, txtNomArret.Text.ToString());
+
+                    if (resultat)
+                    {
+                        MessageBox.Show($"Le nom de l'arrêt a bien été modifié en : {txtNomArret.Text.ToString()} !");
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Une erreur est survenue !");
+                    }
+                }
                 else
                 {
-                    MessageBox.Show("Une erreur est survenue !");
+                    MessageBox.Show("Un arrêt porte déjà ce nom !");
                 }
             }
             else
