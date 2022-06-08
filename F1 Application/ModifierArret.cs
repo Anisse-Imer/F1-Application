@@ -40,7 +40,7 @@ namespace F1_Application
 
         private void cmdConfirmerModifierArret_Click(object sender, EventArgs e)
         {
-            if(txtNomArret != null && txtNomArret.TextLength >= 3)
+            if(txtNomArret != null && txtNomArret.TextLength >= 3 && txtNomArret.TextLength <= 20)
             {
                 // On regarde si un arrêt ne porte pas déjà le nouveau nom de l'arrêt
 
@@ -79,7 +79,7 @@ namespace F1_Application
             }
             else
             {
-                MessageBox.Show("Le nouveau nom doit faire au moins 3 caractères !");
+                MessageBox.Show("Le nouveau nom doit faire entre 3 et 20 caractères !");
             }
         }
     }

@@ -291,7 +291,7 @@ namespace F1_Application
 
         private void cmdConfirmerModifierLigne_Click(object sender, EventArgs e)
         {
-            if (txtNomLigne != null && txtNomLigne.TextLength >= 3)
+            if (txtNomLigne != null && txtNomLigne.TextLength >= 3 && txtNomLigne.TextLength <= 20)
             {
 
                 // On vérifie que le nom de la ligne n'est pas déjà pris
@@ -459,7 +459,7 @@ namespace F1_Application
             }
             else
             {
-                MessageBox.Show("Le nom doit faire au moins 3 caractères !");
+                MessageBox.Show("Le nom doit faire entre 3 et 20 caractères !");
             }
         }
 
