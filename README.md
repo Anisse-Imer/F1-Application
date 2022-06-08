@@ -1,6 +1,6 @@
 Bienvenue !
 
-Vous êtes bien sur le github du groupe F-01 composé des membres suivant ; DELAFOSSE Corentin, IMERZOUKENE Anisse, LEFRANCOIS Killian,
+Vous êtes bien sur le github du groupe F-01 composé des membres suivants : DELAFOSSE Corentin, IMERZOUKENE Anisse, LEFRANCOIS Killian,
 LEROUX Mattéo, PINCHON Enzo, MICHELETTI Jérémie.
 C'est dans le cadre de la SAÉ2.01, projet figurant dans le parcours BUT1 d'informatique de l'IUT d'Amiens (2022) que nous avons pu 
 construire cette application permettant de gérer la base de données d'un réseau de bus ainsi que d'obtenir des horaires et itinéraires.  
